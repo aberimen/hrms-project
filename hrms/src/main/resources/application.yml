@@ -9,10 +9,13 @@ spring:
     
      # JPA properties
  jpa:
-    hibernate:
-      ddl-auto: create 
+    hibernate.ddl-auto: update 
     show-sql: true
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+      
+    
+
     
     
