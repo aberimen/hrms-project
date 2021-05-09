@@ -26,7 +26,7 @@ public class Employer{
 	private String webSite;
 	
 	@Column(nullable = false)
-	private String telNo;
+	private String phoneNumber;
 	
 	@OneToOne(optional = false)
 	private User user;
