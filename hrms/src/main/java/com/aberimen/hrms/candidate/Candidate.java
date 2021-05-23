@@ -2,6 +2,7 @@ package com.aberimen.hrms.candidate;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Candidate{
 	@Column(length = 11, unique = true, nullable = false)
 	private String nationalId;
 	
-	@OneToOne(optional = false)
+	@OneToOne(optional = false,cascade = CascadeType.ALL)
 	private User user;
 	
 
