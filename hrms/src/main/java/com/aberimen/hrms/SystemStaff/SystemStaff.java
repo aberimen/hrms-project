@@ -1,4 +1,4 @@
-package com.aberimen.hrms.SystemStaff;
+package com.aberimen.hrms.systemstaff;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

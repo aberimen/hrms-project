@@ -1,4 +1,4 @@
-package com.aberimen.hrms.JobPosition;
+package com.aberimen.hrms.jobposition;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

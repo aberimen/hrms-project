@@ -1,4 +1,4 @@
-package com.aberimen.hrms.JobPosition;
+package com.aberimen.hrms.jobposition;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
