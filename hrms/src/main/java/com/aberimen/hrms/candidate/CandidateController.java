@@ -1,6 +1,7 @@
 package com.aberimen.hrms.candidate;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aberimen.hrms.candidate.dto.CandidateDTO;
 import com.aberimen.hrms.candidate.dto.CandidateRegisterDTO;
 import com.aberimen.hrms.user.User;
 import com.aberimen.hrms.utils.GenericResponse;
@@ -29,9 +31,14 @@ public class CandidateController {
 	}
 	
 	@GetMapping("/candidates")
-	public ResponseEntity<List<Candidate>> getAll() {
+	public ResponseEntity<List<CandidateDTO>> getAll() {
 		
-		return ResponseEntity.ok(candidateService.getCandidates());
+		List<CandidateDTO> candidates = candidateService.getCandidates()
+		.stream()
+		.map( c -> new CandidateDTO(c)) // map Candidates to CandidateDTOs
+		.collect(Collectors.toList());
+		
+		return ResponseEntity.ok(candidates);
 	}
 
 	@PostMapping("/candidates")
