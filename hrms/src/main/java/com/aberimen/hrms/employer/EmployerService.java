@@ -1,5 +1,7 @@
 package com.aberimen.hrms.employer;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,10 +33,14 @@ public class EmployerService {
 			Employer employer = mapEmployerRegisterDTOtoEmployer(registerDTO);
 			employerRepository.save(employer);
 			
-			return ResponseEntity.ok(new GenericResponse("Employer başarılı"));
+			return ResponseEntity.ok(new GenericResponse("Ekleme başarılı"));
 		}
 		
 		
+	}
+	
+	public List<Employer> getEmployers(){
+		return employerRepository.findAll();
 	}
 	
 	
