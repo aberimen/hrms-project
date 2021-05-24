@@ -1,5 +1,6 @@
 package com.aberimen.hrms.employer;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,11 +29,11 @@ public class Employer{
 	@Column(nullable = false)
 	private String phoneNumber;
 	
-	@OneToOne(optional = false)
+	@OneToOne(optional = false,cascade = CascadeType.ALL)
 	private User user;
 	
 	@Column(nullable = false)
-	private boolean verified;
+	private boolean verified; //by system admin
 	
 
 }
