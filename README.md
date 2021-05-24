@@ -1,1 +1,1 @@
-### Human Resources Management System Project with Spring Boot & ReactJs
+### Human Resources Management System Project with Spring Boot & ReactJS
