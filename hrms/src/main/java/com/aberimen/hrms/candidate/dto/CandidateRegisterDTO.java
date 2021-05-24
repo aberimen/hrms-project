@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotEmpty;
 
 import com.aberimen.hrms.utils.validation.UniqueEmail;
+import com.aberimen.hrms.utils.validation.ValidNationalID;
 import com.sun.istack.NotNull;
 
 import lombok.Data;
@@ -28,6 +29,7 @@ public class CandidateRegisterDTO {
 	@NotNull
 	private LocalDate dateOfBirth;
 	
+	@ValidNationalID // for unique and valid Turkish National ID
 	@NotEmpty
 	private String nationalId;
 

@@ -1,6 +1,7 @@
 package com.aberimen.hrms.candidate;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,12 @@ public class CandidateService {
 		}
 		
 		return "email doğrulanamadı";
+	}
+
+
+	public Optional<Candidate> findByNationalId(String nationalID) {
+		
+		return candidateRepository.findByNationalId(nationalID);
 	}
 	
 	
