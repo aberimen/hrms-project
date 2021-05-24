@@ -3,6 +3,7 @@ package com.aberimen.hrms.candidate.dto;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import com.aberimen.hrms.utils.validation.UniqueEmail;
 import com.aberimen.hrms.utils.validation.ValidNationalID;
@@ -15,6 +16,7 @@ public class CandidateRegisterDTO {
 
 	@UniqueEmail
 	@NotEmpty
+	@Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$",message = "geçersiz email")
 	private String email;
 
 	@NotEmpty
