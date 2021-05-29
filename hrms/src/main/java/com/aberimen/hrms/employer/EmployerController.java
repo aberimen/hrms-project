@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aberimen.hrms.employer.dto.EmployerDTO;
 import com.aberimen.hrms.employer.dto.EmployerRegisterDTO;
+import com.aberimen.hrms.jobposting.JobPostingService;
+import com.aberimen.hrms.jobposting.dto.JobPostingResponseDTO;
+
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/1.0")
+@AllArgsConstructor
 public class EmployerController {
 	
-	@Autowired
 	EmployerService employerService;
+	JobPostingService jobPostingService;
 	
 	@PostMapping("/employers")
 	public ResponseEntity<?> register(@Valid @RequestBody EmployerRegisterDTO registerDTO) {
@@ -37,6 +42,11 @@ public class EmployerController {
 				.collect(Collectors.toList());
 	}
 	
+	@GetMapping("employers/{employerId}/job-postings/")
+	public List<JobPostingResponseDTO> getJobPostingsOfEmployer(@PathVariable long employerId) {
+		return jobPostingService.getJobPostingsOfEmployer(employerId);
+		
+	}
 	
 	
 	
