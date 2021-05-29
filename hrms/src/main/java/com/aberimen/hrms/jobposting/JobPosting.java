@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import com.aberimen.hrms.employer.Employer;
 import com.aberimen.hrms.jobposition.JobPosition;
@@ -41,16 +41,16 @@ public class JobPosting {
 
 	private LocalDate deadline;
 
-	@OneToOne
+	@ManyToOne
 	private Location location;
 
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	private JobPosition jobPosition;
 
-	@OneToOne
+	@ManyToOne
 	private Employer employer;
 
 	private LocalDate postedAt;
 
-	boolean active;
+	private boolean active;
 }
