@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,9 +44,9 @@ public class EmployerController {
 				.collect(Collectors.toList());
 	}
 	
-	@GetMapping("employers/{employerId}/job-postings/")
-	public List<JobPostingResponseDTO> getJobPostingsOfEmployer(@PathVariable long employerId) {
-		return jobPostingService.getJobPostingsOfEmployer(employerId);
+	@GetMapping("employers/{employerId}/job-postings")
+	public Page<JobPostingResponseDTO> getJobPostingsOfEmployer(@PathVariable long employerId, Pageable pageable) {
+		return jobPostingService.getJobPostingsOfEmployer(employerId,pageable);
 		
 	}
 	

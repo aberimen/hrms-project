@@ -1,8 +1,8 @@
 package com.aberimen.hrms.jobposting;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,21 +35,22 @@ public class JobPostingService {
 		return new GenericResponse("İş ilanı eklendi.");
 	}
 	
-	public Page<JobPosting> getJobPostings(Pageable pageable){
+	@Transactional
+	public Page<JobPosting> getActiveJobPostings(Pageable pageable){
 		
-		return jobPostingRepository.findAll(pageable);
+		return jobPostingRepository.findByActive(true,pageable); //aktif iş ilanları
 	}
 	
-	public List<JobPostingResponseDTO> getJobPostingsOfEmployer(long employerId) {
-		return jobPostingRepository.findByEmployerId(employerId)
-				.stream()
-				.map(JobPostingResponseDTO::new)
-				.collect(Collectors.toList());
+	@Transactional //Lob veri içerdiği için
+	public Page<JobPostingResponseDTO> getJobPostingsOfEmployer(long employerId, Pageable pageable) {
+		
+		return jobPostingRepository.findByEmployerIdAndActive(employerId, true, pageable).map(JobPostingResponseDTO::new);
 	}
 	
 	public GenericResponse changePositionStatus(long id) {
 		JobPosting inDB = jobPostingRepository.findById(id).get();
 		inDB.setActive(!inDB.isActive());
+		jobPostingRepository.save(inDB);
 		
 		return new GenericResponse("İş ilanı durumu değiştirildi.");
 	}

@@ -35,7 +35,7 @@ public class JobPostingController {
 	@GetMapping("/job-postings")
 	public Page<JobPostingResponseDTO> getJobPostings(Pageable page){
 		
-		return jobPostingService.getJobPostings(page).map(JobPostingResponseDTO::new);
+		return jobPostingService.getActiveJobPostings(page).map(JobPostingResponseDTO::new);
 	}
 	
 	@PostMapping("/job-postings/status/{id}")
