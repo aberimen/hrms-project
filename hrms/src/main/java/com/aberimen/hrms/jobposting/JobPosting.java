@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import com.aberimen.hrms.jobposition.JobPosition;
 import com.aberimen.hrms.location.Location;
@@ -21,6 +22,7 @@ public class JobPosting {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@Lob
 	@Basic(optional = false)
 	private String jobDescription;
 	
