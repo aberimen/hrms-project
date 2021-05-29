@@ -37,4 +37,8 @@ public class JobPositionService {
 
 	}
 
+	public JobPosition getById(int jobPositionId) {
+		return jobPositionRepository.findById(jobPositionId).get();
+	}
+
 }

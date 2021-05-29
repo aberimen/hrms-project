@@ -19,4 +19,10 @@ public class LocationService {
 		
 		return locationRepository.findAll();
 	}
+
+
+	public Location getById(int locationId) {
+
+		return locationRepository.findById(locationId).get();
+	}
 }

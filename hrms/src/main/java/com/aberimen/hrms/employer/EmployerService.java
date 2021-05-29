@@ -43,6 +43,9 @@ public class EmployerService {
 		return employerRepository.findAll();
 	}
 	
+	public Employer getById(long id) {
+		return employerRepository.findById(id).get();
+	}
 	
 	public Employer mapEmployerRegisterDTOtoEmployer(EmployerRegisterDTO registerDTO) {
 		User user = new User();
