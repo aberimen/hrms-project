@@ -5,27 +5,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED) //entity kalıtımı için - bu sınıfı kalıtan alt sınıflar birbirine foreign key ile bağlı olacak
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@NotEmpty
 	@Column(nullable = false, unique = true)
 	private String email;
 
-	
 	@Column(nullable = false)
 	private boolean enabled;
 	
-	
+	@NotEmpty
 	@Column(nullable = false)
 	private String password;
 
