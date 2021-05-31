@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aberimen.hrms.candidate.dto.CandidateDTO;
-import com.aberimen.hrms.candidate.dto.CandidateRegisterDTO;
-import com.aberimen.hrms.user.User;
-import com.aberimen.hrms.utils.GenericResponse;
 
 @RestController
 @RequestMapping("/api/1.0/")
@@ -42,35 +39,12 @@ public class CandidateController {
 	}
 
 	@PostMapping("/candidates")
-	public void register(@Valid @RequestBody CandidateRegisterDTO registerDTO) {
+	public void register(@Valid @RequestBody Candidate candidate) {
 		
-		candidateService.save(mapRegisterDTOtoCandidate(registerDTO));
+		candidateService.save(candidate);
 	}
 
-	@PostMapping("/cadidates/verify")
-	public GenericResponse verifyEmail(@RequestBody String email) {
-		String message = candidateService.verifyEmail(email);
-		
-		return new GenericResponse(message);
-	}
 	
 	
-	public Candidate mapRegisterDTOtoCandidate(CandidateRegisterDTO request) {
-		User user = new User();
-	
-		user.setEmail(request.getEmail());
-		user.setEnabled(false);
-		user.setPassword(request.getPassword());
-		
-		Candidate candidate = new Candidate();
-
-		candidate.setUser(user);
-		candidate.setName(request.getName());
-		candidate.setLastName(request.getLastName());
-		candidate.setNationalId(request.getNationalId());
-		candidate.setDateOfBirth(request.getDateOfBirth());
-		
-		return candidate;
-	}
 
 }

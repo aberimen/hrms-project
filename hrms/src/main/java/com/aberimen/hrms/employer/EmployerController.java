@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aberimen.hrms.employer.dto.EmployerDTO;
-import com.aberimen.hrms.employer.dto.EmployerRegisterDTO;
 import com.aberimen.hrms.jobposting.JobPostingService;
 import com.aberimen.hrms.jobposting.dto.JobPostingResponseDTO;
 
@@ -31,8 +30,8 @@ public class EmployerController {
 	JobPostingService jobPostingService;
 	
 	@PostMapping("/employers")
-	public ResponseEntity<?> register(@Valid @RequestBody EmployerRegisterDTO registerDTO) {
-		return employerService.saveEmployer(registerDTO);
+	public ResponseEntity<?> register(@Valid @RequestBody Employer employer) {
+		return employerService.saveEmployer(employer);
 	}
 	
 	@GetMapping("/employers")
