@@ -6,9 +6,11 @@ import com.aberimen.hrms.candidate.Candidate;
 import com.aberimen.hrms.user.dto.UserDTO;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class CandidateDTO {
+@EqualsAndHashCode(callSuper = false)
+public class CandidateDTO extends UserDTO{
 		
 	private long id;
 
@@ -18,15 +20,14 @@ public class CandidateDTO {
 
 	private LocalDate dateOfBirth;
 	
-	private UserDTO user;
 	
 	public CandidateDTO(Candidate candidate) {  // Candidate to CandidateDTO
-		
+		super(candidate);
 		setId(candidate.getId());
 		setName(candidate.getName());
 		setLastName(candidate.getLastName());
 		setDateOfBirth(candidate.getDateOfBirth());
-		setUser(new UserDTO(candidate.getUser()));
+		
 	}
 
 }

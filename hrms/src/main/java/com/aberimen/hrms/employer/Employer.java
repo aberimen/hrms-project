@@ -9,32 +9,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.validation.constraints.NotEmpty;
 
 import com.aberimen.hrms.jobposting.JobPosting;
 import com.aberimen.hrms.user.User;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
-public class Employer{
+@PrimaryKeyJoinColumn(name = "user_id",referencedColumnName = "id")
+public class Employer extends User{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@NotEmpty
 	@Column(nullable = false)
 	private String company;
 	
+	@NotEmpty
 	@Column(nullable = false)
 	private String webSite;
 	
+	@NotEmpty
 	@Column(nullable = false)
 	private String phoneNumber;
-	
-	@OneToOne(optional = false,cascade = CascadeType.ALL)
-	private User user;
 	
 	@Column(nullable = false)
 	private boolean verified; //by system admin
