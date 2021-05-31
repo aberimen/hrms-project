@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aberimen.hrms.jobposting.dto.JobPostingDTO;
 import com.aberimen.hrms.jobposting.dto.JobPostingResponseDTO;
 import com.aberimen.hrms.utils.GenericResponse;
 
@@ -28,7 +27,7 @@ public class JobPostingController {
 	}
 	
 	@PostMapping("/job-postings")
-	public GenericResponse createJobPosting(@Valid @RequestBody JobPostingDTO jobPosting) {
+	public GenericResponse createJobPosting(@Valid @RequestBody JobPosting jobPosting) {
 		return jobPostingService.createJobPosting(jobPosting);
 	}
 	

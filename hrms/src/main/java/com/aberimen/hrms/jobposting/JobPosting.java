@@ -1,6 +1,7 @@
 package com.aberimen.hrms.jobposting;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -50,7 +51,7 @@ public class JobPosting {
 	@ManyToOne
 	private Employer employer;
 
-	private LocalDate postedAt;
+	private LocalDateTime createdAt;
 
 	private boolean active;
 }

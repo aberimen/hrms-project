@@ -1,17 +1,19 @@
 package com.aberimen.hrms;
 
+import java.time.LocalDateTime;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
+import com.aberimen.hrms.employer.Employer;
 import com.aberimen.hrms.employer.EmployerService;
-import com.aberimen.hrms.employer.dto.EmployerRegisterDTO;
 import com.aberimen.hrms.jobposition.JobPosition;
 import com.aberimen.hrms.jobposition.JobPositionRepository;
+import com.aberimen.hrms.jobposting.JobPosting;
 import com.aberimen.hrms.jobposting.JobPostingService;
-import com.aberimen.hrms.jobposting.dto.JobPostingDTO;
 import com.aberimen.hrms.location.Location;
 import com.aberimen.hrms.location.LocationRepository;
 
@@ -41,19 +43,19 @@ public class HrmsApplication {
 			}
 			
 
-			//init job positions
+		
 			
 			String[] jobPositions = { "Java Developer", "Backend Developer", "Frontend Developer", "React Developer", ".Net Developer","Python Developer"};
 			
-			for (String position : jobPositions) {
+
+			for(int i=0 ; i < jobPositions.length; i++) {
+				//init job positions
 				JobPosition jobPosition = new JobPosition();
-				jobPosition.setPositionName(position);
+				jobPosition.setPositionName(jobPositions[i]);
 				jobPositionRepository.save(jobPosition);
-			}
-			
-			//init employers
-			for(int i=1; i < 10; i++) {
-				EmployerRegisterDTO employer = new  EmployerRegisterDTO();
+				
+				//init employers
+				Employer employer = new  Employer();
 				employer.setCompany("Firma " + i);
 				employer.setWebSite("www.firma"+i+".com");
 				employer.setEmail("info@firma"+i+".com");
@@ -65,12 +67,14 @@ public class HrmsApplication {
 				
 				//init job postings for each company
 				for (int j = 1; j < 5; j++) {
-					JobPostingDTO jobPostingDTO = new JobPostingDTO();
-					jobPostingDTO.setJobDescription("Firma " + i + " için iş ilanı" +j );
-					jobPostingDTO.setEmployerId(i);
-					jobPostingDTO.setLocationId(j);
-					jobPostingDTO.setJobPositionId(j);
-					jobPostingService.createJobPosting(jobPostingDTO);
+					JobPosting jobPosting= new JobPosting();
+					jobPosting.setJobDescription("Firma " + i + " için iş ilanı" +j );
+					jobPosting.setEmployer(employer);
+					jobPosting.setLocation(null);
+					jobPosting.setActive(true);
+					jobPosting.setCreatedAt(LocalDateTime.now());
+					jobPosting.setJobPosition(jobPosition);
+					jobPostingService.createJobPosting(jobPosting);
 
 				}
 				

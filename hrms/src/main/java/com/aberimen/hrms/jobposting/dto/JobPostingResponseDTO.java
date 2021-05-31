@@ -1,6 +1,7 @@
 package com.aberimen.hrms.jobposting.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.aberimen.hrms.employer.dto.EmployerDTO;
 import com.aberimen.hrms.jobposition.JobPosition;
@@ -30,7 +31,7 @@ public class JobPostingResponseDTO {
 	
 	private EmployerDTO employer;
 
-	private LocalDate postedAt;
+	private LocalDateTime createdAt;
 
 	boolean active;
 	
@@ -44,7 +45,7 @@ public class JobPostingResponseDTO {
 		setLocation(jobPosting.getLocation());
 		setJobPosition(jobPosting.getJobPosition());
 		setEmployer(new EmployerDTO(jobPosting.getEmployer()));
-		setPostedAt(jobPosting.getPostedAt());
+		setCreatedAt(jobPosting.getCreatedAt());
 		setActive(jobPosting.isActive());
 		
 	}
