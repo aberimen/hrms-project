@@ -1,4 +1,4 @@
-package com.aberimen.hrms.location;
+package com.aberimen.hrms.common.location;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

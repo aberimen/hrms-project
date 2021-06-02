@@ -1,4 +1,4 @@
-package com.aberimen.hrms.location;
+package com.aberimen.hrms.common.location;
 
 import java.util.List;
 

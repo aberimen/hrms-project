@@ -1,4 +1,4 @@
-package com.aberimen.hrms.location;
+package com.aberimen.hrms.common.location;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
