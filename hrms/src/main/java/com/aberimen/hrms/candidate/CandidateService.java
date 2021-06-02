@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.aberimen.hrms.resume.Resume;
+
 import lombok.AllArgsConstructor;
 
 @Service
@@ -26,6 +28,20 @@ public class CandidateService {
 	public Optional<Candidate> findByNationalId(String nationalID) {
 
 		return candidateRepository.findByNationalId(nationalID);
+	}
+
+	public Candidate saveResume(Resume resume, long candidateId) {
+		Optional<Candidate> candidateOptional = candidateRepository.findById(candidateId);
+		
+		System.out.println(candidateOptional.get().getEmail());
+		if(candidateOptional.isPresent()) {
+		   Candidate candidate = candidateOptional.get();
+		   candidate.setResume(resume);
+		   
+		   return candidateRepository.save(candidate);
+		}
+		
+		return null;
 	}
 
 }

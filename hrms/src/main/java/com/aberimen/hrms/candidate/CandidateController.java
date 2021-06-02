@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aberimen.hrms.candidate.dto.CandidateDTO;
+import com.aberimen.hrms.resume.Resume;
 
 @RestController
 @RequestMapping("/api/1.0/")
@@ -44,6 +45,10 @@ public class CandidateController {
 		candidateService.save(candidate);
 	}
 
+	@PostMapping("/candidate/{candidateId}/createresume")
+	public Candidate createResume(@RequestBody Resume resume, long candidateId) {
+		return candidateService.saveResume(resume,candidateId);
+	}
 	
 	
 
