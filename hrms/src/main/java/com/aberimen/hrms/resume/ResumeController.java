@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.aberimen.hrms.education.Education;
 import com.aberimen.hrms.experience.Experience;
@@ -52,8 +53,11 @@ public class ResumeController {
 		resumeService.saveTechnicalSkill(resumeId);
 	}
 	
-	public void createProfilePhoto() {
-		//TODO profile photo api
+	@PostMapping("/resumes/profile-image/{resumeId}")
+	public void createProfilePhoto(MultipartFile file, @PathVariable long resumeId) {
+		System.err.println(file);
+		if(file != null)
+		resumeService.saveProfileImage(file, resumeId);
 	}
 	
 	@PostMapping("/resumes/summary/{resumeId}")
