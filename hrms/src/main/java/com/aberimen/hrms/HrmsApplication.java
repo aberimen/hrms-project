@@ -8,14 +8,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
+import com.aberimen.hrms.common.location.Location;
+import com.aberimen.hrms.common.location.LocationRepository;
 import com.aberimen.hrms.employer.Employer;
 import com.aberimen.hrms.employer.EmployerService;
 import com.aberimen.hrms.jobposition.JobPosition;
 import com.aberimen.hrms.jobposition.JobPositionRepository;
 import com.aberimen.hrms.jobposting.JobPosting;
 import com.aberimen.hrms.jobposting.JobPostingService;
-import com.aberimen.hrms.location.Location;
-import com.aberimen.hrms.location.LocationRepository;
 
 @SpringBootApplication
 public class HrmsApplication {

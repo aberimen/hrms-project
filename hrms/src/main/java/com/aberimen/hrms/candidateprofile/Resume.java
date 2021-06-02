@@ -2,6 +2,7 @@ package com.aberimen.hrms.candidateprofile;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,19 +18,19 @@ import lombok.Data;
 
 @Data
 @Entity
-public class CandidateProfile {
+public class Resume {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@OneToMany
-	private List<Education> educationDetails;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Education> education;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Experience> experiences;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<LanguageSkill> languageSkills;
 	
 	private String profileImage;
@@ -38,8 +39,8 @@ public class CandidateProfile {
 	
 	private String linkedinAccount;
 	
-	private String aboutMe;
+	private String summary;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<TechnicalSkill> technicalSkills;
 }

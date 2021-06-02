@@ -3,10 +3,10 @@ package com.aberimen.hrms.jobposting.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.aberimen.hrms.common.location.Location;
 import com.aberimen.hrms.employer.dto.EmployerDTO;
 import com.aberimen.hrms.jobposition.JobPosition;
 import com.aberimen.hrms.jobposting.JobPosting;
-import com.aberimen.hrms.location.Location;
 
 import lombok.Data;
 

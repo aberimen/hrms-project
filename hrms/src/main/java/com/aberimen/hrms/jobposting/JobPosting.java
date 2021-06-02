@@ -11,9 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import com.aberimen.hrms.common.location.Location;
 import com.aberimen.hrms.employer.Employer;
 import com.aberimen.hrms.jobposition.JobPosition;
-import com.aberimen.hrms.location.Location;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
