@@ -2,18 +2,23 @@ package com.aberimen.hrms.candidate;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+import com.aberimen.hrms.resume.Resume;
 import com.aberimen.hrms.user.User;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,13 +39,16 @@ public class Candidate extends User{
 	@Column(nullable = false)
 	private String lastName;
 
-	@NotEmpty
+	@NotNull
 	@Column(nullable = false)
 	private LocalDate dateOfBirth;
 	
 	@NotEmpty
 	@Column(length = 11, unique = true, nullable = false)
 	private String nationalId;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Resume resume;
 	
 
 }
