@@ -6,11 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.aberimen.hrms.common.department.Department;
 import com.aberimen.hrms.common.educationtype.EducationType;
 import com.aberimen.hrms.common.language.Language;
+import com.aberimen.hrms.resume.Resume;
 
 import lombok.Data;
 
@@ -40,4 +42,7 @@ public class Education {
 	private LocalDate startDate;
 	
 	private boolean stillStudying;
+	
+	@ManyToOne
+	private Resume resume;
 }

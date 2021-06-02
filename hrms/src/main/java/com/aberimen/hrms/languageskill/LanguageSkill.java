@@ -7,9 +7,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.aberimen.hrms.common.language.Language;
+import com.aberimen.hrms.resume.Resume;
 
 import lombok.Data;
 
@@ -27,4 +29,7 @@ public class LanguageSkill {
 	@Enumerated(EnumType.ORDINAL)
 	@Column(columnDefinition = "smallint")
 	private LanguageLevel languageLevel; 
+	
+	@ManyToOne
+	private Resume resume;
 }

@@ -24,13 +24,13 @@ public class Resume {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "resume")
 	private List<Education> education;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "resume")
 	private List<Experience> experiences;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "resume")
 	private List<LanguageSkill> languageSkills;
 	
 	private String profileImage;
@@ -41,6 +41,6 @@ public class Resume {
 	
 	private String summary;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "resume")
 	private List<TechnicalSkill> technicalSkills;
 }
