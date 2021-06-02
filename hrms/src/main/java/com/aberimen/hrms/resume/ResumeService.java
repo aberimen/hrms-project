@@ -1,4 +1,4 @@
-package com.aberimen.hrms.candidateprofile;
+package com.aberimen.hrms.resume;
 
 import java.util.List;
 

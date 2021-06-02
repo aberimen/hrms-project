@@ -1,4 +1,4 @@
-package com.aberimen.hrms.candidateprofile;
+package com.aberimen.hrms.resume;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aberimen.hrms.candidateprofile.dto.SocialAccountsDTO;
 import com.aberimen.hrms.education.Education;
 import com.aberimen.hrms.experience.Experience;
 import com.aberimen.hrms.languageskill.LanguageSkill;
+import com.aberimen.hrms.resume.dto.SocialAccountsDTO;
 import com.aberimen.hrms.technicalskill.TechnicalSkill;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;

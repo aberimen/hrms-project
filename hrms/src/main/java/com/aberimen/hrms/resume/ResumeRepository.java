@@ -1,4 +1,4 @@
-package com.aberimen.hrms.candidateprofile;
+package com.aberimen.hrms.resume;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

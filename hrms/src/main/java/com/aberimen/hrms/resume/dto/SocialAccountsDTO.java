@@ -1,4 +1,4 @@
-package com.aberimen.hrms.candidateprofile.dto;
+package com.aberimen.hrms.resume.dto;
 
 import lombok.Data;
 
