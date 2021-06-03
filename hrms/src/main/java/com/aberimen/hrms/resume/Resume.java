@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import com.aberimen.hrms.education.Education;
 import com.aberimen.hrms.experience.Experience;
@@ -24,9 +25,11 @@ public class Resume {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@OrderBy("stillStudying DESC, graduationDate DESC")
 	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "resume")
 	private List<Education> education;
 	
+	@OrderBy("currentJob DESC, startDate DESC")
 	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "resume")
 	private List<Experience> experiences;
 	
