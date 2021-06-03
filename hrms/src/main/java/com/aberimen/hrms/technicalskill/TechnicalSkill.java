@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 
 import com.aberimen.hrms.common.techstack.TechStack;
 import com.aberimen.hrms.resume.Resume;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -23,6 +24,7 @@ public class TechnicalSkill {
 	@OneToOne
 	private TechStack techStack;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Resume resume;
 }

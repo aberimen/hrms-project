@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 
 import com.aberimen.hrms.common.language.Language;
 import com.aberimen.hrms.resume.Resume;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -22,14 +23,15 @@ public class LanguageSkill {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@OneToOne
 	private Language language;
-	
+
 	@Enumerated(EnumType.ORDINAL)
 	@Column(columnDefinition = "smallint")
-	private LanguageLevel languageLevel; 
-	
+	private LanguageLevel languageLevel;
+
+	@JsonIgnore
 	@ManyToOne
 	private Resume resume;
 }

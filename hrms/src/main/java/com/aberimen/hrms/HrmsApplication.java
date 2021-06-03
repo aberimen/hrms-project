@@ -16,6 +16,8 @@ import com.aberimen.hrms.jobposition.JobPosition;
 import com.aberimen.hrms.jobposition.JobPositionRepository;
 import com.aberimen.hrms.jobposting.JobPosting;
 import com.aberimen.hrms.jobposting.JobPostingService;
+import com.aberimen.hrms.resume.Resume;
+import com.aberimen.hrms.resume.ResumeRepository;
 
 @SpringBootApplication
 public class HrmsApplication {
@@ -27,7 +29,7 @@ public class HrmsApplication {
 	@Bean
 	CommandLineRunner initData(EmployerService employerService, 
 			LocationRepository locationRepository, JobPositionRepository 
-			jobPositionRepository, JobPostingService jobPostingService) {
+			jobPositionRepository, JobPostingService jobPostingService, ResumeRepository resumeRepository) {
 		
 		return (String... args) -> {
 			
@@ -79,6 +81,10 @@ public class HrmsApplication {
 				}
 				
 			}
+			
+			Resume resume = new Resume();
+			resume.setId(1);
+			resumeRepository.save(resume);
 		};
 		
 	}

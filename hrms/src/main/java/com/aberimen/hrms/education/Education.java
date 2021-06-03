@@ -13,6 +13,7 @@ import com.aberimen.hrms.common.department.Department;
 import com.aberimen.hrms.common.educationtype.EducationType;
 import com.aberimen.hrms.common.language.Language;
 import com.aberimen.hrms.resume.Resume;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -43,6 +44,7 @@ public class Education {
 	
 	private boolean stillStudying;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Resume resume;
 }
