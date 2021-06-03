@@ -3,9 +3,13 @@ package com.aberimen.hrms.resume;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +18,7 @@ import com.aberimen.hrms.experience.Experience;
 import com.aberimen.hrms.languageskill.LanguageSkill;
 import com.aberimen.hrms.resume.dto.SocialAccountsDTO;
 import com.aberimen.hrms.technicalskill.TechnicalSkill;
+import com.aberimen.hrms.utils.GenericResponse;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -53,11 +58,11 @@ public class ResumeController {
 		resumeService.saveTechnicalSkill(resumeId);
 	}
 	
-	@PostMapping("/resumes/profile-image/{resumeId}")
-	public void createProfilePhoto(MultipartFile file, @PathVariable long resumeId) {
-		System.err.println(file);
-		if(file != null)
+	@PostMapping("/resumes/profile-image")
+	public ResponseEntity<?> createProfilePhoto(MultipartFile file, @RequestParam long resumeId) {
+		
 		resumeService.saveProfileImage(file, resumeId);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new GenericResponse("profil fotoğrafı eklendi"));
 	}
 	
 	@PostMapping("/resumes/summary/{resumeId}")

@@ -1,9 +1,6 @@
 package com.aberimen.hrms.resume;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -11,24 +8,19 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.aberimen.hrms.config.CloudinaryConfig;
-import com.cloudinary.Cloudinary;
-import com.cloudinary.Transformation;
-import com.cloudinary.utils.ObjectUtils;
+import com.aberimen.hrms.error.BadRequestException;
+import com.aberimen.hrms.error.GenericNotFoundException;
+import com.aberimen.hrms.utils.CloudinaryService;
+
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class ResumeService {
 
 	private ResumeRepository resumeRepository;
-	private CloudinaryConfig cloudinaryConfig;
-	private Cloudinary cloudinary;
+	private CloudinaryService cloudinaryService;
 
-	public ResumeService(ResumeRepository resumeRepository, CloudinaryConfig cloudinaryConfig) {
-		super();
-		this.resumeRepository = resumeRepository;
-		this.cloudinaryConfig = cloudinaryConfig;
-		cloudinary = new Cloudinary(cloudinaryConfig.getCloudinaryURL());
-	}
 
 	public List<Resume> getCandidateProfile(long userId) {
 		// TODO Auto-generated method stub
@@ -58,42 +50,29 @@ public class ResumeService {
 	public void saveProfileImage(MultipartFile multipartFile, long resumeId) {
 		Optional<Resume> resumeInDBOptional = resumeRepository.findById(resumeId);
 		
+		if(multipartFile == null ) {
+			throw new BadRequestException("Dosya null olamaz");
+		}
+		
 		if(!resumeInDBOptional.isPresent()) {
-			return;
+			throw new GenericNotFoundException("CV bulunamadı");
 		}
 		
-		Resume resumeInDB = resumeInDBOptional.get();
-		File file = convertMultiPartToFile(multipartFile);
+		Resume inDB = resumeInDBOptional.get();
 		
 		try {
 			
-			Map uploadFile = cloudinary.uploader().uploadLarge(file, ObjectUtils.asMap("transformation",
-                    new Transformation().crop("limit").width(3000).height(2000)));
+			Map<?, ?> result = cloudinaryService.upload(multipartFile);
+			String imgURL = (String) result.get("url");
+			inDB.setProfileImage(imgURL);
 			
-			resumeInDB.setProfileImage((String) uploadFile.get("url"));
-			resumeRepository.save(resumeInDB);
-			
-			file.delete();
-			
+			resumeRepository.save(inDB);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	private File convertMultiPartToFile(MultipartFile file) {
-		File target = new File(file.getOriginalFilename());
-
-		try {
-			OutputStream fos = new FileOutputStream(target);
-			fos.write(file.getBytes());
-			fos.close();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
-
-		return target;
-	}
+	
 
 }

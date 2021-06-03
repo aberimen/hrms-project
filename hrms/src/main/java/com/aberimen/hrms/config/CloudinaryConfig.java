@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "cloudinary")
+@ConfigurationProperties(prefix = "cloudinary") // application.yml dosyasında ön eki cloudinary olan özellikleri alıyor
 public class CloudinaryConfig {
 
 	private String cloudName;
