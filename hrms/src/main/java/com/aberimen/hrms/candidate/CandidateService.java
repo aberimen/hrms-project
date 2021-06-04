@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.aberimen.hrms.error.GenericNotFoundException;
 import com.aberimen.hrms.resume.Resume;
 
 import lombok.AllArgsConstructor;
@@ -16,32 +17,31 @@ public class CandidateService {
 	private CandidateRepository candidateRepository;
 
 	public void save(Candidate candidate) {
-
 		candidateRepository.save(candidate);
 	}
 
 	public List<Candidate> getCandidates() {
-
 		return candidateRepository.findAll();
 	}
 
 	public Optional<Candidate> findByNationalId(String nationalID) {
-
 		return candidateRepository.findByNationalId(nationalID);
 	}
 
-	public Candidate saveResume(Resume resume, long candidateId) {
-		Optional<Candidate> candidateOptional = candidateRepository.findById(candidateId);
-		
-		System.out.println(candidateOptional.get().getEmail());
-		if(candidateOptional.isPresent()) {
-		   Candidate candidate = candidateOptional.get();
-		   candidate.setResume(resume);
-		   
-		   return candidateRepository.save(candidate);
+	public Candidate getCandidateById(long candidateId) {
+		Optional<Candidate> optionalInDB = candidateRepository.findById(candidateId);
+
+		if (!optionalInDB.isPresent()) {
+			throw new GenericNotFoundException("Aday bulunamadı");
 		}
-		
-		return null;
+
+		return optionalInDB.get();
+	}
+
+	public void saveResume(Resume resume, long candidateId) {
+		Candidate candidate = getCandidateById(candidateId);
+		candidate.setResume(resume);
+		candidateRepository.save(candidate);
 	}
 
 }

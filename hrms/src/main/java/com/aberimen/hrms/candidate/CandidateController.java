@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aberimen.hrms.candidate.dto.CandidateDTO;
 import com.aberimen.hrms.resume.Resume;
+import com.aberimen.hrms.utils.GenericResponse;
 
 @RestController
 @RequestMapping("/api/1.0/")
@@ -29,25 +29,24 @@ public class CandidateController {
 	}
 	
 	@GetMapping("/candidates")
-	public ResponseEntity<List<CandidateDTO>> getAll() {
-		
+	public List<CandidateDTO> getAll() {	
 		List<CandidateDTO> candidates = candidateService.getCandidates()
 		.stream()
 		.map( c -> new CandidateDTO(c)) // map Candidates to CandidateDTOs
 		.collect(Collectors.toList());
 		
-		return ResponseEntity.ok(candidates);
+		return candidates;
 	}
 
 	@PostMapping("/candidates")
 	public void register(@Valid @RequestBody Candidate candidate) {
-		
 		candidateService.save(candidate);
 	}
 
-	@PostMapping("/candidate/{candidateId}/createresume")
-	public Candidate createResume(@RequestBody Resume resume, long candidateId) {
-		return candidateService.saveResume(resume,candidateId);
+	@PostMapping("/candidates/{candidateId}/createresume")
+	public GenericResponse createResume(@RequestBody Resume resume, long candidateId) {
+		 candidateService.saveResume(resume,candidateId);
+		 return new GenericResponse("CV oluşturuldu.");
 	}
 	
 	

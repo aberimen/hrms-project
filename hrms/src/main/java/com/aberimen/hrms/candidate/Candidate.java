@@ -15,10 +15,10 @@ import javax.validation.constraints.NotNull;
 
 import com.aberimen.hrms.resume.Resume;
 import com.aberimen.hrms.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -47,6 +47,7 @@ public class Candidate extends User{
 	@Column(length = 11, unique = true, nullable = false)
 	private String nationalId;
 	
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Resume resume;
 	
