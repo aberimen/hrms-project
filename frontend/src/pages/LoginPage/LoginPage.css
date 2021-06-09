@@ -1,0 +1,26 @@
+.wrapper {
+  border: 1px solid #eff2f7;
+  border-radius: 0.25rem;
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+img {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  width: 100%;
+  max-height: 80%;
+}
+
+.divider {
+  border-bottom: 2px dashed rgba(132, 146, 166, 0.3);
+  width: 100%;
+}
