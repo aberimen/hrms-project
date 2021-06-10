@@ -1,0 +1,50 @@
+@import "../../index.scss";
+
+$navbar-light-color: #333;
+$navbar-light-hover-color: $primary;
+
+@import "../../custom-bootstrap.scss";
+
+.navbar-area {
+  background-color: $light;
+}
+
+.navbar-area {
+  border-bottom: 1px solid #e1e6ea;
+}
+
+nav button {
+  padding: 0 30px;
+}
+
+.navbar-nav .nav-item a {
+  padding: 1rem 0.7rem;
+  font-weight: 600;
+  display: inline-block;
+  position: relative;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 20px;
+}
+
+.navbar-nav .nav-item a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background-color: $primary;
+  border-radius: 10px;
+  -webkit-transition: width 0.3s ease;
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-item a:hover::after {
+  width: 100%;
+}
+
+.navbar-nav .nav-item a.actived::after {
+  width: 100% !important;
+}
