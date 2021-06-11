@@ -9,7 +9,6 @@ const Navbar = () => {
 
     const handleClickLink = (e) =>{
         e.preventDefault();
-        console.log(e.target);
         setActive(e.target.name);
     }
 

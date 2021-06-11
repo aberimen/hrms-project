@@ -1,8 +1,8 @@
-import HomePage from './pages/HomePage'
 import './App.css';
 import LoginPage from './pages/LoginPage/LoginPage';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Navbar from './layouts/Navbar/Navbar';
+import HomePage from './pages/HomePage/HomePage';
 
 
 function App() {
