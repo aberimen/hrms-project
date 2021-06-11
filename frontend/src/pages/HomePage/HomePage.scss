@@ -1,0 +1,30 @@
+
+@import '../../index.scss';
+
+section.apply-steps{
+    background-color: $primary;
+    padding: 60px 160px;
+    margin-top: 3.5rem;
+    color: #fff;
+}
+
+.section-title{
+   
+    h2{
+        text-transform: capitalize;
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+    
+}
+
+.last-posts{
+    padding: 100px 0;
+
+    .content{
+        background-color: #fff;
+        border-radius: 10px;
+        height: 250px;
+        margin-top: 1rem;
+    }
+}
