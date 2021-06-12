@@ -3,6 +3,7 @@ import onlineResume from '../../assets/undraw_online_resume.svg';
 import './HomePage.scss';
 import { FaBeer, FaBriefcase, FaClipboardList, FaRegAddressCard, FaUserCheck } from 'react-icons/fa';
 import { MdAssignmentTurnedIn } from "react-icons/md"
+import SingleJob from '../../components/SingleJob/SingleJob';
 
 const HomePage = () => {
 
@@ -53,7 +54,29 @@ const HomePage = () => {
 
             </section>
 
-           
+            <section className="last-posts">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12 d-flex justify-content-center">
+                            <div className="section-title">
+                                <h2> Son İş İlanları</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row contents">
+                        <div className="col-lg-4 col-md-6">
+                            <SingleJob title="Java Developer" />
+                        </div>
+                        <div className="col-lg-4 col-md-6">
+                            <SingleJob title="Front End Developer" />
+                        </div>
+                        <div className="col-lg-4 col-md-6">
+                            <SingleJob title="Front End Developer" />
+                        </div>
+                    </div>
+                </div>
+
+            </section>
 
 
         </>
