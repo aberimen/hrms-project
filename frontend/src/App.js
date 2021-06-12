@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Navbar from './layouts/Navbar/Navbar';
 import HomePage from './pages/HomePage/HomePage';
+import PostJobPage from './pages/PostJobPage';
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
         <div>
           <Navbar />
           <Route exact path="/" component={HomePage} />
-          <Redirect to="/" />
+          <Route  path="/job-post" component={PostJobPage} />
+          {/* <Redirect to="/" /> */}
         </div>
 
       </Switch>

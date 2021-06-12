@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({ error, onChange, name, type, label, placeholder, className }) => {
+const Input = ({ error, id, onChange, name, value, type, label, placeholder, className }) => {
 
     className = className || 'form-control';
 
@@ -9,9 +9,9 @@ const Input = ({ error, onChange, name, type, label, placeholder, className }) =
     }
     return (
         <div className="form-group my-4">
+            {label && (<label className="form-label" htmlFor={id}>{label}</label>)}
             <div className="input-group">
-                {label && (<label>{label}</label>)}
-                <input type={type} className={className} name={name} placeholder={placeholder} onChange={onChange} />
+                <input id={id} type={type} className={className} value={value} name={name} placeholder={placeholder} onChange={onChange} />
                 {error && <div className="invalid-feedback">{error}</div>}
             </div>
         </div>
