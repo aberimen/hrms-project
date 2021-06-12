@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
 
+import com.aberimen.hrms.jobposting.EmploymentType;
+
 import lombok.Data;
 
 @Data
@@ -25,5 +27,9 @@ public class JobPostingDTO {
 	private LocalDate deadline;
 	
 	private int employerId;
+	
+	private EmploymentType employmentType;
+	
+	private boolean workRemotely;
 
 }

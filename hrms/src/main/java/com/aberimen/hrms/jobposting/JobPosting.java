@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,4 +56,9 @@ public class JobPosting {
 	private LocalDateTime createdAt;
 
 	private boolean active;
+	
+	@Enumerated(EnumType.ORDINAL)
+	private EmploymentType employmentType;
+	
+	private boolean workRemotely;
 }
