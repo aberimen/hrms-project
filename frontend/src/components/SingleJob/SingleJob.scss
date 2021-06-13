@@ -1,0 +1,68 @@
+@import "../../index.scss";
+
+.single-job {
+  margin-top: 35px;
+  min-width: 0;
+  border: 1px solid rgba(35,38,45,.08);;
+  border-radius: 0.8rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  transition: all .4s ease;
+
+  .company-image {
+    max-width: 120px;
+    max-height: auto;
+    padding: 20px 0 0 20px;
+    opacity: 0.6;
+    transition: 0.3s;
+
+    img {
+      width: 100%;
+      border-radius: 0.6rem;
+    }
+  }
+
+  &:hover{
+    box-shadow: 0 1rem 3rem rgba(35,38,45,.15);
+  }
+  &:hover .company-image {
+    opacity: 1;
+  }
+
+  .card-body {
+    padding: 20px;
+
+    .job-title h5{
+      font-weight: 700;
+      display: block;
+      width: 100%;
+      color: $dark-gray;
+    }
+  }
+
+  .job-tags {
+    margin-top: 1rem;
+    display: inline-flex;
+    flex-wrap: wrap;
+
+    .tag {
+      font-weight: 700;
+      margin-right: 6px;
+      margin-bottom: 6px;
+      padding: 4px 10px;
+      font-size: 0.6rem;
+      background-color: #d3dce655;
+      border-radius: 0.3rem;
+      color: $primary;
+      //color: #8492a6;
+    }
+  }
+  .card-submit {
+    padding: 20px;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
