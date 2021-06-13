@@ -1,15 +1,14 @@
 import React from 'react';
 import onlineResume from '../../assets/undraw_online_resume.svg';
 import './HomePage.scss';
-import { FaBeer, FaBriefcase, FaClipboardList, FaRegAddressCard, FaUserCheck } from 'react-icons/fa';
-import { MdAssignmentTurnedIn } from "react-icons/md"
+import { FaBriefcase, FaRegAddressCard, FaUserCheck } from 'react-icons/fa';
 import SingleJob from '../../components/SingleJob/SingleJob';
 
 const HomePage = () => {
 
     return (
         <>
-            <section>
+            <section className="mt-5">
                 <div className="container">
                     <div className="pt-5">
                         <div className="row">

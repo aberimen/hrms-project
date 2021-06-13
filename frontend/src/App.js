@@ -16,7 +16,7 @@ function App() {
         <div>
           <Navbar />
           <Route exact path="/" component={HomePage} />
-          <Route  path="/job-post" component={PostJobPage} />
+          <Route path="/post-job" component={PostJobPage} />
           {/* <Redirect to="/" /> */}
         </div>
 
