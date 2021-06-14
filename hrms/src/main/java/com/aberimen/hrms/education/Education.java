@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 
 import com.aberimen.hrms.common.department.Department;
 import com.aberimen.hrms.common.language.Language;
+import com.aberimen.hrms.common.university.University;
 import com.aberimen.hrms.resume.Resume;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,6 +31,9 @@ public class Education {
 
 	@Enumerated(EnumType.ORDINAL)
 	private EducationLevel educationLevel;
+
+	@ManyToOne
+	private University university;
 
 	@OneToOne
 	private Department department;
