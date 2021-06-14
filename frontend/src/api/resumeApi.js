@@ -6,7 +6,7 @@ export const getCandidateResume = resumeId => {
 };
 
 export const addEducationDetails = (educationDetails, resumeId) => {
-    return axios.post(`/api/1.0/education-details?resumeId= ${resumeId}`, educationDetails);
+    return axios.post(`/api/1.0/resumes/education-details?resumeId=${resumeId}`, educationDetails);
 };
 
 export const addExperience = (experience, resumeId) => {
@@ -15,10 +15,6 @@ export const addExperience = (experience, resumeId) => {
 
 export const addLanguageSkill = (languageSkill, resumeId) => {
     return axios.post(`/api/1.0/resumes/language-skills?resumeId= ${resumeId}`, languageSkill);
-};
-
-export const addTechnicalSkill = (technicalSkill, resumeId) => {
-    return axios.post(`/api/1.0/resumes/technical-skills?resumeId= ${resumeId}`, technicalSkill);
 };
 
 export const addTechnicalSkill = (technicalSkill, resumeId) => {
@@ -35,4 +31,22 @@ export const addSummary = (summary, resumeId) => {
 
 export const addSocialAccounts = (socialAccounts, resumeId) => {
     return axios.post(`/api/1.0/resumes/social-accounts?resumeId= ${resumeId}`, socialAccounts);
+};
+
+export const getEducationLevels = () => {
+    return [
+        { value: "BACHELOR", label: "Lisans" },
+        { value: "ASSOCIATE", label: "Ön Lisans" },
+        { value: "MASTER", label: "Yüksek Lisans" },
+        { value: "DOCTORAL", label: "Doktora" },
+        { value: "HIGH_SCHOOL", label: "Lise" },
+    ];
+};
+
+export const getEducationTypes = () => {
+    return [
+        { value: "ORGUN", label: "Örgün" },
+        { value: "IKINCI_OGRETIM", label: "İkinci Öğretim" },
+        { value: "ACIK_OGRETIM", label: "Açık Öğretim" }
+    ];
 };
