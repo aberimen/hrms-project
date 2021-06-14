@@ -2,13 +2,17 @@ import React from 'react';
 
 const Input = ({ error, id, onChange, name, value, type, label, placeholder, className, onBlur }) => {
 
-    className = `form-control ${className}`;
+    if (type !== 'checkbox') {
+        className = `form-control ${className}`;
+    } else {
+        className = 'form-check-input';
+    }
 
     if (error) {
         className += ' is-invalid';
     }
     return (
-        <div className="form-group my-4">
+        <div className="form-group my-2">
             {label && (<label className="form-label" htmlFor={id}>{label}</label>)}
             <div className="input-group">
 
