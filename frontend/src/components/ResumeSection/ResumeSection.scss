@@ -1,0 +1,37 @@
+@import "../../index.scss";
+
+.resume-page {
+  background-color: $bg-light;
+  height: 100%;
+
+  section {
+    border-radius: $border-radius;
+    background-color: #fff !important;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+
+    .header {
+      margin-top: 0;
+      margin-left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1rem;
+      // border-radius: inherit;
+      border-radius: $border-radius $border-radius 0 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.082);
+      width: 100%;
+    }
+
+    .title {
+      h3,
+      h5 {
+        font-weight: 600;
+      }
+    }
+  }
+}
