@@ -21,7 +21,7 @@ const Modal = ({ title, visible, name, children, onClickCancel, onClickSave }) =
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" onClick={onClickCancel}>Çık</button>
-                        <button type="button" className="btn btn-primary" onClick={onClickSave}>Kaydet</button>
+                        <button type="button" className="btn btn-primary" type="submit" onClick={onClickSave}>Kaydet</button>
                     </div>
                 </div>
             </div>

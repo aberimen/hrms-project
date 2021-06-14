@@ -8,7 +8,7 @@ const TextArea = ({ error, id, onChange, name, value, label, placeholder, classN
         className += ' is-invalid';
     }
     return (
-        <div className="form-group my-4">
+        <div className="form-group my-2">
             {label && (<label className="form-label" htmlFor={id}>{label}</label>)}
 
             <div className="input-group">

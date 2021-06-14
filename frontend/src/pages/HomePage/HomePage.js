@@ -57,8 +57,11 @@ const HomePage = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 d-flex justify-content-center">
+
+
                             <div className="section-title">
-                                <h2> Son İş İlanları</h2>
+                                <div className="badge bg-primary">Yeni İlanlar</div>
+                                <h2> Son İş İlanlarına Göz At</h2>
                             </div>
                         </div>
                     </div>

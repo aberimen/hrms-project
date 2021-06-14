@@ -9,7 +9,7 @@ const Select = ({ id, name, value, label, options = [], error, onChange, onBlur 
     }
 
     return (
-        <div className="form-group my-4">
+        <div className="form-group my-2">
             {label && (<label className="form-label" htmlFor={id}>{label}</label>)}
             <select className={className} value={value} name={name} onChange={onChange} onBlur={onBlur}>
                 <option value="" label="Bir seçim yapınız" />

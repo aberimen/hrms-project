@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   font-size: 1rem;
@@ -8,9 +7,9 @@
   text-align: left;
 }
 
-
 /* colors */
 $primary: #4169e1;
+$bg-light: #f8f9fa;
 $dark-gray: #3c4858;
 $headings-color: $dark-gray;
 $input-color: #8492a6;
@@ -23,11 +22,8 @@ $input-padding-x: 0.75rem;
 
 /* icons */
 
-$large-icon : 4rem;
-
+$large-icon: 4rem;
 
 /* buttons */
 
-
 $border-radius: 0.5rem;
-

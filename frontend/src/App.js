@@ -4,6 +4,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Navbar from './layouts/Navbar/Navbar';
 import HomePage from './pages/HomePage/HomePage';
 import PostJobPage from './pages/PostJobPage';
+import ResumePage from './pages/ResumePage/ResumePage';
 
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
           <Navbar />
           <Route exact path="/" component={HomePage} />
           <Route path="/post-job" component={PostJobPage} />
+          <Route path="/resume" component={ResumePage} />
+
           {/* <Redirect to="/" /> */}
         </div>
 
