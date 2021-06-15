@@ -14,7 +14,7 @@ public class EmployerDTO extends UserDTO{
 	
 	private String company;
 	
-	private String webSite;
+	private String website;
 	
 	private String phoneNumber;
 	
@@ -23,7 +23,7 @@ public class EmployerDTO extends UserDTO{
 	public EmployerDTO(Employer employer) {
 		super(employer);
 		setCompany(employer.getCompany());
-		setWebSite(employer.getWebSite());
+		setWebsite(employer.getWebsite());
 		setPhoneNumber(employer.getPhoneNumber());
 		setVerified(employer.isVerified());
 		

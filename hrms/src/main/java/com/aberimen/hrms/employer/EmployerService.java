@@ -20,7 +20,7 @@ public class EmployerService{
 	
 	public ResponseEntity<?> saveEmployer(Employer employer) {
 		String emailDomain = employer.getEmail().split("@")[1];
-		String host = employer.getWebSite()
+		String host = employer.getWebsite()
 	            .replaceAll("http://|https://|www.|ws://|wss://","")
 	            .replaceAll("/.*","");
 	            

@@ -65,7 +65,7 @@ public class HrmsApplication {
 				//init employers
 				Employer employer = new  Employer();
 				employer.setCompany("Firma " + i);
-				employer.setWebSite("www.firma"+i+".com");
+				employer.setWebsite("www.firma"+i+".com");
 				employer.setEmail("info@firma"+i+".com");
 				employer.setPassword("1234");
 				employer.setPhoneNumber("1234567899");

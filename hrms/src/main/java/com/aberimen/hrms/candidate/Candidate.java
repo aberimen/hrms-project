@@ -1,7 +1,5 @@
 package com.aberimen.hrms.candidate;
 
-import java.time.LocalDate;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import com.aberimen.hrms.resume.Resume;
 import com.aberimen.hrms.user.User;
@@ -39,9 +36,9 @@ public class Candidate extends User{
 	@Column(nullable = false)
 	private String lastName;
 
-	@NotNull
+	@NotEmpty
 	@Column(nullable = false)
-	private LocalDate dateOfBirth;
+	private String yearOfBirth;
 	
 	@NotEmpty
 	@Column(length = 11, unique = true, nullable = false)

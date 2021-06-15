@@ -17,6 +17,7 @@ public class CandidateService {
 	private CandidateRepository candidateRepository;
 
 	public void save(Candidate candidate) {
+		candidate.setEnabled(false); // email doğrulaması ile hesabını açtırması gerek
 		candidateRepository.save(candidate);
 	}
 

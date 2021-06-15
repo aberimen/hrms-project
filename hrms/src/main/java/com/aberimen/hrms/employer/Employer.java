@@ -34,7 +34,7 @@ public class Employer extends User{
 	
 	@NotEmpty
 	@Column(nullable = false)
-	private String webSite;
+	private String website;
 	
 	@NotEmpty
 	@Column(nullable = false)
