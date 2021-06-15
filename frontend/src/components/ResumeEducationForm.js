@@ -10,6 +10,7 @@ import { addEducationDetails, getEducationLevels, getEducationTypes } from '../a
 
 const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
 
+    const [visible, setVisible] = useState(modalVisible);
     const [universities, setUniversities] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [languages, setLanguages] = useState([]);
@@ -18,12 +19,12 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
         initialValues: {
             educationLevel: '',
             schoolName: '',
-            university: '',
+            universityId: '',
             educationType: '',
-            department: '',
+            departmentId: '',
             startDate: '',
             graduationDate: '',
-            educationLanguage: '',
+            educationLanguageId: '',
             stillStudying: false
         },
 
@@ -35,14 +36,8 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
             }),
 
         onSubmit: (values, { resetForm, setSubmitting }) => {
-            // department, educationLanguage, university backend'den obje olarak isteniyor
-            const educationDetails = {
-                ...values,
-                department: { id: values.department },
-                educationLanguage: { id: values.educationLanguage },
-                university: { id: values.university }
-            };
-            saveEducationDetails(educationDetails)
+            saveEducationDetails(values);
+            // resetForm();
         }
     });
 
@@ -66,16 +61,21 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
 
     const saveEducationDetails = async (educationDetails) => {
         const resumeId = 1; // test için
-        await addEducationDetails(educationDetails, resumeId);
+        try {
+            await addEducationDetails(educationDetails, resumeId);
+        } catch (error) {
+        }
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <Modal
                 name="educationDetails"
-                visible={modalVisible}
+                visible={visible}
                 onClickCancel={onModalClickCancel}
-                title="Yeni Eğitim Bilgisi Ekle">
+                // saveButtonDisabled={isSubmitting}
+                title="Yeni Eğitim Bilgisi Ekle"
+            >
 
                 <div className="container-fluid">
                     <div className="row">
@@ -95,8 +95,8 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
                                 <div className="col-md-12">
                                     <Select
                                         label="Üniversite"
-                                        name="university"
-                                        value={values.university}
+                                        name="universityId"
+                                        value={values.universityId}
                                         options={universities.map(u => ({ value: u.id, label: u.name }))}
                                         onChange={handleChange}
                                         error={errors.educationLevel}
@@ -107,9 +107,9 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
                                 <div className="col-md-12">
                                     <Select
                                         label="Bölüm"
-                                        name="department"
-                                        value={values.department}
-                                        options={departments.map(d => ({ value: d.id, label: d.name }))}
+                                        name="departmentId"
+                                        value={values.departmentId}
+                                        options={departments.map(d => ({ value: d.id, label: d.departmentName }))}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                     />
@@ -144,12 +144,13 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
                                 name="startDate"
                                 label="Başlangıç Tarihi *"
                                 value={values.startDate}
-                                error={errors.startDate}
+                                error={touched.startDate && errors.startDate}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
                         </div>
-                        <div className="col-md-5">
+
+                        {values.stillStudying !== true && <div className="col-md-5">
                             <Input
                                 type="date"
                                 label="Bitiş Tarihi"
@@ -158,7 +159,7 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
-                        </div>
+                        </div>}
 
                         <div className="col-md-2">
                             <Input
@@ -174,9 +175,9 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
                         <div className="col-md-6">
                             <Select
                                 label="Eğitim Dili"
-                                name="educationLanguage"
-                                value={values.educationLanguage}
-                                options={departments.map(l => ({ value: l.id, label: l.languageName }))}
+                                name="educationLanguageId"
+                                value={values.educationLanguageId}
+                                options={languages.map(l => ({ value: l.id, label: l.languageName }))}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
