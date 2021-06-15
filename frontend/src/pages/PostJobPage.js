@@ -179,7 +179,7 @@ const PostJobPage = () => {
                         value={values.openPositions}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        error={errors.openPositions}
+                        error={touched.openPositions && errors.openPositions}
                         id="openPositions"
                         placeholder="Açık Pozisyon Sayısı" />
 
@@ -189,7 +189,7 @@ const PostJobPage = () => {
                         name="deadline"
                         value={values.deadline}
                         onChange={handleChange}
-                        error={errors.deadline}
+                        error={touched.deadline && errors.deadline}
                         id="deadline" />
 
                     <button className="btn btn-primary btn-apply" type="submit" name="submit" disabled={isSubmitting} > Gönder </button>

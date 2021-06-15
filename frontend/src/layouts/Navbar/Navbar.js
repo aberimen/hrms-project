@@ -7,7 +7,7 @@ const Navbar = () => {
 
     const [active, setActive] = useState("Home");
 
-    const handleClickLink = (e) =>{
+    const handleClickLink = (e) => {
         e.preventDefault();
         setActive(e.target.name);
     }
@@ -23,14 +23,14 @@ const Navbar = () => {
 
                 <div className="collapse navbar-collapse">
                     <ul className="navbar-nav ms-auto">
-                        <NavItem name="Home" active={active} onClick={handleClickLink}/>
-                        <NavItem name="Deneme" active={active} onClick={handleClickLink}/>
-                        <NavItem name="Profile" active={active} onClick={handleClickLink}/>
-                        <NavItem name="Akış" active={active} onClick={handleClickLink}/>
+                        <NavItem name="Home" active={active} onClick={handleClickLink} />
+                        <NavItem name="Deneme" active={active} onClick={handleClickLink} />
+                        <NavItem name="Profile" active={active} onClick={handleClickLink} />
+                        <NavItem name="Akış" active={active} onClick={handleClickLink} />
 
                     </ul>
                     <div className="ms-5">
-                        <button className="btn btn-secondary my-2 my-sm-0" type="submit">Kayıt Ol</button>
+                        <Link className="btn btn-secondary my-2 my-sm-0" to="/register">Kayıt Ol</Link>
                         <Link className="btn btn-primary my-2 my-sm-0 ms-2" to="/login" >Giriş Yap</Link>
                     </div>
                 </div>
