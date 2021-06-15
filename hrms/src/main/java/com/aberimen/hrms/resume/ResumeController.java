@@ -1,5 +1,6 @@
 package com.aberimen.hrms.resume;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aberimen.hrms.education.Education;
+import com.aberimen.hrms.education.EducationDTO;
 import com.aberimen.hrms.experience.Experience;
 import com.aberimen.hrms.languageskill.LanguageSkill;
 import com.aberimen.hrms.resume.dto.SocialAccountsDTO;
@@ -24,6 +26,9 @@ public class ResumeController {
 
 	@Autowired
 	ResumeService resumeService;
+	
+	@Autowired
+	ModelMapper mapper;
 
 	@GetMapping("/resumes")
 	public Resume getCandidateResume(@RequestParam long resumeId) {
@@ -31,7 +36,8 @@ public class ResumeController {
 	}
 
 	@PostMapping("/resumes/education-details")
-	public GenericResponse createEducation(@RequestBody Education education, @RequestParam long resumeId) {
+	public GenericResponse createEducation(@RequestBody EducationDTO educationDTO, @RequestParam long resumeId) {
+		Education education = mapper.map(educationDTO, Education.class);
 		resumeService.saveEducation(education, resumeId);
 		return new GenericResponse("Eğitim bilgisi eklendi.");
 	}

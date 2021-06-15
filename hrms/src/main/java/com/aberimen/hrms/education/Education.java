@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.aberimen.hrms.common.department.Department;
 import com.aberimen.hrms.common.language.Language;
@@ -35,13 +34,13 @@ public class Education {
 	@ManyToOne
 	private University university;
 
-	@OneToOne
+	@ManyToOne
 	private Department department;
 
 	@Enumerated(EnumType.ORDINAL)
 	private EducationType educationType;
 
-	@OneToOne
+	@ManyToOne
 	private Language educationLanguage;
 
 	private LocalDate graduationDate;
