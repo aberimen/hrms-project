@@ -1,16 +1,10 @@
-* {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.7;
-  font-family: "Nunito", sans-serif !important;
-  text-align: left;
-}
-
 /* colors */
 $primary: #4169e1;
-$bg-light: #f8f9fa;
+$bg-light: #f9fafb;
 $dark-gray: #3c4858;
+$gray: #e5eaf0;
+$gray-5: #737f8b;
+$gray-6: #546e7a;
 $headings-color: $dark-gray;
 $input-color: #8492a6;
 $input-border-color: #e0e6ed;
@@ -27,3 +21,7 @@ $large-icon: 4rem;
 /* buttons */
 
 $border-radius: 0.5rem;
+
+/* title */
+
+$title-font-weight: 600;
