@@ -21,7 +21,7 @@ public class JobPostingService {
 
 	public GenericResponse createJobPosting(JobPosting jobPosting) {
 		jobPosting.setCreatedAt(LocalDateTime.now());
-		jobPosting.setActive(false);
+		//jobPosting.setActive(false);
 		jobPostingRepository.save(jobPosting);
 
 		return new GenericResponse("İş ilanı eklendi.");

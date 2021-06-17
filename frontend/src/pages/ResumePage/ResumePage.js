@@ -11,7 +11,7 @@ const ResumePage = () => {
 
     return (
         <div className="resume-page">
-            <div className="cover">
+            <div className="page-cover">
 
             </div>
             <div className="container">

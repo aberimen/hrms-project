@@ -15,7 +15,7 @@ const HomePage = () => {
                             <div className="col-lg-6 p-5">
                                 <h1 className="fw-bold" style={{ marginTop: '5rem' }}>
                                     HRMS, Hemen iş Aramaya Başla
-                            </h1>
+                                </h1>
                             </div>
 
                             <div className="col-lg-6 bg-white" style={{ borderTopLeftRadius: '5rem', borderBottomRightRadius: '5rem' }}>
@@ -59,9 +59,9 @@ const HomePage = () => {
                         <div className="col-lg-12 d-flex justify-content-center">
 
 
-                            <div className="section-title">
-                                <div className="badge bg-primary">Yeni İlanlar</div>
-                                <h2> Son İş İlanlarına Göz At</h2>
+                            <div className="section-title p-5">
+                                <span className="badge bg-primary">Yeni İlanlar</span>
+                                <h2 > Son İş İlanlarına Göz At</h2>
                             </div>
                         </div>
                     </div>

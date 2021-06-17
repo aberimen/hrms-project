@@ -15,6 +15,7 @@ import com.aberimen.hrms.employer.Employer;
 import com.aberimen.hrms.employer.EmployerService;
 import com.aberimen.hrms.jobposition.JobPosition;
 import com.aberimen.hrms.jobposition.JobPositionRepository;
+import com.aberimen.hrms.jobposting.EmploymentType;
 import com.aberimen.hrms.jobposting.JobPosting;
 import com.aberimen.hrms.jobposting.JobPostingService;
 import com.aberimen.hrms.resume.Resume;
@@ -76,10 +77,11 @@ public class HrmsApplication {
 				//init job postings for each company
 				for (int j = 1; j < 5; j++) {
 					JobPosting jobPosting= new JobPosting();
-					jobPosting.setJobDescription("Firma " + i + " için iş ilanı" +j );
+					jobPosting.setJobDescription("Firma " + i + " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
 					jobPosting.setEmployer(employer);
 					jobPosting.setLocation(null);
 					jobPosting.setActive(true);
+					jobPosting.setEmploymentType(EmploymentType.FULLTIME);
 					jobPosting.setCreatedAt(LocalDateTime.now());
 					jobPosting.setJobPosition(jobPosition);
 					jobPostingService.createJobPosting(jobPosting);

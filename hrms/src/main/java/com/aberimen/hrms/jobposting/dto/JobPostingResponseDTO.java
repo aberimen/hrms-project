@@ -32,6 +32,10 @@ public class JobPostingResponseDTO {
 	private EmployerDTO employer;
 
 	private LocalDateTime createdAt;
+	
+	private String employmentType;
+	
+	private boolean workRemotely;
 
 	boolean active;
 	
@@ -47,6 +51,8 @@ public class JobPostingResponseDTO {
 		setEmployer(new EmployerDTO(jobPosting.getEmployer()));
 		setCreatedAt(jobPosting.getCreatedAt());
 		setActive(jobPosting.isActive());
+		setEmploymentType(jobPosting.getEmploymentType().toString());
+		setWorkRemotely(jobPosting.isWorkRemotely());
 		
 	}
 }

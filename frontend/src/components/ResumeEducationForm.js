@@ -161,7 +161,7 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
                             />
                         </div>}
 
-                        <div className="col-md-2">
+                        <div className={values.stillStudying ? 'col-6' : 'col-md-2'}>
                             <Input
                                 type="checkbox"
                                 label="Devam ediyor"
