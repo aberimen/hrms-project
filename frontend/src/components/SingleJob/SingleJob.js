@@ -1,13 +1,13 @@
 import React from 'react';
 import './SingleJob.scss';
-import image from '../../assets/undraw_online_resume.svg'
+import defaultImage from '../../assets/company-default.png'
 
-const SingleJob = ({ title }) => {
+const SingleJob = ({ title, description, tags = [] }) => {
     return (
         <div className="single-job">
 
             <div className="company-image">
-                <img src="https://kuponla.com/wp-content/uploads/2020/02/airbnb-guncel-indirim-kuponlari-KUPONLACOM.png" alt="img" />
+                <img src={defaultImage} alt="img" />
             </div>
 
             <div className="card-body">
@@ -16,11 +16,18 @@ const SingleJob = ({ title }) => {
                 </div>
 
                 <div className="job-tags">
-                    {/* tags here */}
-                    <div className="tag">Uzaktan</div>
-                    <div className="tag">Yakından</div>
-                    <div className="tag">Full Time</div>
+                    {tags.map(tag =>
+                        <div className="tag" key={tag}>
+                            {tag}
+                        </div>
+                    )}
 
+                </div>
+
+                <div className="job-description">
+                    <p>
+                        {description}
+                    </p>
                 </div>
             </div>
 
