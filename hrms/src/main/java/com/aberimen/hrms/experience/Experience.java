@@ -27,7 +27,7 @@ public class Experience {
 	private String companyName;
 
 	@Basic(optional = false)
-	private boolean currentJob;
+	private boolean stillWorking;
 
 	@ManyToOne(optional = false)
 	private JobPosition jobPosition;

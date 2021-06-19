@@ -1,5 +1,7 @@
 package com.aberimen.hrms.resume;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.aberimen.hrms.education.Education;
 import com.aberimen.hrms.education.EducationDTO;
 import com.aberimen.hrms.experience.Experience;
+import com.aberimen.hrms.experience.ExperienceRequestDTO;
 import com.aberimen.hrms.languageskill.LanguageSkill;
 import com.aberimen.hrms.resume.dto.SocialAccountsDTO;
 import com.aberimen.hrms.technicalskill.TechnicalSkill;
@@ -26,7 +29,7 @@ public class ResumeController {
 
 	@Autowired
 	ResumeService resumeService;
-	
+
 	@Autowired
 	ModelMapper mapper;
 
@@ -43,7 +46,9 @@ public class ResumeController {
 	}
 
 	@PostMapping("/resumes/experiences")
-	public GenericResponse createExperience(@RequestBody Experience experience, @RequestParam long resumeId) {
+	public GenericResponse createExperience(@RequestBody @Valid ExperienceRequestDTO experienceRequestDTO,
+			@RequestParam long resumeId) {
+		Experience experience = mapper.map(experienceRequestDTO, Experience.class);
 		resumeService.saveExperience(experience, resumeId);
 		return new GenericResponse("Deneyim bilgisi eklendi.");
 	}
