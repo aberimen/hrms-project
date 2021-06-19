@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,10 @@ import com.aberimen.hrms.education.EducationDTO;
 import com.aberimen.hrms.experience.Experience;
 import com.aberimen.hrms.experience.ExperienceRequestDTO;
 import com.aberimen.hrms.languageskill.LanguageSkill;
+import com.aberimen.hrms.languageskill.LanguageSkillRequestDTO;
 import com.aberimen.hrms.resume.dto.SocialAccountsDTO;
 import com.aberimen.hrms.technicalskill.TechnicalSkill;
+import com.aberimen.hrms.technicalskill.TechnicalSkillRequestDTO;
 import com.aberimen.hrms.utils.GenericResponse;
 
 @RestController
@@ -33,8 +36,8 @@ public class ResumeController {
 	@Autowired
 	ModelMapper mapper;
 
-	@GetMapping("/resumes")
-	public Resume getCandidateResume(@RequestParam long resumeId) {
+	@GetMapping("/resumes/{resumeId}")
+	public Resume getCandidateResume(@PathVariable long resumeId) {
 		return resumeService.getCandidateProfile(resumeId);
 	}
 
@@ -54,14 +57,17 @@ public class ResumeController {
 	}
 
 	@PostMapping("/resumes/language-skills")
-	public GenericResponse createLanguageSkill(@RequestBody LanguageSkill languageSkill, @RequestParam long resumeId) {
+	public GenericResponse createLanguageSkill(@RequestBody LanguageSkillRequestDTO languageSkillRequestDTO,
+			@RequestParam long resumeId) {
+		LanguageSkill languageSkill = mapper.map(languageSkillRequestDTO, LanguageSkill.class);
 		resumeService.saveLanguageSkill(languageSkill, resumeId);
 		return new GenericResponse("Dil bilgisi eklendi.");
 	}
 
 	@PostMapping("/resumes/technical-skills")
-	public GenericResponse createTechnicalSkill(@RequestBody TechnicalSkill technicalSkill,
+	public GenericResponse createTechnicalSkill(@RequestBody TechnicalSkillRequestDTO technicalSkillRequestDTO,
 			@RequestParam long resumeId) {
+		TechnicalSkill technicalSkill = mapper.map(technicalSkillRequestDTO, TechnicalSkill.class);
 		resumeService.saveTechnicalSkill(technicalSkill, resumeId);
 		return new GenericResponse("Teknik bilgisi eklendi.");
 	}
@@ -78,7 +84,8 @@ public class ResumeController {
 	}
 
 	@PostMapping("/resumes/social-accounts")
-	public GenericResponse createSocialAccounts(SocialAccountsDTO socialAccountsDTO, @RequestParam long resumeId) {
+	public GenericResponse createSocialAccounts(@RequestBody SocialAccountsDTO socialAccountsDTO,
+			@RequestParam long resumeId) {
 		resumeService.saveSocialAccounts(socialAccountsDTO, resumeId);
 		return new GenericResponse("Sosyal medya bilgileri eklendi.");
 	}

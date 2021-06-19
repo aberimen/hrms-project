@@ -100,8 +100,7 @@ const PostJobPage = () => {
                         options={jobPositions.map(j => ({ value: j.id, label: j.positionName }))}
                         onChange={handleChange}
                         error={touched.jobPosition && errors.jobPosition}
-                        iterateFor="positionName"
-                        keyField="id" />
+                    />
 
                     <Select
                         label="Lokasyon *"

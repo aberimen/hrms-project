@@ -21,10 +21,6 @@
   height: calc(1.5em + 1.5rem + 2px);
 }
 
-// .btn{
-//   height: calc(1.5em + 1.5rem + 2px);
-
-// }
 
 .btn.focus,
 .btn:focus {
@@ -44,31 +40,6 @@
   box-shadow: 0 0 0 rgba(65, 105, 225, 0.25), inset 0 1px 0 hsla(0, 0%, 100%, 0.15);
 }
 
-.form-control:focus::-webkit-input-placeholder {
-  color: #d3dce6;
-}
-.form-control:focus:-ms-input-placeholder {
-  color: #d3dce6;
-}
-.form-control:focus::-ms-input-placeholder {
-  color: #d3dce6;
-}
-.form-control:focus::placeholder {
-  color: #d3dce6;
-}
-
-.form-primary .form-control::-webkit-input-placeholder {
-  color: hsla(0, 0%, 100%, 0.8);
-}
-.form-primary .form-control:-ms-input-placeholder {
-  color: hsla(0, 0%, 100%, 0.8);
-}
-.form-primary .form-control::-ms-input-placeholder {
-  color: hsla(0, 0%, 100%, 0.8);
-}
-.form-primary .form-control::placeholder {
-  color: hsla(0, 0%, 100%, 0.8);
-}
 
 .form-control:focus {
   color: #8492a6;

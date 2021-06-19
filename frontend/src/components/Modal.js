@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({ title, visible, name, saveButtonDisabled, children, onClickCancel, onClickSave }) => {
+const Modal = ({ title, visible, saveButtonDisabled, children, onClickCancel, onClickSave }) => {
 
     let className = 'modal fade';
 
