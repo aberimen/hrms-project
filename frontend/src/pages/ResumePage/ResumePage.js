@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import ResumeSection from '../../components/ResumeSection/ResumeSection';
 import './ResumePage.scss';
-import Modal from '../../components/Modal';
 import ResumeEducationForm from '../../components/ResumeEducationForm';
+import ResumeSummaryForm from '../../components/ResumeSummaryForm';
+import ResumeExperienceForm from '../../components/ResumeExperienceForm';
+import ResumeSocialAccountsForm from '../../components/ResumeSocialAccountsForm';
+import ResumeTechnicalSkillForm from '../../components/ResumeTechnicalSkillForm';
+import ResumeLanguageSkillForm from '../../components/ResumeLanguageSkillForm';
+
 
 
 const ResumePage = () => {
@@ -27,11 +32,16 @@ const ResumePage = () => {
 
 
 
-                <ResumeSection className="summary" title="Öz" >
+                <ResumeSection className="summary-section" title="Öz" onClickAdd={() => { setVisibleModalName('summary') }}  >
+                    {(visibleModalName === "summary") &&
+                        <ResumeSummaryForm
+                            modalVisible={true}
+                            onModalClickCancel={() => { setVisibleModalName(undefined) }} />
+                    }
 
                 </ResumeSection>
 
-                <ResumeSection className="education-details" title="Eğitim Bilgisi" onClickAdd={() => { setVisibleModalName('educationDetails') }} >
+                <ResumeSection className="education-details-section" title="Eğitim Bilgisi" onClickAdd={() => { setVisibleModalName('educationDetails') }} >
                     {(visibleModalName === "educationDetails") &&
                         <ResumeEducationForm
                             modalVisible={true}
@@ -41,20 +51,38 @@ const ResumePage = () => {
                 </ResumeSection>
 
 
-                <ResumeSection className="experiences" title="Deneyim" >
-
+                <ResumeSection className="experiences-section" title="Deneyim" onClickAdd={() => { setVisibleModalName('experiences') }} >
+                    {(visibleModalName === "experiences") &&
+                        <ResumeExperienceForm
+                            modalVisible={true}
+                            onModalClickCancel={() => { setVisibleModalName(undefined) }} />
+                    }
                 </ResumeSection>
 
 
-                <ResumeSection className="language-skills" title="Yabancı Dil" >
+                <ResumeSection className="language-skills-section" title="Yabancı Dil" onClickAdd={() => { setVisibleModalName('language-skills') }} >
+                    {(visibleModalName === "language-skills") &&
+                        <ResumeLanguageSkillForm
+                            modalVisible={true}
+                            onModalClickCancel={() => { setVisibleModalName(undefined) }} />
+                    }
+                </ResumeSection>
+
+                <ResumeSection className="technical-skills-section" title="Teknik Bilgileri" onClickAdd={() => { setVisibleModalName('technical-skills') }} >
+                    {(visibleModalName === "technical-skills") &&
+                        <ResumeTechnicalSkillForm
+                            modalVisible={true}
+                            onModalClickCancel={() => { setVisibleModalName(undefined) }} />
+                    }
 
                 </ResumeSection>
 
-                <ResumeSection className="technical-skills" title="Teknik Bilgileri" >
-
-                </ResumeSection>
-
-                <ResumeSection className="social" title="Sosyal Hesaplar" >
+                <ResumeSection className="social-section" title="Sosyal Hesaplar" onClickAdd={() => { setVisibleModalName('social') }}>
+                    {(visibleModalName === "social") &&
+                        <ResumeSocialAccountsForm
+                            modalVisible={true}
+                            onModalClickCancel={() => { setVisibleModalName(undefined) }} />
+                    }
 
                 </ResumeSection>
 
