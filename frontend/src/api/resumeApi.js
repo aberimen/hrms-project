@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 export const getCandidateResume = resumeId => {
-    return axios.get("/api/1.0/resumes?resumeId=" + resumeId);
+    return axios.get("/api/1.0/resumes/" + resumeId);
 };
 
 export const addEducationDetails = (educationDetails, resumeId) => {
