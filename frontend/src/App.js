@@ -1,16 +1,15 @@
-import './App.css';
-import LoginPage from './pages/LoginPage/LoginPage';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import Navbar from './layouts/Navbar/Navbar';
-import HomePage from './pages/HomePage/HomePage';
-import PostJobPage from './pages/PostJobPage';
-import ResumePage from './pages/ResumePage/ResumePage';
-import SignupPage from './pages/SignupPage';
-import JobsPage from './pages/JobsPage/JobsPage';
-
+import "./App.css";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import Navbar from "./layouts/Navbar/Navbar";
+import HomePage from "./pages/HomePage/HomePage";
+import PostJobPage from "./pages/PostJobPage";
+import ResumePage from "./pages/ResumePage/ResumePage";
+import SignupPage from "./pages/SignupPage";
+import JobsPage from "./pages/JobsPage/JobsPage";
+import Footer from "./layouts/Footer";
 
 function App() {
-
   return (
     <BrowserRouter>
       <Switch>
@@ -25,9 +24,9 @@ function App() {
           <Route path="/employer" component={SignupPage} />
           <Route path="/jobs" component={JobsPage} />
 
-          {/* <Redirect to="/" /> */}
-        </div>
 
+          <Footer />
+        </div>
       </Switch>
     </BrowserRouter>
   );
