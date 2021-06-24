@@ -1,6 +1,5 @@
 package com.aberimen.hrms.jobposting;
 
-
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -18,28 +17,30 @@ import com.aberimen.hrms.utils.GenericResponse;
 @RestController
 @RequestMapping("/api/1.0")
 public class JobPostingController {
-	
+
 	private JobPostingService jobPostingService;
-	
+
 	public JobPostingController(JobPostingService jobPostingService) {
 		super();
 		this.jobPostingService = jobPostingService;
 	}
-	
+
 	@PostMapping("/job-postings")
 	public GenericResponse createJobPosting(@Valid @RequestBody JobPosting jobPosting) {
 		return jobPostingService.createJobPosting(jobPosting);
 	}
-	
+
 	@GetMapping("/job-postings")
-	public Page<JobPostingResponseDTO> getJobPostings(Pageable page){
-		
-		return jobPostingService.getActiveJobPostings(page).map(JobPostingResponseDTO::new);
+	public Page<JobPostingResponseDTO> getJobPostings(Boolean isRemote, Integer min, Integer max,
+			EmploymentType employmentType, Pageable pageable) {
+
+		return jobPostingService.getActiveJobPostings(isRemote, min, max, employmentType, pageable)
+				.map(JobPostingResponseDTO::new);
 	}
-	
+
 	@PostMapping("/job-postings/status/{id}")
 	public GenericResponse changeStatus(@PathVariable long id) {
-		
+
 		return jobPostingService.changePositionStatus(id);
 	}
 
