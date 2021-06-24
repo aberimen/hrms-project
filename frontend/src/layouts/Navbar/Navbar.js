@@ -26,8 +26,7 @@ const Navbar = () => {
                         <NavLink name="Ana Sayfa" active={active} onClick={handleClickLink} to="/" />
                         <NavLink name="İş İlanları" active={active} onClick={handleClickLink} to="/jobs" />
                         <NavLink name="Profil" active={active} onClick={handleClickLink} to="/resume" />
-                        <NavLink name="Akış" active={active} onClick={handleClickLink} />
-
+                        <NavLink name="İlan Ver" active={active} onClick={handleClickLink} to="/post-job" />
                     </ul>
                     <div className="ms-5">
                         <Link className="btn btn-secondary my-2 my-sm-0" to="/register">Kayıt Ol</Link>

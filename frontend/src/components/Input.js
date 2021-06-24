@@ -2,19 +2,25 @@ import React from 'react';
 
 const Input = ({ error, id, onChange, name, value, type, label, placeholder, className, onBlur }) => {
 
-    if (type !== 'checkbox') {
-        className = `form-control ${className}`;
-    } else {
-        className = 'form-check-input';
-    }
-
     if (error) {
         className += ' is-invalid';
     }
+
+    let isFormCheck = false;
+
+    if (type === 'checkbox' || type === 'radio') {
+        className = 'form-check-input';
+        isFormCheck = true;
+
+    } else {
+        className = `form-control ${className}`;
+    }
+
+
     return (
         <div className="form-group my-2">
-            {label && (type !== 'checkbox' && (<label className="form-label" htmlFor={id}>{label}</label>))}
-            <div className={`${type !== 'checkbox' ? 'input-group' : 'form-check'}`}>
+            {label && (!isFormCheck && (<label className="form-label" htmlFor={id}>{label}</label>))}
+            <div className={`${isFormCheck ? 'form-check' : 'input-group'}`}>
 
                 <input
                     id={id}
@@ -27,12 +33,11 @@ const Input = ({ error, id, onChange, name, value, type, label, placeholder, cla
                     onBlur={onBlur}
                 />
 
-                {type === 'checkbox' && (<label className="form-label-check" htmlFor={id}>{label}</label>)}
-
-                {error && <div className="invalid-feedback">{error}</div>}
+                {isFormCheck && (<label className="form-label-check" htmlFor={id}>{label}</label>)}
             </div>
         </div>
     );
 };
+
 
 export default Input;

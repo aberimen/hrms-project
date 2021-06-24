@@ -3,18 +3,21 @@ import { getAllJobPostings } from '../../api/jobPostingApi';
 import JobsFilter from '../../components/JobsFilter/JobsFilter';
 import SingleJob from '../../components/SingleJob/SingleJob';
 import './JobsPage.scss';
+import axios from "axios";
+
 
 const JobsPage = () => {
 
-    const [jobs, setJobs] = useState([])
+    const [filters, setFilters] = useState({});
+    const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
         loadJobs();
-    }, []);
+    }, [filters]);
 
     const loadJobs = async () => {
         try {
-            const result = await getAllJobPostings();
+            const result = await getAllJobPostings({ ...filters });
             setJobs(result.data.content);
         } catch (error) { }
     };
@@ -28,8 +31,10 @@ const JobsPage = () => {
             <div className="container py-5">
                 <div className="row">
                     <div className="col-lg-3">
-                        <JobsFilter />
+                        <JobsFilter handleFilters={setFilters} />
                     </div>
+                    {console.log(filters)}
+
 
                     <div className="col-lg-9">
                         <div className="row">
