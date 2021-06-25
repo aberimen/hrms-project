@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Select = ({ id, name, value, label, options = [], error, onChange, onBlur }) => {
+const Select = ({ id, name, defaultValue, value, label, options = [], error, onChange, onBlur }) => {
 
     let className = "form-control form-select";
 
@@ -12,7 +12,8 @@ const Select = ({ id, name, value, label, options = [], error, onChange, onBlur 
         <div className="form-group my-2">
             {label && (<label className="form-label" htmlFor={id}>{label}</label>)}
             <select className={className} value={value} name={name} onChange={onChange} onBlur={onBlur}>
-                <option value="" label="Bir seçim yapınız" />
+                {defaultValue ? <option value={defaultValue} label={defaultValue} />
+                    : <option value="" label="Bir seçim yapınız" />}
 
                 {options.map(option =>
                     <option key={option.value} value={option.value} label={option.label} />

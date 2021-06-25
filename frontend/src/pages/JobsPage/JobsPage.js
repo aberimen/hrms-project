@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { getAllJobPostings } from '../../api/jobPostingApi';
 import JobsFilter from '../../components/JobsFilter/JobsFilter';
+import JobsTopMenu from '../../components/JobsTopMenu';
 import SingleJob from '../../components/SingleJob/SingleJob';
 import './JobsPage.scss';
 
 
 const JobsPage = () => {
 
-    const [filters, setFilters] = useState({});
-    const [jobs, setJobs] = useState([]);
+    const [filters, setFilters] = useState({
+        size: '10'
+    });
+    const [jobsPage, setJobsPage] = useState({ //pagination ve iş ilanlarını içeriyor
+        content: [] //iş ilanları
+    });
 
     useEffect(() => {
         loadJobs();
@@ -17,7 +22,9 @@ const JobsPage = () => {
     const loadJobs = async () => {
         try {
             const result = await getAllJobPostings({ ...filters });
-            setJobs(result.data.content);
+            setJobsPage({
+                ...result.data
+            });
         } catch (error) { }
     };
     return (
@@ -28,15 +35,27 @@ const JobsPage = () => {
                 </div>
             </div>
             <div className="container py-5">
+
                 <div className="row">
+
                     <div className="col-lg-3">
-                        <JobsFilter handleFilters={setFilters} />
+                        <JobsFilter
+                            filters={filters}
+                            handleFilters={setFilters}
+                        />
                     </div>
 
                     <div className="col-lg-9">
                         <div className="row">
+                            <div className="col-lg-12 d-flex justify-content-end me-3 mb-2">
+                                <JobsTopMenu
+                                    filters={filters}
+                                    handleFilters={setFilters}
+                                    totalJobsCount={jobsPage.totalElements}
+                                />
+                            </div>
 
-                            {jobs.map(job =>
+                            {jobsPage.content.map(job =>
                                 <div className="col-lg-6" key={job.id}>
                                     <SingleJob
                                         title={job.jobPosition.positionName}

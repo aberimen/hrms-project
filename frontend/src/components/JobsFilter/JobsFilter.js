@@ -3,23 +3,22 @@ import Input from '../Input';
 import './JobsFilter.scss';
 import { FaFilter } from 'react-icons/fa';
 
-const JobsFilter = ({ handleFilters }) => {
+const JobsFilter = ({ filters, handleFilters }) => {
 
-    const [filters, setFilters] = useState({
+    const [values, setValues] = useState({
         employmentType: '',
         min: '',
         max: '',
         isRemote: '',
-
     });
 
     useEffect(() => {
-        handleFilters(filters);
-    }, [filters]);
+        handleFilters({ ...filters, ...values });
+    }, [values]);
 
     const handleChange = (e) => {
-        setFilters({
-            ...filters,
+        setValues({
+            ...values,
             [e.target.name]: e.target.value
         });
     };
