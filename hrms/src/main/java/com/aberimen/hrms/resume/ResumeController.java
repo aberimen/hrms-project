@@ -1,5 +1,7 @@
 package com.aberimen.hrms.resume;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -22,6 +24,7 @@ import com.aberimen.hrms.experience.ExperienceRequestDTO;
 import com.aberimen.hrms.languageskill.LanguageSkill;
 import com.aberimen.hrms.languageskill.LanguageSkillRequestDTO;
 import com.aberimen.hrms.resume.dto.SocialAccountsDTO;
+import com.aberimen.hrms.resume.dto.SummaryDTO;
 import com.aberimen.hrms.technicalskill.TechnicalSkill;
 import com.aberimen.hrms.technicalskill.TechnicalSkillRequestDTO;
 import com.aberimen.hrms.utils.GenericResponse;
@@ -44,6 +47,7 @@ public class ResumeController {
 	@PostMapping("/resumes/education-details")
 	public GenericResponse createEducation(@RequestBody EducationDTO educationDTO, @RequestParam long resumeId) {
 		Education education = mapper.map(educationDTO, Education.class);
+		System.out.println(educationDTO);
 		resumeService.saveEducation(education, resumeId);
 		return new GenericResponse("Eğitim bilgisi eklendi.");
 	}
@@ -78,7 +82,7 @@ public class ResumeController {
 	}
 
 	@PostMapping("/resumes/summary")
-	public GenericResponse createSummary(@RequestBody String summary, @RequestParam long resumeId) {
+	public GenericResponse createSummary(@RequestBody SummaryDTO summary, @RequestParam long resumeId) {
 		resumeService.saveSummary(summary, resumeId);
 		return new GenericResponse("Ön yazı bilgisi eklendi.");
 	}

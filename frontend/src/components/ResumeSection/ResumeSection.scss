@@ -4,13 +4,16 @@
   background-color: $bg-light;
   height: 100%;
 
+  .profile-abstract {
+    align-items: center;
+  }
+
   section {
     border-radius: $border-radius;
     background-color: #fff !important;
     word-wrap: break-word;
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-bottom: 20px;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 
@@ -25,6 +28,11 @@
       border-radius: $border-radius $border-radius 0 0;
       border-bottom: 1px solid rgba(0, 0, 0, 0.082);
       width: 100%;
+    }
+
+    .resume-section-footer {
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.065);
     }
 
     .title {

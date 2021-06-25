@@ -14,6 +14,7 @@ import com.aberimen.hrms.error.GenericNotFoundException;
 import com.aberimen.hrms.experience.Experience;
 import com.aberimen.hrms.languageskill.LanguageSkill;
 import com.aberimen.hrms.resume.dto.SocialAccountsDTO;
+import com.aberimen.hrms.resume.dto.SummaryDTO;
 import com.aberimen.hrms.technicalskill.TechnicalSkill;
 import com.aberimen.hrms.utils.CloudinaryService;
 
@@ -33,8 +34,8 @@ public class ResumeService {
 	public void saveEducation(Education education, long resumeId) {
 		Resume inDB = getResumeById(resumeId);
 		education.setResume(inDB);
-		inDB.getEducation().add(education);
-
+		inDB.getEducationDetails().add(education);
+		
 		resumeRepository.save(inDB);
 	}
 
@@ -98,9 +99,9 @@ public class ResumeService {
 		return resumeInDBOptional.get();
 	}
 
-	public void saveSummary(String summary, long resumeId) {
+	public void saveSummary(SummaryDTO summary, long resumeId) {
 		Resume inDB = getResumeById(resumeId);
-		inDB.setSummary(summary);
+		inDB.setSummary(summary.getSummary());
 
 		resumeRepository.save(inDB);
 	}

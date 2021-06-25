@@ -3,7 +3,6 @@ import { getAllJobPostings } from '../../api/jobPostingApi';
 import JobsFilter from '../../components/JobsFilter/JobsFilter';
 import SingleJob from '../../components/SingleJob/SingleJob';
 import './JobsPage.scss';
-import axios from "axios";
 
 
 const JobsPage = () => {
@@ -33,8 +32,6 @@ const JobsPage = () => {
                     <div className="col-lg-3">
                         <JobsFilter handleFilters={setFilters} />
                     </div>
-                    {console.log(filters)}
-
 
                     <div className="col-lg-9">
                         <div className="row">

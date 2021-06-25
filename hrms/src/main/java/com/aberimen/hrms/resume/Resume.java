@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
@@ -24,26 +25,27 @@ public class Resume {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@OrderBy("stillStudying DESC, graduationDate DESC")
-	@OneToMany(cascade = CascadeType.REMOVE  ,mappedBy = "resume")
-	private List<Education> education;
-	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "resume")
+	private List<Education> educationDetails;
+
 	@OrderBy("stillWorking DESC, startDate DESC")
-	@OneToMany(cascade = CascadeType.REMOVE ,mappedBy = "resume")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "resume")
 	private List<Experience> experiences;
-	
-	@OneToMany(cascade = CascadeType.REMOVE  ,mappedBy = "resume")
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "resume")
 	private List<LanguageSkill> languageSkills;
-	
+
 	private String profileImage;
-	
+
 	private String githubAccount;
-	
+
 	private String linkedinAccount;
-	
+
+	@Lob
 	private String summary;
-	
-	@OneToMany(cascade = CascadeType.ALL ,mappedBy = "resume")
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "resume")
 	private List<TechnicalSkill> technicalSkills;
 }
