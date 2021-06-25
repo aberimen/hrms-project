@@ -50,3 +50,11 @@ export const getEducationTypes = () => {
         { value: "ACIK_OGRETIM", label: "Açık Öğretim" }
     ];
 };
+
+
+//update APIs
+
+export const updateSummary = (summary, resumeId) => {
+    return axios.put(`/api/1.0/resumes/summary?resumeId=${resumeId}`, summary);
+};
+

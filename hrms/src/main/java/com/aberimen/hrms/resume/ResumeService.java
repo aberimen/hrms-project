@@ -112,7 +112,9 @@ public class ResumeService {
 		inDB.setLinkedinAccount(socialAccountsDTO.getLinkedinAccount());
 
 		resumeRepository.save(inDB);
-
 	}
+	
+	
+	
 
 }

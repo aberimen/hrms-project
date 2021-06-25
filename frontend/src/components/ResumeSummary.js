@@ -4,16 +4,16 @@ import ResumeSummaryFormModal from './ResumeSummaryFormModal';
 import ResumeSection from './ResumeSection/ResumeSection';
 
 const ResumeSummary = ({ resume, setResume }) => {
-    const [modalTitle, setModalTitle] = useState('');
+    const [updateMode, setUpdateMode] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
     const handleClickAdd = () => {
-        setModalTitle("Yeni Ekle");
+        setUpdateMode(false);
         setModalVisible(true);
     };
 
     const handleClickEdit = () => {
-        setModalTitle("Düzenle");
+        setUpdateMode(true);
         setModalVisible(true);
     };
 
@@ -21,14 +21,14 @@ const ResumeSummary = ({ resume, setResume }) => {
         <ResumeSection className="summary-section" title="Öz">
 
             <div className="card-body">
-                <div className="row">
+                {resume.summary && <div className="row">
                     <div className="ps-3 col-10">
                         <div>{resume.summary}</div>
                     </div>
                     <div className="align-items-start col-2 d-flex justify-content-end pe-2">
                         <EditButton onClick={handleClickEdit} />
                     </div>
-                </div>
+                </div>}
 
                 {!resume.summary &&
                     <ResumeSection.Footer onClickAdd={handleClickAdd} />
@@ -39,8 +39,8 @@ const ResumeSummary = ({ resume, setResume }) => {
                     setModalVisible={setModalVisible}
                     onModalClickCancel={() => { setModalVisible(false) }}
                     summaryValue={resume.summary}
-                    modalTitle={modalTitle}
                     setResume={setResume}
+                    updateMode={updateMode}
                     resume={resume}
                 />
             </div>

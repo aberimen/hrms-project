@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import TextArea from './TextArea';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Modal from './Modal';
-import { addSummary } from '../api/resumeApi';
+import { addSummary, updateSummary } from '../api/resumeApi';
 
-const ResumeSummaryFormModal = ({ modalVisible, modalTitle, onModalClickCancel, setModalVisible, summaryValue, resume, setResume }) => {
+const ResumeSummaryFormModal = ({ modalVisible, onModalClickCancel, setModalVisible, summaryValue, updateMode, resume, setResume }) => {
 
     const formik = useFormik({
         initialValues: {
@@ -29,14 +29,14 @@ const ResumeSummaryFormModal = ({ modalVisible, modalTitle, onModalClickCancel, 
 
     const { handleSubmit, handleChange, handleBlur, values, touched, errors, isSubmitting, setTouched } = formik;
 
-    useEffect(() => {
-    }, []);
-
-
     const saveSummary = async (summary) => {
         const resumeId = 1; //test
         try {
-            await addSummary(summary, resumeId);
+            if (!updateMode) {
+                await addSummary(summary, resumeId);
+            } else {
+                await updateSummary(summary, resumeId);
+            }
         } catch (error) { }
     };
 
@@ -47,7 +47,7 @@ const ResumeSummaryFormModal = ({ modalVisible, modalTitle, onModalClickCancel, 
                 visible={modalVisible}
                 onClickCancel={onModalClickCancel}
                 // saveButtonDisabled={isSubmitting}
-                title={modalTitle}
+                title={updateMode ? 'Düzenle' : 'Yeni Ekle'}
             >
 
                 <div className="container-fluid">

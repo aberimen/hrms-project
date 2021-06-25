@@ -1,7 +1,5 @@
 package com.aberimen.hrms.resume;
 
-import java.util.Map;
-
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -11,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,4 +94,9 @@ public class ResumeController {
 	}
 
 	// TODO update delete methods
+	@PutMapping("/resumes/summary")
+	public GenericResponse updateSummary(@RequestBody SummaryDTO summary, @RequestParam long resumeId) {
+		resumeService.saveSummary(summary, resumeId);
+		return new GenericResponse("Ön yazı bilgisi güncellendi.");
+	}
 }
