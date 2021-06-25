@@ -1,18 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ResumeSection from '../../components/ResumeSection/ResumeSection';
 import './ResumePage.scss';
 import ResumeEducationForm from '../../components/ResumeEducationForm';
-import ResumeSummaryForm from '../../components/ResumeSummaryForm';
 import ResumeExperienceForm from '../../components/ResumeExperienceForm';
 import ResumeSocialAccountsForm from '../../components/ResumeSocialAccountsForm';
 import ResumeTechnicalSkillForm from '../../components/ResumeTechnicalSkillForm';
 import ResumeLanguageSkillForm from '../../components/ResumeLanguageSkillForm';
-
+import { getCandidateResume } from '../../api/resumeApi';
+import ResumeSummary from '../../components/ResumeSummary';
+import _ from 'lodash';
 
 
 const ResumePage = () => {
     const [visibleModalName, setVisibleModalName] = useState(undefined);
 
+    const [resume, setResume] = useState({
+        educationDetails: [],
+
+    });
+
+    useEffect(() => {
+        loadResume();
+    }, [resume]);
+
+    const resumeId = 1;
+
+    const loadResume = async () => {
+        try {
+            const result = await getCandidateResume(resumeId);
+            if (!_.isEqual(result.data, resume)) { // eğer değişiklik yoksa resume state'i değiştirme yoksa useEffect tetiklenir, sonsuz döngü oluşur
+                setResume(result.data);
+            }
+        } catch (error) { }
+    };
 
     return (
         <div className="resume-page">
@@ -30,16 +50,7 @@ const ResumePage = () => {
                     </div>
                 </section>
 
-
-
-                <ResumeSection className="summary-section" title="Öz" onClickAdd={() => { setVisibleModalName('summary') }}  >
-                    {(visibleModalName === "summary") &&
-                        <ResumeSummaryForm
-                            modalVisible={true}
-                            onModalClickCancel={() => { setVisibleModalName(undefined) }} />
-                    }
-
-                </ResumeSection>
+                <ResumeSummary resume={resume} setResume={setResume} />
 
                 <ResumeSection className="education-details-section" title="Eğitim Bilgisi" onClickAdd={() => { setVisibleModalName('educationDetails') }} >
                     {(visibleModalName === "educationDetails") &&
@@ -47,7 +58,32 @@ const ResumePage = () => {
                             modalVisible={true}
                             onModalClickCancel={() => { setVisibleModalName(undefined) }} />
                     }
-                    body here
+                    {resume.educationDetails.map(education =>
+                        <div className="row p-3 border-top">
+                            <div className="col-3">
+                                <div>{education.startDate}</div>
+                                <div>{education.graduationDate}</div>
+                                <div>{education.educationLevel}</div>
+                            </div>
+                            <div className="col-3">
+                                <div className="fw-bold">Üniversite</div>
+                                <div>{education.university.name}</div>
+                            </div>
+                            <div className="col-3">
+                                <div className="fw-bold">Bölüm</div>
+                                <div>{education.department.departmentName}</div>
+                            </div>
+                            <div className="col-3">
+                                <div className="fw-bold">Öğretim Tipi</div>
+                                <div>{education.educationType}</div>
+                            </div>
+                            <div className="col-3">
+                                <div className="fw-bold">Öğretim Dili</div>
+                                <div>{education.educationLanguage.languageName}</div>
+                            </div>
+                        </div>
+                    )}
+
                 </ResumeSection>
 
 

@@ -5,13 +5,14 @@ import * as Yup from 'yup';
 import Modal from './Modal';
 import { addSummary } from '../api/resumeApi';
 
-const ResumeSummaryForm = ({ modalVisible, onModalClickCancel }) => {
+const ResumeSummaryFormModal = ({ modalVisible, modalTitle, onModalClickCancel, setModalVisible, summaryValue, resume, setResume }) => {
 
     const formik = useFormik({
         initialValues: {
-            summary: '',
+            summary: summaryValue || '',
         },
 
+        enableReinitialize: true,
         validationSchema:
             Yup.object({
                 summary: Yup.string().required('Özet Bilgi alanı boş bırakılamaz'),
@@ -20,7 +21,9 @@ const ResumeSummaryForm = ({ modalVisible, onModalClickCancel }) => {
 
         onSubmit: (values, { resetForm, setSubmitting }) => {
             saveSummary(values);
-            // resetForm();
+            setModalVisible(false);
+            resetForm();
+            setResume({ ...resume, ...values });
         }
     });
 
@@ -44,7 +47,7 @@ const ResumeSummaryForm = ({ modalVisible, onModalClickCancel }) => {
                 visible={modalVisible}
                 onClickCancel={onModalClickCancel}
                 // saveButtonDisabled={isSubmitting}
-                title="Özet Bilgi Ekle"
+                title={modalTitle}
             >
 
                 <div className="container-fluid">
@@ -70,4 +73,4 @@ const ResumeSummaryForm = ({ modalVisible, onModalClickCancel }) => {
     );
 };
 
-export default ResumeSummaryForm;
+export default ResumeSummaryFormModal;
