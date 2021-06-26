@@ -1,0 +1,28 @@
+@import "../../index.scss";
+
+.menu-button {
+  margin-bottom: 0.5rem;
+  width: 100%;
+  font-weight: 400;
+  color: $gray-6;
+  text-align: left;
+  display: flex;
+  align-items: center !important;
+
+  span {
+    color: inherit;
+    font-weight: inherit;
+    margin-left: 0.63rem;
+  }
+
+  &:hover {
+    color: $primary;
+    background-color: rgba($primary, 0.2);
+  }
+}
+
+.menu-button.active {
+  background-color: rgba($primary, 0.063);
+  color: $primary;
+  font-weight: 600;
+}
