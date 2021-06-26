@@ -8,6 +8,7 @@ import ResumePage from "./pages/ResumePage/ResumePage";
 import SignupPage from "./pages/SignupPage";
 import JobsPage from "./pages/JobsPage/JobsPage";
 import Footer from "./layouts/Footer";
+import AccountSettingsPage from "./pages/AccountSettingsPage/AccountSettingsPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/resume" component={ResumePage} />
           <Route path="/register" component={SignupPage} />
           <Route path="/employer" component={SignupPage} />
+          <Route path="/account" component={AccountSettingsPage} />
           <Route path="/jobs" component={JobsPage} />
 
 
