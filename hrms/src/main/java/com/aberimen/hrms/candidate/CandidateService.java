@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.aberimen.hrms.error.GenericNotFoundException;
 import com.aberimen.hrms.resume.Resume;
+import com.aberimen.hrms.user.Role;
 
 import lombok.AllArgsConstructor;
 
@@ -18,6 +19,7 @@ public class CandidateService {
 
 	public void save(Candidate candidate) {
 		candidate.setEnabled(false); // email doğrulaması ile hesabını açtırması gerek
+		candidate.setRole(Role.CANDIDATE);
 		candidateRepository.save(candidate);
 	}
 

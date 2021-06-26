@@ -1,5 +1,6 @@
 package com.aberimen.hrms.user.dto;
 
+import com.aberimen.hrms.user.Role;
 import com.aberimen.hrms.user.User;
 
 import lombok.AllArgsConstructor;
@@ -17,9 +18,12 @@ public class UserDTO {
 
 	private boolean enabled;
 	
+	private Role role;
+	
 	public UserDTO(User user) { // User to UserDTO
 		setId(user.getId());
 		setEmail(user.getEmail());
+		setRole(user.getRole());
 		setEnabled(user.isEnabled());
 	}
 
