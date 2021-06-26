@@ -5,8 +5,10 @@ import NavLink from './NavLink';
 
 const Navbar = () => {
 
-    const [active, setActive] = useState("Home");
+    const [active, setActive] = useState("Ana Sayfa");
 
+    //TODO: use location
+    
     const handleClickLink = (e) => {
         e.preventDefault();
         setActive(e.target.name);
@@ -14,7 +16,7 @@ const Navbar = () => {
 
     return (
         <div className="navbar-area">
-            <nav className="navbar navbar-expand-lg container navbar-light bg-light p-0">
+            <nav className="navbar navbar-expand-lg container navbar-light pb-0">
 
                 <Link className="navbar-brand" to="/" onClick={() => setActive("Home")}>HRMS</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

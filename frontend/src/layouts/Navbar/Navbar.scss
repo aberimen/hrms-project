@@ -3,14 +3,12 @@
 $navbar-light-color: #333;
 $navbar-light-hover-color: $primary;
 
-@import "../../custom-bootstrap.scss";
-
 .navbar-area {
-  background-color: $light;
-}
-
-.navbar-area {
-  border-bottom: 1px solid #e1e6ea;
+  position: relative;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.08);
+  z-index: 99;
 }
 
 nav button {
