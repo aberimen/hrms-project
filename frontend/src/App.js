@@ -1,6 +1,6 @@
 import "./App.css";
 import LoginPage from "./pages/LoginPage/LoginPage";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./layouts/Navbar/Navbar";
 import HomePage from "./pages/HomePage/HomePage";
 import PostJobPage from "./pages/PostJobPage";
@@ -9,12 +9,15 @@ import SignupPage from "./pages/SignupPage";
 import JobsPage from "./pages/JobsPage/JobsPage";
 import Footer from "./layouts/Footer";
 import AccountSettingsPage from "./pages/AccountSettingsPage/AccountSettingsPage";
+import { useSelector } from "react-redux";
 
 function App() {
+  const { isLoggedIn } = useSelector(state => state.auth);
+
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/login" component={LoginPage} />
+        {!isLoggedIn && <Route exact path="/login" component={LoginPage} />}
 
         <div>
           <Navbar />

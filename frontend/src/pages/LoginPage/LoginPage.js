@@ -1,10 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './LoginPage.css';
 import mapSvg from '../../assets/map.svg';
 import Input from '../../components/Input';
+import { loginHandler } from '../../redux/actions/authActions';
+import { useDispatch } from 'react-redux';
 
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+
+    const [credentials, setCredentials] = useState({
+        email: '',
+        password: '',
+    });
+
+    const [apiError, setApiError] = useState(undefined);
+    const dispatch = useDispatch();
+
+    const handleChange = (e) => {
+        setCredentials({
+            ...credentials,
+            [e.target.name]: e.target.value
+        });
+        setApiError(undefined);
+    };
+
+    const onClickLogin = async (e) => {
+        e.preventDefault();
+        const { push } = props.history;
+
+        try {
+            await dispatch(loginHandler(credentials));
+            push('/');
+
+        } catch (err) {
+            setApiError(err.response.data.message);
+        }
+    };
+
     return (
         <div className="container centered">
             <div className="wrapper no-gutters shadow justify-content-center align-items-center">
@@ -12,19 +44,27 @@ const LoginPage = () => {
                     <img src={mapSvg} alt="map svg" />
                 </div>
                 <div className="col-lg-5 col-12 col-md-8">
+
                     <div className="m-5">
+
+
                         <h2 className="card-title" style={{ fontWeight: 800 }}>HRMS Giriş</h2>
                         <p className="fw-normal text-muted">Hızlıca iş aramaya başla</p>
-                        <Input type="text" placeholder="E-posta" name="email"  />
-                        <Input type="password" placeholder="Şifre" name="password" />
+                        <Input type="text" placeholder="E-posta" name="email" onChange={handleChange} />
+                        <Input type="password" placeholder="Şifre" name="password" onChange={handleChange} />
 
 
                         <div className="form-group mb-4">
                             <div className="input-group">
-                                <button type="submit" className="btn btn-primary btn-block">Giriş Yap</button>
+                                <button type="submit" className="btn btn-primary btn-block" onClick={onClickLogin}>Giriş Yap</button>
 
                             </div>
                         </div>
+
+                        {apiError && <div class="text-danger">
+                            Hatalı giriş yaptınız..
+                        </div>}
+
                         <div className="divider my-4 mx-auto"></div>
 
                         <div className="form-group mb-4">
@@ -54,6 +94,7 @@ const LoginPage = () => {
 
                                     <span className="ms-2" >Google ile Giriş Yap</span>
                                 </button>
+
 
 
                             </div>
