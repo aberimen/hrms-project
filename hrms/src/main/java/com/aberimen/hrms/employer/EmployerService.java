@@ -1,13 +1,14 @@
 package com.aberimen.hrms.employer;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.aberimen.hrms.employer.dto.AccountDetailsUpdatedDTO;
+import com.aberimen.hrms.error.BadRequestException;
+import com.aberimen.hrms.error.NotFoundException;
 import com.aberimen.hrms.user.Role;
-import com.aberimen.hrms.utils.GenericResponse;
 
 @Service
 public class EmployerService {
@@ -19,17 +20,16 @@ public class EmployerService {
 		this.employerRepository = employerRepository;
 	}
 
-	public ResponseEntity<?> saveEmployer(Employer employer) {
+	public Employer saveEmployer(Employer employer) {
 		String emailDomain = employer.getEmail().split("@")[1];
 		String host = employer.getWebsite().replaceAll("http://|https://|www.|ws://|wss://", "").replaceAll("/.*", "");
 
 		if (!emailDomain.equalsIgnoreCase(host)) {
 
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new GenericResponse("Geçersiz şirket maili"));
+			throw new BadRequestException("Geçersiz şirket maili");
 		} else {
 			employer.setRole(Role.EMPLOYER);
-			employerRepository.save(employer);
-			return ResponseEntity.ok(new GenericResponse("Ekleme başarılı"));
+			return employerRepository.save(employer);
 		}
 
 	}
@@ -39,7 +39,23 @@ public class EmployerService {
 	}
 
 	public Employer getById(long id) {
-		return employerRepository.findById(id).get();
+		 Optional<Employer> employerOptional = employerRepository.findById(id);
+		 
+		 if(!employerOptional.isPresent()) {
+			 throw new NotFoundException("Kullanıcı bulunamadı");
+		 }
+		 
+		 return employerOptional.get();
+	}
+
+	public Employer updateEmployer(long id, AccountDetailsUpdatedDTO accountDetailsUpdated) {
+		Employer inDB = getById(id);
+		inDB.setCompany(accountDetailsUpdated.getCompany());
+		inDB.setEmail(accountDetailsUpdated.getEmail());
+		inDB.setPhoneNumber(accountDetailsUpdated.getPhoneNumber());
+		inDB.setWebsite(accountDetailsUpdated.getWebsite());
+		 
+		return saveEmployer(inDB);
 	}
 
 }

@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS } from "../constants/UserActionTypes";
+import { LOGIN_SUCCESS, UPDATE_SUCCESS } from "../constants/UserActionTypes";
 
 const defaultState = {
     isLoggedIn: false,
@@ -11,6 +11,12 @@ const authReducer = (state = defaultState, action) => {
             return {
                 isLoggedIn: true,
                 user: action.payload
+            };
+        case UPDATE_SUCCESS:
+            return {
+                ...state,
+                user: action.payload
+
             };
         default:
             return state;
