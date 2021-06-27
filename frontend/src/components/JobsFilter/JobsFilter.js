@@ -3,7 +3,7 @@ import Input from '../Input';
 import './JobsFilter.scss';
 import { FaFilter } from 'react-icons/fa';
 
-const JobsFilter = ({ filters, handleFilters }) => {
+const JobsFilter = ({ filters, setFilters }) => {
 
     const [values, setValues] = useState({
         employmentType: '',
@@ -13,7 +13,7 @@ const JobsFilter = ({ filters, handleFilters }) => {
     });
 
     useEffect(() => {
-        handleFilters({ ...filters, ...values });
+        setFilters({ ...filters, ...values });
     }, [values]);
 
     const handleChange = (e) => {
@@ -55,7 +55,7 @@ const JobsFilter = ({ filters, handleFilters }) => {
             </div>
 
             <div className="filter-group">
-                <h6>Maaş Sklası</h6>
+                <h6>Maaş Skalası</h6>
                 <div className="d-flex">
                     <div className="col-6">
                         <Input

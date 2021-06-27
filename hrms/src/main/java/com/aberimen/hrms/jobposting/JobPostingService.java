@@ -2,6 +2,7 @@ package com.aberimen.hrms.jobposting;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.criteria.Join;
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.aberimen.hrms.common.location.Location;
+import com.aberimen.hrms.jobposition.JobPosition;
 import com.aberimen.hrms.jobposting.dto.JobPostingResponseDTO;
 import com.aberimen.hrms.utils.GenericResponse;
 
@@ -29,15 +32,17 @@ public class JobPostingService {
 	}
 
 	@Transactional
-	public Page<JobPosting> getActiveJobPostings(Boolean isRemote, Integer min, Integer max, EmploymentType employmentType,
-			Pageable pageable) {
+	public Page<JobPosting> getActiveJobPostings(Boolean isRemote, Integer min, Integer max,
+			EmploymentType employmentType, String location, String positionName, Pageable pageable) {
 
-		Specification<JobPosting> specs = 
-				Specification.where(isActive(true))
+		Specification<JobPosting> specs = Specification
+				.where(isActive(true))
 				.and(isRemote(isRemote))
 				.and(minSalaryGreaterThan(min))
 				.and(minSalaryLessThan(max))
-				.and(isEmployementTypeEqual(employmentType));
+				.and(isEmployementTypeEqual(employmentType))
+				.and(isPositionNameLike(positionName))
+				.and(isLocationEqual(location));
 
 		return jobPostingRepository.findAll(specs, pageable);
 	}
@@ -84,6 +89,24 @@ public class JobPostingService {
 	public Specification<JobPosting> isEmployementTypeEqual(EmploymentType value) {
 		return (root, query, criteriaBuilder) -> {
 			return value == null ? null : criteriaBuilder.equal(root.get("employmentType"), value);
+		};
+	}
+
+	public Specification<JobPosting> isPositionNameLike(String positionName) {
+		return (root, query, cb) -> {
+			if (positionName == null || positionName.isEmpty())
+				return null;
+			Join<JobPosting, JobPosition> join = root.join("jobPosition");
+			return cb.like(cb.upper(join.get("positionName")), "%" + positionName.toUpperCase() + "%");
+		};
+	}
+
+	public Specification<JobPosting> isLocationEqual(String city) {
+		return (root, query, cb) -> {
+			if (city == null || city.isEmpty())
+				return null;
+			Join<JobPosting, Location> join = root.join("location");
+			return cb.equal(join.get("city"), city);
 		};
 	}
 

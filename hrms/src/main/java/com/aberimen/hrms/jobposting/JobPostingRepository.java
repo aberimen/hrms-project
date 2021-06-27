@@ -9,7 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JobPostingRepository extends JpaRepository<JobPosting, Long>, JpaSpecificationExecutor<JobPosting>{
 	
-	Page<JobPosting> findByActive(boolean active, Pageable pageable); // tüm aktif iş ilanları
-	
 	Page<JobPosting> findByEmployerIdAndActive(long employerId,boolean active, Pageable pageable); // işveren(firma)'e ait tüm aktif iş ilanları
 }

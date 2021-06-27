@@ -32,9 +32,10 @@ public class JobPostingController {
 
 	@GetMapping("/job-postings")
 	public Page<JobPostingResponseDTO> getJobPostings(Boolean isRemote, Integer min, Integer max,
-			EmploymentType employmentType, Pageable pageable) {
+			EmploymentType employmentType, String location, String positionName, Pageable pageable) {
 
-		return jobPostingService.getActiveJobPostings(isRemote, min, max, employmentType, pageable)
+		return jobPostingService
+				.getActiveJobPostings(isRemote, min, max, employmentType, location, positionName, pageable)
 				.map(JobPostingResponseDTO::new);
 	}
 

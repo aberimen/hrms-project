@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Select from './Select';
 
-const JobsTopMenu = ({ totalJobsCount, filters, handleFilters }) => {
+const JobsTopMenu = ({ totalJobsCount, filters, setFilters }) => {
 
     const [sizePerPage, setSizePerPage] = useState('10'); // sayfa başına iş ilanı
 
     useEffect(() => {
-        handleFilters({
+        setFilters({
             ...filters,
             size: sizePerPage
         });
@@ -23,7 +23,7 @@ const JobsTopMenu = ({ totalJobsCount, filters, handleFilters }) => {
             </div>
             <div className="">
                 <Select
-                    defaultValue={10}
+                    defaultOption={{ label: 10, value: 10 }}
                     onChange={onChange}
                     options={[
                         { value: 20, label: 20 },
