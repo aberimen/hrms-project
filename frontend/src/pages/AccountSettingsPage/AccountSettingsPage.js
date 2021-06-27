@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import SideMenu from './SideMenu';
 import './AccountSettingsPage.scss';
 import Input from '../../components/Input';
-import MyDetailsMenu from './MyDetailsMenu';
+import MyDetailsPanel from '../../components/MyAccountPanels/MyDetailsPanel';
 
 const AccountSettingsPage = () => {
     const [selectedMenuItem, setSelectedMenuItem] = useState('account-details');
 
     const panels = {
-        'account-details': <MyDetailsMenu />,
+        'account-details': <MyDetailsPanel />,
         'deneme': <Menu2 />,
         'deneme2': <Menu3 />,
     }

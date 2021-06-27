@@ -31,13 +31,17 @@ const Navbar = () => {
                     <ul className="navbar-nav ms-auto">
                         <NavLink name="Ana Sayfa" active={active} onClick={handleClickLink} to="/" />
                         <NavLink name="İş İlanları" active={active} onClick={handleClickLink} to="/jobs" />
-                        <NavLink name="Profil" active={active} onClick={handleClickLink} to="/resume" />
-                        <NavLink name="İlan Ver" active={active} onClick={handleClickLink} to="/post-job" />
+                        {user.role === 'CANDIDATE' && <NavLink name="CV" active={active} onClick={handleClickLink} to="/resume" />}
+                        {user.role === 'EMPLOYER' && < NavLink name="İlan Ver" active={active} onClick={handleClickLink} to="/post-job" />}
+                        {isLoggedIn && <NavLink name="Hesabım" active={active} onClick={handleClickLink} to="/account" />}
                     </ul>
-                    {!isLoggedIn && <div className="ms-5">
-                        <Link className="btn btn-secondary my-2 my-sm-0" to="/register">Kayıt Ol</Link>
-                        <Link className="btn btn-primary my-2 my-sm-0 ms-2" to="/login" >Giriş Yap</Link>
-                    </div>}
+
+                    {!isLoggedIn &&
+                        <div className="ms-5">
+                            <Link className="btn btn-secondary my-2 my-sm-0" to="/register">Kayıt Ol</Link>
+                            <Link className="btn btn-primary my-2 my-sm-0 ms-2" to="/login" >Giriş Yap</Link>
+                        </div>
+                    }
                 </div>
             </nav>
 

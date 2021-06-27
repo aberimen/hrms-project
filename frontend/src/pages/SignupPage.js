@@ -6,9 +6,9 @@ import { useHistory } from 'react-router-dom';
 import { registerEmployer } from '../api/employerApi';
 import { registerCandidate } from '../api/candidateApi';
 
-const SignupPage = () => {
+const SignupPage = (props) => {
 
-    const history = useHistory();
+    const {history} = props;
     const isPageForEmployers = history.location.pathname === '/employer';
 
     const employerRegisterFormInitialValues = {

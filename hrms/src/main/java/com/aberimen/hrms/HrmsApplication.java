@@ -7,7 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
 
 import com.aberimen.hrms.candidate.Candidate;
 import com.aberimen.hrms.candidate.CandidateService;
@@ -78,9 +77,8 @@ public class HrmsApplication {
 				employer.setEmail("info@firma" + i + ".com");
 				employer.setPassword("1234");
 				employer.setPhoneNumber("1234567899");
-				HttpStatus statusCode = employerService.saveEmployer(employer).getStatusCode();
+				employerService.saveEmployer(employer);
 
-				System.out.println(statusCode.value());
 
 				// init job postings for each company
 				for (int j = 1; j < 5; j++) {
