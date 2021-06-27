@@ -1,9 +1,9 @@
 import React from 'react';
-import TextArea from './TextArea';
+import TextArea from '../TextArea';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from './Modal';
-import { addSummary, updateSummary } from '../api/resumeApi';
+import Modal from '../Modal';
+import { addSummary, updateSummary } from '../../api/resumeApi';
 
 const ResumeSummaryFormModal = ({ modalVisible, onModalClickCancel, setModalVisible, summaryValue, updateMode, resume, setResume }) => {
 

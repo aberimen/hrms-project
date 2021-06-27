@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from './Modal';
-import { addExperience, addSummary } from '../api/resumeApi';
-import Input from './Input';
-import Select from './Select';
-import { getAllJobPositions } from '../api/jobPositionApi';
+import Modal from '../Modal';
+import Input from '../Input';
+import Select from '../Select';
+import { getAllJobPositions } from '../../api/jobPositionApi';
+import { addExperience } from '../../api/resumeApi';
 
 const ResumeExperienceForm = ({ modalVisible, onModalClickCancel }) => {
     const [jobPositions, setJobPositions] = useState([]);

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { getDepartments, getLanguages, getUniversities } from '../api/commonApi';
-import Input from './Input';
-import Select from './Select';
+import { getDepartments, getLanguages, getUniversities } from '../../api/commonApi';
+import Input from '../Input';
+import Select from '../Select';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from './Modal';
-import { addEducationDetails, getEducationLevels, getEducationTypes } from '../api/resumeApi';
+import Modal from '../Modal';
+import { addEducationDetails, getEducationLevels, getEducationTypes } from '../../api/resumeApi';
 
 
 const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {

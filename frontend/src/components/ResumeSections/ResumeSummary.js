@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import EditButton from './EditButton';
+import React, { useState } from 'react';
+import EditButton from '../EditButton';
 import ResumeSummaryFormModal from './ResumeSummaryFormModal';
-import ResumeSection from './ResumeSection/ResumeSection';
+import ResumeSection from '../ResumeSection/ResumeSection';
 
 const ResumeSummary = ({ resume, setResume }) => {
     const [updateMode, setUpdateMode] = useState(false);

@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from './Modal';
-import Input from './Input';
-import { addSocialAccounts } from '../api/resumeApi';
+import Modal from '../Modal';
+import Input from '../Input';
+import { addSocialAccounts } from '../../api/resumeApi';
 
 const ResumeSocialAccountsForm = ({ modalVisible, onModalClickCancel }) => {
 

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import TextArea from './TextArea';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from './Modal';
-import { addSummary, addTechnicalSkill } from '../api/resumeApi';
-import { getTechStacks } from '../api/commonApi';
-import Select from './Select';
+import Modal from '../Modal';
+import { addTechnicalSkill } from '../../api/resumeApi';
+import { getTechStacks } from '../../api/commonApi';
+import Select from '../Select';
 
 const ResumeTechnicalSkillForm = ({ modalVisible, onModalClickCancel }) => {
 

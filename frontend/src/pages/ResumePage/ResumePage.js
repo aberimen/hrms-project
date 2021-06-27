@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ResumeSection from '../../components/ResumeSection/ResumeSection';
 import './ResumePage.scss';
-import ResumeEducationForm from '../../components/ResumeEducationForm';
-import ResumeExperienceForm from '../../components/ResumeExperienceForm';
-import ResumeSocialAccountsForm from '../../components/ResumeSocialAccountsForm';
-import ResumeTechnicalSkillForm from '../../components/ResumeTechnicalSkillForm';
-import ResumeLanguageSkillForm from '../../components/ResumeLanguageSkillForm';
+import ResumeEducationForm from '../../components/ResumeSections/ResumeEducationForm';
+import ResumeExperienceForm from '../../components/ResumeSections/ResumeExperienceForm';
+import ResumeSocialAccountsForm from '../../components/ResumeSections/ResumeSocialAccountsForm';
+import ResumeTechnicalSkillForm from '../../components/ResumeSections/ResumeTechnicalSkillForm';
+import ResumeLanguageSkillForm from '../../components/ResumeSections/ResumeLanguageSkillForm';
 import { getCandidateResume } from '../../api/resumeApi';
-import ResumeSummary from '../../components/ResumeSummary';
+import ResumeSummary from '../../components/ResumeSections/ResumeSummary';
 import _ from 'lodash';
 
 

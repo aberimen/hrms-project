@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import TextArea from './TextArea';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from './Modal';
-import Select from './Select';
-import { getLanguages } from '../api/commonApi';
-import { addLanguageSkill } from '../api/resumeApi';
+import Modal from '../Modal';
+import Select from '../Select';
+import { getLanguages } from '../../api/commonApi';
+import { addLanguageSkill } from '../../api/resumeApi';
 
 const ResumeLanguageSkillForm = ({ modalVisible, onModalClickCancel }) => {
 
