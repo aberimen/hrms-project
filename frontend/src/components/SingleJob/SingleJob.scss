@@ -94,4 +94,21 @@
     justify-content: space-between;
     width: 100%;
   }
+
+  .job-location {
+    max-height: 2rem;
+    max-width: auto;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    div {
+      margin-left: 5px;
+    }
+
+    .icon {
+    }
+  }
 }
+

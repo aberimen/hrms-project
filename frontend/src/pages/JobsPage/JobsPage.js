@@ -111,6 +111,7 @@ const JobsPage = () => {
                                             (job.workRemotely ? 'Remote' : 'İş Yerinde')
                                         ]}
                                         jobId={job.id}
+                                        location={job.location}
                                     />
                                 </div>
                             )}
