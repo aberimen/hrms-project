@@ -13,16 +13,29 @@
 
   transition: all 0.2s ease-in-out;
 
-  .company-image {
-    max-width: 120px;
-    max-height: auto;
-    padding: 20px 0 0 20px;
-    opacity: 0.8;
-    transition: 0.3s;
+  .job-header {
+    display: flex;
+    justify-content: space-between;
 
-    img {
-      width: 100%;
-      border-radius: 0.6rem;
+    .company-image {
+      max-width: 120px;
+      max-height: auto;
+      padding: 20px 0 0 20px;
+      opacity: 0.8;
+      transition: 0.3s;
+
+      img {
+        width: 100%;
+        border-radius: 0.6rem;
+      }
+    }
+
+    .favorite-button {
+      padding: 0.8rem;
+      .star-icon {
+        font-size: 1.5rem;
+        color: $warning;
+      }
     }
   }
 
@@ -56,7 +69,6 @@
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
       }
-
     }
   }
 

@@ -10,11 +10,9 @@ export const loginSuccess = (user) => {
 
 export const loginHandler = credentials => {
     return async dispatch => {
-
         const result = await login(credentials);
-        dispatch(loginSuccess(result.data));
+        await dispatch(loginSuccess(result.data));
         return result;
-
     }
 };
 

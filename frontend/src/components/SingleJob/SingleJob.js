@@ -1,13 +1,43 @@
 import React from 'react';
 import './SingleJob.scss';
 import defaultImage from '../../assets/company-default.png'
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { handleAddToFavoriteJobs, handleRemoveFromFavoriteJobs } from '../../redux/actions/candidateActions';
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
-const SingleJob = ({ title, description, tags = [] }) => {
+
+const SingleJob = ({ title, description, tags = [], jobId }) => {
+
+    const dispatch = useDispatch();
+    const { user } = useSelector(state => state.auth);
+    const { favoriteJobs } = useSelector(state => state.candidate);
+
+    const isFavoritedJob = favoriteJobs.find(j => j.jobId === jobId);
+
+    const onClicFavoriteJobIcon = async () => {
+        if (!isFavoritedJob) {
+            await dispatch(handleAddToFavoriteJobs(user.id, jobId));
+        }
+        else {
+            await dispatch(handleRemoveFromFavoriteJobs(user.id, jobId));
+        }
+    };
+
     return (
         <div className="single-job">
-
-            <div className="company-image">
-                <img src={defaultImage} alt="img" />
+            <div className="job-header">
+                <div className="company-image">
+                    <img src={defaultImage} alt="img" />
+                </div>
+                <div className="favorite-button">
+                    <button className="btn" onClick={onClicFavoriteJobIcon}>
+                        {!isFavoritedJob ?
+                            <AiOutlineStar className="star-icon" />
+                            : <AiFillStar className="star-icon" />
+                        }
+                    </button>
+                </div>
             </div>
 
             <div className="card-body">

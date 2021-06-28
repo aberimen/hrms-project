@@ -1,15 +1,19 @@
 package com.aberimen.hrms.candidate;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.validation.constraints.NotEmpty;
 
+import com.aberimen.hrms.jobposting.JobPosting;
 import com.aberimen.hrms.resume.Resume;
 import com.aberimen.hrms.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -43,6 +47,9 @@ public class Candidate extends User{
 	@NotEmpty
 	@Column(length = 11, unique = true, nullable = false)
 	private String nationalId;
+	
+	@ManyToMany
+	Set<JobPosting> favoriteJobs;
 	
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)

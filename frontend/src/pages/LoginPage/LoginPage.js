@@ -4,6 +4,7 @@ import mapSvg from '../../assets/map.svg';
 import Input from '../../components/Input';
 import { loginHandler } from '../../redux/actions/authActions';
 import { useDispatch } from 'react-redux';
+import { handleGetFavoriteJobs } from '../../redux/actions/candidateActions';
 
 
 const LoginPage = (props) => {
@@ -29,7 +30,11 @@ const LoginPage = (props) => {
         const { push } = props.history;
 
         try {
-            await dispatch(loginHandler(credentials));
+            const result = await dispatch(loginHandler(credentials));
+            const user = result.data;
+            if (user.role === 'CANDIDATE') {
+                await dispatch(handleGetFavoriteJobs(user.id));
+            }
             push('/');
 
         } catch (err) {

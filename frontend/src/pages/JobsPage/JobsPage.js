@@ -110,6 +110,7 @@ const JobsPage = () => {
                                             job.employmentType,
                                             (job.workRemotely ? 'Remote' : 'İş Yerinde')
                                         ]}
+                                        jobId={job.id}
                                     />
                                 </div>
                             )}
