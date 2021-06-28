@@ -9,6 +9,7 @@ import ResumeLanguageSkillForm from '../../components/ResumeSections/ResumeLangu
 import { getCandidateResume } from '../../api/resumeApi';
 import ResumeSummary from '../../components/ResumeSections/ResumeSummary';
 import _ from 'lodash';
+import defaultProfileImage from '../../assets/user-avatar.png';
 
 
 const ResumePage = () => {
@@ -42,7 +43,7 @@ const ResumePage = () => {
             <div className="container">
                 <section className="profile-abstract">
                     <div className="avatar">
-                        <img src="https://docs.kariyer.net/candidate/000/023/126/avatar/2312643620200305030012126.jpg?filesec=XdsV1VzBKiPzRwcAz5MUUkG5fX%2FbBgSfjhdDH1dPFyzu4riam%2BLuxakhgzkZIV7EdySUEoa4gX4Q9cePbWkABF%2F9dgSvqBIQ!e!" />
+                        <img src={defaultProfileImage} />
                     </div>
 
                     <div className="name">
