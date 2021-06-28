@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaAddressCard, FaAlipay, FaInstagram, FaStreetView } from 'react-icons/fa';
+import React from 'react';
+import { AiFillSetting, AiOutlineFileSearch, AiOutlineUser } from 'react-icons/ai';
 import SideMenuItem from '../../components/SideMenuItem/SideMenuItem';
 import './SideMenu.scss';
 
@@ -17,23 +17,23 @@ const SideMenu = ({ selectedMenuItem, setSelectedMenuItem }) => {
                 text="Bilgilerim"
                 name="account-details"
                 active={selectedMenuItem === 'account-details'}
-                Icon={FaStreetView}
+                Icon={AiOutlineUser}
                 onClick={handleClick}
             />
 
             <SideMenuItem
-                text="Bilgilerim"
+                text="Deneme 1"
                 name="deneme"
                 active={selectedMenuItem === 'deneme'}
-                Icon={FaInstagram}
+                Icon={AiOutlineFileSearch}
                 onClick={handleClick}
             />
 
             <SideMenuItem
-                text="Bilgilerim"
+                text="Deneme 2"
                 name="deneme2"
                 active={selectedMenuItem === 'deneme2'}
-                Icon={FaAddressCard}
+                Icon={AiFillSetting}
                 onClick={handleClick}
             />
         </div >
