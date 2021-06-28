@@ -1,6 +1,7 @@
 package com.aberimen.hrms.jobposting;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import javax.persistence.criteria.Join;
 import javax.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.aberimen.hrms.common.location.Location;
+import com.aberimen.hrms.error.GenericNotFoundException;
 import com.aberimen.hrms.jobposition.JobPosition;
 import com.aberimen.hrms.jobposting.dto.JobPostingResponseDTO;
 import com.aberimen.hrms.utils.GenericResponse;
@@ -31,7 +33,6 @@ public class JobPostingService {
 		return new GenericResponse("İş ilanı eklendi.");
 	}
 
-	@Transactional
 	public Page<JobPosting> getActiveJobPostings(Boolean isRemote, Integer min, Integer max,
 			EmploymentType employmentType, String location, String positionName, Pageable pageable) {
 
@@ -47,7 +48,6 @@ public class JobPostingService {
 		return jobPostingRepository.findAll(specs, pageable);
 	}
 
-	@Transactional // Lob veri içerdiği için
 	public Page<JobPostingResponseDTO> getJobPostingsOfEmployer(long employerId, Pageable pageable) {
 
 		return jobPostingRepository.findByEmployerIdAndActive(employerId, true, pageable)
@@ -61,6 +61,17 @@ public class JobPostingService {
 
 		return new GenericResponse("İş ilanı durumu değiştirildi.");
 	}
+	
+	public JobPosting findById(long jobId) {
+		 Optional<JobPosting> jobOptional = jobPostingRepository.findById(jobId);
+
+			if (!jobOptional.isPresent()) {
+				throw new GenericNotFoundException("İş ilanı bulunamadı");
+			}
+
+			return jobOptional.get();
+	}
+
 
 	public Specification<JobPosting> isActive(Boolean isActive) {
 		return (root, query, criteriaBuilder) -> {
@@ -110,4 +121,5 @@ public class JobPostingService {
 		};
 	}
 
+	
 }
