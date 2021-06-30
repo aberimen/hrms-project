@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from '../Modal';
-import Select from '../Select';
-import { getLanguages } from '../../api/commonApi';
-import { addLanguageSkill } from '../../api/resumeApi';
+import Modal from '../../Modal';
+import Select from '../../Select';
+import { getLanguages } from '../../../api/commonApi';
+import { addLanguageSkill } from '../../../api/resumeApi';
 
-const ResumeLanguageSkillForm = ({ modalVisible, onModalClickCancel }) => {
+const ResumeLanguageSkillModalForm = ({ modalVisible, onModalClickCancel }) => {
 
     const [languages, setLanguages] = useState([]);
 
@@ -100,4 +100,4 @@ const ResumeLanguageSkillForm = ({ modalVisible, onModalClickCancel }) => {
     );
 };
 
-export default ResumeLanguageSkillForm;
+export default ResumeLanguageSkillModalForm;

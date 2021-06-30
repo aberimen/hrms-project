@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from '../Modal';
-import { addTechnicalSkill } from '../../api/resumeApi';
-import { getTechStacks } from '../../api/commonApi';
-import Select from '../Select';
+import Modal from '../../Modal';
+import { addTechnicalSkill } from '../../../api/resumeApi';
+import { getTechStacks } from '../../../api/commonApi';
+import Select from '../../Select';
 
-const ResumeTechnicalSkillForm = ({ modalVisible, onModalClickCancel }) => {
+const ResumeTechnicalSkillModalForm = ({ modalVisible, onModalClickCancel }) => {
 
     const [techStacks, setTechStacks] = useState([]);
 
@@ -78,4 +78,4 @@ const ResumeTechnicalSkillForm = ({ modalVisible, onModalClickCancel }) => {
     );
 };
 
-export default ResumeTechnicalSkillForm;
+export default ResumeTechnicalSkillModalForm;

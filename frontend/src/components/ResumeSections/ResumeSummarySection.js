@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import EditButton from '../EditButton';
-import ResumeSummaryFormModal from './ResumeSummaryFormModal';
+import ResumeSummaryFormModal from './ModalForms/ResumeSummaryModalForm';
 import ResumeSection from '../ResumeSection/ResumeSection';
 
-const ResumeSummary = ({ resume, setResume }) => {
+const ResumeSummarySection = ({ resume }) => {
     const [updateMode, setUpdateMode] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -37,9 +37,7 @@ const ResumeSummary = ({ resume, setResume }) => {
                 <ResumeSummaryFormModal
                     modalVisible={modalVisible}
                     setModalVisible={setModalVisible}
-                    onModalClickCancel={() => { setModalVisible(false) }}
                     summaryValue={resume.summary}
-                    setResume={setResume}
                     updateMode={updateMode}
                     resume={resume}
                 />
@@ -49,4 +47,4 @@ const ResumeSummary = ({ resume, setResume }) => {
     );
 };
 
-export default ResumeSummary;
+export default ResumeSummarySection;

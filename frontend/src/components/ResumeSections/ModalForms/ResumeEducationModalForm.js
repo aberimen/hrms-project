@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { getDepartments, getLanguages, getUniversities } from '../../api/commonApi';
-import Input from '../Input';
-import Select from '../Select';
+import { getDepartments, getLanguages, getUniversities } from '../../../api/commonApi';
+import Input from '../../Input';
+import Select from '../../Select';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from '../Modal';
-import { addEducationDetails, getEducationLevels, getEducationTypes } from '../../api/resumeApi';
+import Modal from '../../Modal';
+import { addEducationDetails, getEducationLevels, getEducationTypes, updateEducationDetails } from '../../../api/resumeApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateResumeSuccess } from '../../../redux/actions/resumeActions';
 
 
-const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
+const ResumeEducationModalForm = ({ modalVisible, setModalVisible, previousValues, isUpdateMode }) => {
 
-    const [visible, setVisible] = useState(modalVisible);
     const [universities, setUniversities] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [languages, setLanguages] = useState([]);
 
+    const dispatch = useDispatch();
+    const resume = useSelector(state => state.resume);
+
     const formik = useFormik({
-        initialValues: {
-            educationLevel: '',
-            schoolName: '',
-            universityId: '',
-            educationType: '',
-            departmentId: '',
-            startDate: '',
-            graduationDate: '',
-            educationLanguageId: '',
-            stillStudying: false
-        },
+        initialValues: previousValues ? { ...previousValues } :
+            {
+                educationLevel: '',
+                schoolName: '',
+                universityId: '',
+                educationType: '',
+                departmentId: '',
+                startDate: '',
+                graduationDate: '',
+                educationLanguageId: '',
+                stillStudying: false
+            },
 
         validationSchema:
             Yup.object({
@@ -37,7 +42,8 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
 
         onSubmit: (values, { resetForm, setSubmitting }) => {
             saveEducationDetails(values);
-            // resetForm();
+            resetForm();
+            setModalVisible();
         }
     });
 
@@ -60,21 +66,32 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
     };
 
     const saveEducationDetails = async (educationDetails) => {
-        const resumeId = 1; // test için
+        const { id: resumeId } = resume;
+
         try {
-            await addEducationDetails(educationDetails, resumeId);
+            let result;
+
+            if (!isUpdateMode) {
+                result = await addEducationDetails(educationDetails, resumeId);
+            } else {
+                result = await updateEducationDetails(educationDetails, resumeId);
+            }
+
+            dispatch(updateResumeSuccess(result.data));
         } catch (error) {
+
         }
     };
+
 
     return (
         <form onSubmit={handleSubmit}>
             <Modal
                 name="educationDetails"
-                visible={visible}
-                onClickCancel={onModalClickCancel}
+                visible={modalVisible}
+                onClickCancel={() => { setModalVisible(false) }}
                 // saveButtonDisabled={isSubmitting}
-                title="Yeni Eğitim Bilgisi Ekle"
+                title={isUpdateMode ? 'Eğitim Bilgisini Düzenle' : 'Yeni Eğitim Bilgisi Ekle'}
             >
 
                 <div className="container-fluid">
@@ -189,4 +206,4 @@ const ResumeEducationForm = ({ modalVisible, onModalClickCancel }) => {
     );
 };
 
-export default ResumeEducationForm;
+export default ResumeEducationModalForm;

@@ -1,11 +1,15 @@
 import React from 'react';
-import TextArea from '../TextArea';
+import TextArea from '../../TextArea';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Modal from '../Modal';
-import { addSummary, updateSummary } from '../../api/resumeApi';
+import Modal from '../../Modal';
+import { addSummary, updateSummary } from '../../../api/resumeApi';
+import { useDispatch } from 'react-redux';
+import { updateResumeSuccess } from '../../../redux/actions/resumeActions';
 
-const ResumeSummaryFormModal = ({ modalVisible, onModalClickCancel, setModalVisible, summaryValue, updateMode, resume, setResume }) => {
+const ResumeSummaryModalForm = ({ modalVisible, setModalVisible, summaryValue, updateMode, resume }) => {
+
+    const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
@@ -23,20 +27,21 @@ const ResumeSummaryFormModal = ({ modalVisible, onModalClickCancel, setModalVisi
             saveSummary(values);
             setModalVisible(false);
             resetForm();
-            setResume({ ...resume, ...values });
         }
     });
 
     const { handleSubmit, handleChange, handleBlur, values, touched, errors, isSubmitting, setTouched } = formik;
 
     const saveSummary = async (summary) => {
-        const resumeId = 1; //test
         try {
+            let result;
             if (!updateMode) {
-                await addSummary(summary, resumeId);
+                result = await addSummary(summary, resume.id);
+
             } else {
-                await updateSummary(summary, resumeId);
+                result = await updateSummary(summary, resume.id);
             }
+            dispatch(updateResumeSuccess(result.data));
         } catch (error) { }
     };
 
@@ -45,7 +50,7 @@ const ResumeSummaryFormModal = ({ modalVisible, onModalClickCancel, setModalVisi
             <Modal
                 name="summary"
                 visible={modalVisible}
-                onClickCancel={onModalClickCancel}
+                onClickCancel={() => { setModalVisible(false) }}
                 // saveButtonDisabled={isSubmitting}
                 title={updateMode ? 'Düzenle' : 'Yeni Ekle'}
             >
@@ -73,4 +78,4 @@ const ResumeSummaryFormModal = ({ modalVisible, onModalClickCancel, setModalVisi
     );
 };
 
-export default ResumeSummaryFormModal;
+export default ResumeSummaryModalForm;
