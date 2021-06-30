@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Select = ({ id, name, defaultOption = {}, value, label, options = [], error, onChange, onBlur }) => {
+const Select = ({ id, name, defaultOption, value, label, options = [], error, onChange, onBlur }) => {
 
     let className = "form-control form-select";
 

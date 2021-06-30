@@ -1,24 +1,24 @@
 import { addToFavoriteJobs, getFavoriteJobs, removeFromFavoriteJobs } from "../../api/candidateApi";
-import { ADD_TO_FAVORITE_JOB_SUCCESS, GET_FAVORITE_JOBS_SUCCESS, REMOVE_FROM_FAVORITE_JOBS_SUCCESS } from '../constants/candidateActionTypes';
+import * as ACTIONS from '../constants/candidateActionTypes';
 
 
 export const getFavoriteJobsSuccess = (favoriteJobs) => {
     return {
-        type: GET_FAVORITE_JOBS_SUCCESS,
+        type: ACTIONS.GET_FAVORITE_JOBS_SUCCESS,
         payload: favoriteJobs,
     };
 };
 
 export const addToFavoriteJobsSuccess = (job) => {
     return {
-        type: ADD_TO_FAVORITE_JOB_SUCCESS,
+        type: ACTIONS.ADD_TO_FAVORITE_JOB_SUCCESS,
         payload: job
     };
 };
 
 export const removeFromFavoriteSuccess = (job) => {
     return {
-        type: REMOVE_FROM_FAVORITE_JOBS_SUCCESS,
+        type: ACTIONS.REMOVE_FROM_FAVORITE_JOBS_SUCCESS,
         payload: job
     };
 };
@@ -26,6 +26,7 @@ export const removeFromFavoriteSuccess = (job) => {
 
 
 
+//handlers
 
 export const handleGetFavoriteJobs = (candidateId) => {
     return async (dispatch) => {
@@ -55,3 +56,4 @@ export const handleRemoveFromFavoriteJobs = (candidateId, jobId) => {
         } catch (err) { }
     }
 };
+
