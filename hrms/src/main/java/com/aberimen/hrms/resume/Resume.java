@@ -3,11 +3,11 @@ package com.aberimen.hrms.resume;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
@@ -43,7 +43,7 @@ public class Resume {
 
 	private String linkedinAccount;
 
-	@Lob
+	@Column(columnDefinition = "TEXT")
 	private String summary;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "resume")
