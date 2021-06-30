@@ -2,7 +2,7 @@ import * as ACTIONS from "../constants/resumeActionTypes";
 
 const initialState = {
     summary: '',
-    educationDetails : null,
+    educationDetails : [],
 
 }
 

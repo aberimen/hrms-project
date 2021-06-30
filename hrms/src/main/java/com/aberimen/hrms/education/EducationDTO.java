@@ -4,14 +4,11 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Data
 public class EducationDTO {
 	
-	@JsonIgnore
 	private long id;
 	
 	@NotEmpty

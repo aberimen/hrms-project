@@ -10,8 +10,16 @@ import org.springframework.context.annotation.Bean;
 
 import com.aberimen.hrms.candidate.Candidate;
 import com.aberimen.hrms.candidate.CandidateService;
+import com.aberimen.hrms.common.department.Department;
+import com.aberimen.hrms.common.department.DepartmentRepository;
+import com.aberimen.hrms.common.language.Language;
+import com.aberimen.hrms.common.language.LanguageRepository;
+import com.aberimen.hrms.common.language.LanguageService;
 import com.aberimen.hrms.common.location.Location;
 import com.aberimen.hrms.common.location.LocationRepository;
+import com.aberimen.hrms.common.university.University;
+import com.aberimen.hrms.common.university.UniversityRepository;
+import com.aberimen.hrms.common.university.UniversityService;
 import com.aberimen.hrms.employer.Employer;
 import com.aberimen.hrms.employer.EmployerService;
 import com.aberimen.hrms.jobposition.JobPosition;
@@ -37,7 +45,8 @@ public class HrmsApplication {
 	@Bean
 	CommandLineRunner initData(EmployerService employerService, LocationRepository locationRepository,
 			JobPositionRepository jobPositionRepository, JobPostingService jobPostingService,
-			ResumeRepository resumeRepository, CandidateService candidateService) {
+			ResumeRepository resumeRepository, CandidateService candidateService, LanguageRepository languageRepository,
+			UniversityRepository universityRepository, DepartmentRepository departmentRepository) {
 
 		return (String... args) -> {
 
@@ -79,7 +88,6 @@ public class HrmsApplication {
 				employer.setPhoneNumber("1234567899");
 				employerService.saveEmployer(employer);
 
-
 				// init job postings for each company
 				for (int j = 1; j < 5; j++) {
 					JobPosting jobPosting = new JobPosting();
@@ -100,7 +108,7 @@ public class HrmsApplication {
 			Resume resume = new Resume();
 			resume.setId(1);
 			resumeRepository.save(resume);
-			
+
 			Candidate candidate = new Candidate();
 			candidate.setName("Abdurrahman");
 			candidate.setLastName("Berimen");
@@ -108,8 +116,22 @@ public class HrmsApplication {
 			candidate.setNationalId("123456789");
 			candidate.setPassword("pass123");
 			candidate.setYearOfBirth("1997");
-			
+
 			candidateService.save(candidate);
+
+			Language ing = new Language();
+			ing.setLanguageName("İngilizce");
+			languageRepository.save(ing);
+
+			University university = new University();
+			university.setName("Fırat Uni");
+			universityRepository.save(university);
+			
+			Department yazilim = new Department();
+			yazilim.setDepartmentName("Yazılım Mühendisliği");
+			
+			departmentRepository.save(yazilim);
+
 		};
 
 	}
