@@ -31,12 +31,12 @@ public class ResumeService {
 		return getResumeById(userId);
 	}
 
-	public void saveEducation(Education education, long resumeId) {
+	public Resume saveEducation(Education education, long resumeId) {
 		Resume inDB = getResumeById(resumeId);
 		education.setResume(inDB);
 		inDB.getEducationDetails().add(education);
 		
-		resumeRepository.save(inDB);
+		return resumeRepository.save(inDB);
 	}
 
 	public void saveExperience(Experience experience, long resumeId) {
@@ -99,11 +99,13 @@ public class ResumeService {
 		return resumeInDBOptional.get();
 	}
 
-	public void saveSummary(SummaryDTO summary, long resumeId) {
+	public String saveSummary(SummaryDTO summary, long resumeId) {
 		Resume inDB = getResumeById(resumeId);
 		inDB.setSummary(summary.getSummary());
 
 		resumeRepository.save(inDB);
+		
+	   return inDB.getSummary();
 	}
 
 	public void saveSocialAccounts(SocialAccountsDTO socialAccountsDTO, long resumeId) {
@@ -113,8 +115,6 @@ public class ResumeService {
 
 		resumeRepository.save(inDB);
 	}
-	
-	
 	
 
 }

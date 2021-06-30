@@ -42,13 +42,12 @@ public class ResumeController {
 	public Resume getCandidateResume(@PathVariable long resumeId) {
 		return resumeService.getCandidateProfile(resumeId);
 	}
+	
 
 	@PostMapping("/resumes/education-details")
-	public GenericResponse createEducation(@RequestBody EducationDTO educationDTO, @RequestParam long resumeId) {
+	public Resume createEducation(@RequestBody EducationDTO educationDTO, @RequestParam long resumeId) {
 		Education education = mapper.map(educationDTO, Education.class);
-		System.out.println(educationDTO);
-		resumeService.saveEducation(education, resumeId);
-		return new GenericResponse("Eğitim bilgisi eklendi.");
+		return resumeService.saveEducation(education, resumeId);
 	}
 
 	@PostMapping("/resumes/experiences")
@@ -81,9 +80,8 @@ public class ResumeController {
 	}
 
 	@PostMapping("/resumes/summary")
-	public GenericResponse createSummary(@RequestBody SummaryDTO summary, @RequestParam long resumeId) {
-		resumeService.saveSummary(summary, resumeId);
-		return new GenericResponse("Ön yazı bilgisi eklendi.");
+	public SummaryDTO createSummary(@RequestBody SummaryDTO summary, @RequestParam long resumeId) {
+		return new SummaryDTO(resumeService.saveSummary(summary, resumeId));
 	}
 
 	@PostMapping("/resumes/social-accounts")
@@ -95,8 +93,16 @@ public class ResumeController {
 
 	// TODO update delete methods
 	@PutMapping("/resumes/summary")
-	public GenericResponse updateSummary(@RequestBody SummaryDTO summary, @RequestParam long resumeId) {
-		resumeService.saveSummary(summary, resumeId);
-		return new GenericResponse("Ön yazı bilgisi güncellendi.");
+	public SummaryDTO updateSummary(@RequestBody SummaryDTO summary, @RequestParam long resumeId) {
+		return new SummaryDTO(resumeService.saveSummary(summary, resumeId));
 	}
+	
+	@PutMapping("/resumes/education-details")
+	public Resume updateEducation(@RequestBody EducationDTO educationDTO, @RequestParam long resumeId) {
+		Education education = mapper.map(educationDTO, Education.class);
+		return resumeService.saveEducation(education, resumeId);
+	}
+
+	
+	
 }
