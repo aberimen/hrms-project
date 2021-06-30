@@ -22,8 +22,10 @@ public class CandidateService {
 	private JobPostingService jobPostingService;
 
 	public void save(Candidate candidate) {
+		Resume emptyResume = new Resume();
 		candidate.setEnabled(false); // email doğrulaması ile hesabını açtırması gerek
 		candidate.setRole(Role.CANDIDATE);
+		candidate.setResume(emptyResume);
 		candidateRepository.save(candidate);
 	}
 
