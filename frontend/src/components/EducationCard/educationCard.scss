@@ -1,0 +1,62 @@
+@import "../../index.scss";
+
+.education {
+  position: relative;
+  padding-block: 2rem;
+  margin-inline: 1rem;
+  border-bottom: 1px solid $gray;
+
+  .edit-button {
+    display: none;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
+
+  &:hover {
+    border-radius: $border-radius;
+    border: 1px solid rgba($warning, 0.5);
+    .edit-button {
+      display: block;
+    }
+  }
+
+  .dates {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+
+    .education-level {
+      font-weight: 600;
+    }
+
+    .dates-wrapper {
+      margin-top: 1rem;
+      padding-block: 5px;
+      text-align: center;
+      width: 60%;
+      border-radius: $border-radius;
+      // background-color: rgba($primary, 0.8);
+      border: 1px solid rgba($primary, 0.4);
+      // color: #fff;
+      font-size: 0.6rem;
+      font-weight: 600;
+
+      .start-date {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+
+      .start-date::after {
+        content: "-";
+      }
+
+      .end-date {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+    }
+  }
+}
