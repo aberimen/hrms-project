@@ -58,3 +58,28 @@ export const updateSummary = (summary, resumeId) => {
     return axios.put(`/api/1.0/resumes/summary?resumeId=${resumeId}`, summary);
 };
 
+export const updateEducationDetails = (educationDetails, resumeId) => {
+    return axios.put(`/api/1.0/resumes/education-details?resumeId=${resumeId}`, educationDetails);
+};
+
+export const updateExperience = (experience, resumeId) => {
+    return axios.put(`/api/1.0/resumes/experiences?resumeId=${resumeId}`, experience);
+};
+
+export const updateLanguageSkill = (languageSkill, resumeId) => {
+    return axios.put(`/api/1.0/resumes/language-skills?resumeId=${resumeId}`, languageSkill);
+};
+
+export const updateTechnicalSkill = (technicalSkill, resumeId) => {
+    return axios.put(`/api/1.0/resumes/technical-skills?resumeId=${resumeId}`, technicalSkill);
+};
+
+export const updateProfileImage = (file, resumeId) => {
+    return axios.put(`/api/1.0/resumes/profile-image?resumeId=${resumeId}`, file);
+};
+
+export const updateSocialAccounts = (socialAccounts, resumeId) => {
+    return axios.put(`/api/1.0/resumes/social-accounts?resumeId=${resumeId}`, socialAccounts);
+};
+
+
