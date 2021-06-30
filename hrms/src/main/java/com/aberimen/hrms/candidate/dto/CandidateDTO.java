@@ -17,6 +17,8 @@ public class CandidateDTO extends UserDTO {
 	private String lastName;
 
 	private String yearOfBirth;
+	
+	private Long resumeId;
 
 	public CandidateDTO(Candidate candidate) { // Candidate to CandidateDTO
 		super(candidate);
@@ -24,6 +26,11 @@ public class CandidateDTO extends UserDTO {
 		setName(candidate.getName());
 		setLastName(candidate.getLastName());
 		setYearOfBirth(candidate.getYearOfBirth());
+		
+		if(candidate.getResume() != null) {
+			setResumeId(candidate.getResume().getId());
+		}
+		
 
 	}
 
