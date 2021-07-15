@@ -24,7 +24,7 @@ public class UserDTO {
 		setId(user.getId());
 		setEmail(user.getEmail());
 		setRole(user.getRole());
-		setEnabled(user.isEnabled());
+		setEnabled(user.isEmailVerified());
 	}
 
 }

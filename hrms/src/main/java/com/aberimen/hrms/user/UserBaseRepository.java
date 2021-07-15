@@ -9,5 +9,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 public interface UserBaseRepository<T extends User> extends JpaRepository<T, Long>{
 
 	Optional<T> findByEmail(String email);	
+	
+	Optional<T> findByUsername(String username);	
 
 }

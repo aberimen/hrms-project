@@ -33,13 +33,21 @@ public class UserService {
 
 		if (inDBOptional.isPresent()) {
 			User inDB = inDBOptional.get();
-			inDB.setEnabled(true);
+			inDB.setEmailVerified(true);
 			userRepository.save(inDB);
 
 			return "email doğrulandı";
 		}
-
 		return "email doğrulanamadı";
+	}
+
+	public User findByUsername(String username) {
+		Optional<User> inDB = userRepository.findByUsername(username);
+
+		if (inDB.isPresent()) {
+			return inDB.get();
+		}
+		return null;
 	}
 
 }

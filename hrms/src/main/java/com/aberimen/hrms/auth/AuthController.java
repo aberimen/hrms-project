@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aberimen.hrms.user.dto.UserDTO;
-
 @RestController
 @RequestMapping("/api/1.0/auth")
 public class AuthController {
@@ -16,7 +14,7 @@ public class AuthController {
 	AuthService authService;
 
 	@PostMapping("/login")
-	public UserDTO login(@RequestBody AuthRequest request) {
+	public AuthResponse login(@RequestBody AuthRequest request) {
 		
 		return authService.authenticateUser(request);
 	}

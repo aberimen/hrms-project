@@ -25,11 +25,15 @@ public class User {
 	private long id;
 	
 	@NotEmpty
+	@Column(nullable = false,unique = true)
+	private String username;
+	
+	@NotEmpty
 	@Column(nullable = false, unique = true)
 	private String email;
 
 	@Column(nullable = false)
-	private boolean enabled;
+	private boolean emailVerified;
 	
 	@NotEmpty
 	@Column(nullable = false)

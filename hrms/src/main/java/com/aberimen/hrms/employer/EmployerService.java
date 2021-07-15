@@ -3,6 +3,7 @@ package com.aberimen.hrms.employer;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.aberimen.hrms.employer.dto.AccountDetailsUpdatedDTO;
@@ -14,10 +15,12 @@ import com.aberimen.hrms.user.Role;
 public class EmployerService {
 
 	private EmployerRepository employerRepository;
+	private PasswordEncoder passwordEncoder;
 
-	public EmployerService(EmployerRepository employerRepository) {
+	public EmployerService(EmployerRepository employerRepository, PasswordEncoder passwordEncoder) {
 		super();
 		this.employerRepository = employerRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	public Employer saveEmployer(Employer employer) {
@@ -28,6 +31,7 @@ public class EmployerService {
 
 			throw new BadRequestException("Geçersiz şirket maili");
 		} else {
+			employer.setPassword(passwordEncoder.encode(employer.getPassword()));
 			employer.setRole(Role.EMPLOYER);
 			return employerRepository.save(employer);
 		}

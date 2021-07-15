@@ -10,7 +10,7 @@ import { handleGetFavoriteJobs } from '../../redux/actions/candidateActions';
 const LoginPage = (props) => {
 
     const [credentials, setCredentials] = useState({
-        email: '',
+        username: '',
         password: '',
     });
 
@@ -55,7 +55,7 @@ const LoginPage = (props) => {
 
                         <h2 className="card-title" style={{ fontWeight: 800 }}>HRMS Giriş</h2>
                         <p className="fw-normal text-muted">Hızlıca iş aramaya başla</p>
-                        <Input type="text" placeholder="E-posta" name="email" onChange={handleChange} />
+                        <Input type="text" placeholder="Kullanıcı Adı" name="username" onChange={handleChange} />
                         <Input type="password" placeholder="Şifre" name="password" onChange={handleChange} />
 
 

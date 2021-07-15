@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.aberimen.hrms.error.GenericNotFoundException;
@@ -20,12 +21,14 @@ public class CandidateService {
 
 	private CandidateRepository candidateRepository;
 	private JobPostingService jobPostingService;
+	private PasswordEncoder passwordEncoder; // SecurityConfig sınıfında BCrypt için bean tanımlamıştık 
 
 	public void save(Candidate candidate) {
 		Resume emptyResume = new Resume();
-		candidate.setEnabled(false); // email doğrulaması ile hesabını açtırması gerek
+		candidate.setEmailVerified(false); // email doğrulaması ile hesabını açtırması gerek
 		candidate.setRole(Role.CANDIDATE);
 		candidate.setResume(emptyResume);
+		candidate.setPassword(passwordEncoder.encode(candidate.getPassword()));
 		candidateRepository.save(candidate);
 	}
 

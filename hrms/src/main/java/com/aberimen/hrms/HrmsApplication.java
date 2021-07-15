@@ -14,12 +14,10 @@ import com.aberimen.hrms.common.department.Department;
 import com.aberimen.hrms.common.department.DepartmentRepository;
 import com.aberimen.hrms.common.language.Language;
 import com.aberimen.hrms.common.language.LanguageRepository;
-import com.aberimen.hrms.common.language.LanguageService;
 import com.aberimen.hrms.common.location.Location;
 import com.aberimen.hrms.common.location.LocationRepository;
 import com.aberimen.hrms.common.university.University;
 import com.aberimen.hrms.common.university.UniversityRepository;
-import com.aberimen.hrms.common.university.UniversityService;
 import com.aberimen.hrms.employer.Employer;
 import com.aberimen.hrms.employer.EmployerService;
 import com.aberimen.hrms.jobposition.JobPosition;
@@ -81,6 +79,7 @@ public class HrmsApplication {
 
 				// init employers
 				Employer employer = new Employer();
+				employer.setUsername("firma"+i);
 				employer.setCompany("Firma " + i);
 				employer.setWebsite("www.firma" + i + ".com");
 				employer.setEmail("info@firma" + i + ".com");
@@ -110,6 +109,8 @@ public class HrmsApplication {
 			resumeRepository.save(resume);
 
 			Candidate candidate = new Candidate();
+			
+			candidate.setUsername("aberimen");
 			candidate.setName("Abdurrahman");
 			candidate.setLastName("Berimen");
 			candidate.setEmail("info@gmail.com");
