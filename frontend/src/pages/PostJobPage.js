@@ -7,16 +7,18 @@ import Select from '../components/Select';
 import { getAllJobPositions } from '../api/jobPositionApi';
 import { createJobPosting } from '../api/jobPostingApi';
 import TextArea from '../components/TextArea';
+import { useSelector } from 'react-redux';
 const PostJobPage = () => {
 
     const [locations, setLocations] = useState([]);
     const [jobPositions, setJobPositions] = useState([]);
-    const [jobPosting, setJobPosting] = useState({ employer: { id: 1 } }); //test olarak idsi 1 olan iş veren
+
+    const { id: employerId } = useSelector(store => store.auth.user);
 
     const formik = useFormik({
         initialValues: {
-            jobPosition: "",
-            location: "",
+            jobPositionId: "",
+            locationId: "",
             employmentType: "",
             workRemotely: "",
             jobDescription: "",
@@ -28,31 +30,19 @@ const PostJobPage = () => {
         },
         validationSchema:
             Yup.object({
-                jobPosition: Yup.string().required('İş Pozisyonu boş bırakılamaz'),
-                location: Yup.string().required('Lokasyon boş bırakılamaz'),
+                jobPositionId: Yup.string().required('İş Pozisyonu boş bırakılamaz'),
+                locationId: Yup.string().required('Lokasyon boş bırakılamaz'),
                 jobDescription: Yup.string().required('İş Tanımı alanı boş bırakılamaz'),
                 openPositions: Yup.string().required('Açık Pozisyon Sayısı boş bırakılamaz'),
-
             }),
 
         onSubmit: (values, { resetForm, setSubmitting }) => {
-            setJobPosting({
-                ...jobPosting,
-                ...values,
-                location: { id: values.location },
-                jobPosition: { id: values.jobPosition }
-            });
-            postJob();
-            setSubmitting(false);
-            alert(JSON.stringify(jobPosting));
-
+            postJob(values);
         }
-
 
     });
 
     const { handleSubmit, handleChange, handleBlur, values, touched, errors, isSubmitting } = formik;
-
 
     useEffect(() => {
         loadLocations();
@@ -77,10 +67,12 @@ const PostJobPage = () => {
         }
     }
 
-    const postJob = async () => {
+    const postJob = async (jobPosting) => {
         try {
-            const result = await createJobPosting(jobPosting);
-            alert(JSON.stringify(result.data));
+            const result = await createJobPosting({
+                ...jobPosting,
+                employerId
+            });
         } catch (error) { }
     }
 
@@ -95,21 +87,21 @@ const PostJobPage = () => {
                     <Select
                         label="İş Pozisyonu *"
                         onBlur={handleBlur}
-                        name="jobPosition"
+                        name="jobPositionId"
                         value={values.jobPosition}
                         options={jobPositions.map(j => ({ value: j.id, label: j.positionName }))}
                         onChange={handleChange}
-                        error={touched.jobPosition && errors.jobPosition}
+                        error={touched.jobPositionId && errors.jobPositionId}
                     />
 
                     <Select
                         label="Lokasyon *"
-                        name="location"
+                        name="locationId"
                         value={values.location}
                         options={locations.map(l => ({ value: l.id, label: l.city }))}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        error={touched.location && errors.location}
+                        error={touched.locationId && errors.locationId}
                     />
 
                     <Select
@@ -131,8 +123,8 @@ const PostJobPage = () => {
                         name="workRemotely"
                         value={values.workRemotely}
                         options={[
-                            { value: "True", label: "Evet" },
-                            { value: "False", label: "Hayır" }
+                            { value: "true", label: "Evet" },
+                            { value: "false", label: "Hayır" }
                         ]}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -191,7 +183,7 @@ const PostJobPage = () => {
                         error={touched.deadline && errors.deadline}
                         id="deadline" />
 
-                    <button className="btn btn-primary btn-apply" type="submit" name="submit" disabled={isSubmitting} > Gönder </button>
+                    <button className="btn btn-primary btn-apply" type="submit" name="submit"  > Gönder </button>
                 </form>
             </div >
         </div>

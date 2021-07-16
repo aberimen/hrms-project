@@ -13,7 +13,6 @@ export const loginHandler = credentials => {
         const result = await login(credentials);
         await dispatch(loginSuccess(result.data));
         setAuthorizationToken(result.data.token);
-        console.log(result.data.token);
         return result;
     }
 };

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const NavItem = ({ name, active, onClick, to }) => {
 
-    const isActive = active === name;
+    const isActive = active === to;
 
     return (
         <li className="nav-item" onClick={onClick}>

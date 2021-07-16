@@ -18,13 +18,13 @@ const Footer = () => {
                         </div>
 
                         <div className="col-md-3 col-lg-2 col-xl-2 mx-auto align-self-center ">
-                            <a className="text-reset" href="https://github.com/aberimen/" target="_blank">
+                            <a className="text-reset" href="https://github.com/aberimen/" target="_blank" rel="noreferrer">
                                 <FaGithub className="fs-2" />
                             </a>
-                            <a className="text-reset" href="https://instagram.com/aberimen/" target="_blank">
+                            <a className="text-reset" href="https://instagram.com/aberimen/" target="_blank" rel="noreferrer">
                                 <FaInstagram className="fs-2 mx-2" />
                             </a>
-                            <a className="text-reset" href="https://linkedin.com/in/aberimen/" target="_blank">
+                            <a className="text-reset" href="https://linkedin.com/in/aberimen/" target="_blank" rel="noreferrer">
                                 <FaLinkedin className="fs-2" />
                             </a>
 
