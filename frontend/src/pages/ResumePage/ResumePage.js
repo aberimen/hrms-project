@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import './ResumePage.scss';
-import _ from 'lodash';
 import defaultProfileImage from '../../assets/user-avatar.png';
 import ResumeSummarySection from '../../components/ResumeSections/ResumeSummarySection';
 import ResumeEducationDetailsSection from '../../components/ResumeSections/ResumeEducationDetailsSection';
