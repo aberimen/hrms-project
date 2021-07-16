@@ -2,8 +2,10 @@ package com.aberimen.hrms.jobposting;
 
 import javax.validation.Valid;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aberimen.hrms.jobposting.dto.JobPostingDTO;
 import com.aberimen.hrms.jobposting.dto.JobPostingResponseDTO;
 import com.aberimen.hrms.utils.GenericResponse;
 
@@ -19,14 +22,18 @@ import com.aberimen.hrms.utils.GenericResponse;
 public class JobPostingController {
 
 	private JobPostingService jobPostingService;
+	private ModelMapper modelMapper;
 
-	public JobPostingController(JobPostingService jobPostingService) {
+	public JobPostingController(JobPostingService jobPostingService, ModelMapper modelMapper) {
 		super();
 		this.jobPostingService = jobPostingService;
+		this.modelMapper = modelMapper;
 	}
 
 	@PostMapping("/job-postings")
-	public GenericResponse createJobPosting(@Valid @RequestBody JobPosting jobPosting) {
+	@PreAuthorize("hasRole('EMPLOYER')")
+	public GenericResponse createJobPosting(@Valid @RequestBody JobPostingDTO jobPostingDto) {
+		JobPosting jobPosting = modelMapper.map(jobPostingDto, JobPosting.class);
 		return jobPostingService.createJobPosting(jobPosting);
 	}
 
