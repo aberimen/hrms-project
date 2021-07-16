@@ -5,11 +5,15 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotEmpty;
 
 import com.aberimen.hrms.jobposting.EmploymentType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
 @Data
 public class JobPostingDTO {
+	
+	@JsonIgnore
+	private long id;
 	
 	private int jobPositionId; 
 	
