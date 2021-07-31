@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 
@@ -24,18 +23,12 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotEmpty
-	@Column(nullable = false,unique = true)
-	private String username;
-	
-	@NotEmpty
 	@Column(nullable = false, unique = true)
 	private String email;
 
 	@Column(nullable = false)
 	private boolean emailVerified;
 	
-	@NotEmpty
 	@Column(nullable = false)
 	private String password;
 	

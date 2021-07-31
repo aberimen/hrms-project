@@ -2,7 +2,7 @@ import React from 'react';
 
 const ValidationErrorsMessage = ({ errors = [] }) => {
     return (
-        <ul>
+        <ul className="mt-4">
             {errors.map(error => 
                 <li key={error} className="text-danger">
                     {error}

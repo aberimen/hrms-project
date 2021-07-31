@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({ error, id, onChange, name, value, type, label, placeholder, className, onBlur }) => {
+const Input = ({ error, id, onChange, name, value, type, label, placeholder, className, onBlur, ...rest }) => {
 
     if (error) {
         className += ' is-invalid';
@@ -31,6 +31,7 @@ const Input = ({ error, id, onChange, name, value, type, label, placeholder, cla
                     placeholder={placeholder}
                     onChange={onChange}
                     onBlur={onBlur}
+                    {...rest}
                 />
 
                 {isFormCheck && (<label className="form-label-check" htmlFor={id}>{label}</label>)}

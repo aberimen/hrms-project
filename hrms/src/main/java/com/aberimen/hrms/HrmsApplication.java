@@ -8,8 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.aberimen.hrms.candidate.Candidate;
 import com.aberimen.hrms.candidate.CandidateService;
+import com.aberimen.hrms.candidate.dto.CandidateRegisterRequest;
 import com.aberimen.hrms.common.department.Department;
 import com.aberimen.hrms.common.department.DepartmentRepository;
 import com.aberimen.hrms.common.language.Language;
@@ -79,7 +79,6 @@ public class HrmsApplication {
 
 				// init employers
 				Employer employer = new Employer();
-				employer.setUsername("firma"+i);
 				employer.setCompany("Firma " + i);
 				employer.setWebsite("www.firma" + i + ".com");
 				employer.setEmail("info@firma" + i + ".com");
@@ -108,9 +107,8 @@ public class HrmsApplication {
 			resume.setId(1);
 			resumeRepository.save(resume);
 
-			Candidate candidate = new Candidate();
+			CandidateRegisterRequest candidate = new CandidateRegisterRequest();
 			
-			candidate.setUsername("aberimen");
 			candidate.setName("Abdurrahman");
 			candidate.setLastName("Berimen");
 			candidate.setEmail("info@gmail.com");

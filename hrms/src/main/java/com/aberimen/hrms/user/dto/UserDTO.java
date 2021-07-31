@@ -16,7 +16,7 @@ public class UserDTO {
 	
 	private String email;
 
-	private boolean enabled;
+	private boolean emailVerified;
 	
 	private Role role;
 	
@@ -24,7 +24,7 @@ public class UserDTO {
 		setId(user.getId());
 		setEmail(user.getEmail());
 		setRole(user.getRole());
-		setEnabled(user.isEmailVerified());
+		setEmailVerified(user.isEmailVerified());
 	}
 
 }
