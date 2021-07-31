@@ -2,7 +2,6 @@ package com.aberimen.hrms.resume;
 
 import javax.validation.Valid;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +26,7 @@ import com.aberimen.hrms.resume.dto.SummaryDTO;
 import com.aberimen.hrms.technicalskill.TechnicalSkill;
 import com.aberimen.hrms.technicalskill.TechnicalSkillRequestDTO;
 import com.aberimen.hrms.utils.GenericResponse;
+import com.aberimen.hrms.utils.Mapper;
 
 @RestController
 @RequestMapping("/api/1.0")
@@ -34,9 +34,6 @@ public class ResumeController {
 
 	@Autowired
 	ResumeService resumeService;
-
-	@Autowired
-	ModelMapper mapper;
 
 	@GetMapping("/resumes/{resumeId}")
 	public Resume getCandidateResume(@PathVariable long resumeId) {
@@ -46,14 +43,14 @@ public class ResumeController {
 
 	@PostMapping("/resumes/education-details")
 	public Resume createEducation(@RequestBody EducationDTO educationDTO, @RequestParam long resumeId) {
-		Education education = mapper.map(educationDTO, Education.class);
+		Education education = Mapper.getInstance().map(educationDTO, Education.class);
 		return resumeService.saveEducation(education, resumeId);
 	}
 
 	@PostMapping("/resumes/experiences")
 	public GenericResponse createExperience(@RequestBody @Valid ExperienceRequestDTO experienceRequestDTO,
 			@RequestParam long resumeId) {
-		Experience experience = mapper.map(experienceRequestDTO, Experience.class);
+		Experience experience = Mapper.getInstance().map(experienceRequestDTO, Experience.class);
 		resumeService.saveExperience(experience, resumeId);
 		return new GenericResponse("Deneyim bilgisi eklendi.");
 	}
@@ -61,7 +58,7 @@ public class ResumeController {
 	@PostMapping("/resumes/language-skills")
 	public GenericResponse createLanguageSkill(@RequestBody LanguageSkillRequestDTO languageSkillRequestDTO,
 			@RequestParam long resumeId) {
-		LanguageSkill languageSkill = mapper.map(languageSkillRequestDTO, LanguageSkill.class);
+		LanguageSkill languageSkill = Mapper.getInstance().map(languageSkillRequestDTO, LanguageSkill.class);
 		resumeService.saveLanguageSkill(languageSkill, resumeId);
 		return new GenericResponse("Dil bilgisi eklendi.");
 	}
@@ -69,7 +66,7 @@ public class ResumeController {
 	@PostMapping("/resumes/technical-skills")
 	public GenericResponse createTechnicalSkill(@RequestBody TechnicalSkillRequestDTO technicalSkillRequestDTO,
 			@RequestParam long resumeId) {
-		TechnicalSkill technicalSkill = mapper.map(technicalSkillRequestDTO, TechnicalSkill.class);
+		TechnicalSkill technicalSkill = Mapper.getInstance().map(technicalSkillRequestDTO, TechnicalSkill.class);
 		resumeService.saveTechnicalSkill(technicalSkill, resumeId);
 		return new GenericResponse("Teknik bilgisi eklendi.");
 	}
@@ -99,7 +96,7 @@ public class ResumeController {
 	
 	@PutMapping("/resumes/education-details")
 	public Resume updateEducation(@RequestBody EducationDTO educationDTO, @RequestParam long resumeId) {
-		Education education = mapper.map(educationDTO, Education.class);
+		Education education = Mapper.getInstance().map(educationDTO, Education.class);
 		return resumeService.saveEducation(education, resumeId);
 	}
 
