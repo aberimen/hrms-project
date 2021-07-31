@@ -1,9 +1,5 @@
 import axios from "axios";
 
-export const registerCandidate = candidate => {
-    return axios.post("/api/1.0/candidates", candidate);
-};
-
 export const getAllCandidates = () => {
     return axios.post("/api/1.0/candidates");
 };
@@ -22,4 +18,8 @@ export const addToFavoriteJobs = (candidateId, jobId) => {
 
 export const removeFromFavoriteJobs = (candidateId, jobId) => {
     return axios.delete(`/api/1.0/candidates/favorite-jobs/${candidateId}/${jobId}`);
+};
+
+export const updateCandidate = (candidateId, updatedCandidate)=> {
+    return axios.put(`/api/1.0/candidates/${candidateId}`,updatedCandidate);
 };

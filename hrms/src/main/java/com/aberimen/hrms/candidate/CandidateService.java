@@ -7,11 +7,14 @@ import java.util.Set;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.aberimen.hrms.candidate.dto.CandidateRegisterRequest;
+import com.aberimen.hrms.candidate.dto.UpdatedCandidate;
 import com.aberimen.hrms.error.GenericNotFoundException;
 import com.aberimen.hrms.jobposting.JobPosting;
 import com.aberimen.hrms.jobposting.JobPostingService;
 import com.aberimen.hrms.resume.Resume;
 import com.aberimen.hrms.user.Role;
+import com.aberimen.hrms.utils.Mapper;
 
 import lombok.AllArgsConstructor;
 
@@ -23,12 +26,15 @@ public class CandidateService {
 	private JobPostingService jobPostingService;
 	private PasswordEncoder passwordEncoder; // SecurityConfig sınıfında BCrypt için bean tanımlamıştık 
 
-	public void save(Candidate candidate) {
+	public void save(CandidateRegisterRequest candidateReq) {
+		Candidate candidate = Mapper.getInstance().map(candidateReq, Candidate.class);
+		
 		Resume emptyResume = new Resume();
 		candidate.setEmailVerified(false); // email doğrulaması ile hesabını açtırması gerek
 		candidate.setRole(Role.CANDIDATE);
 		candidate.setResume(emptyResume);
 		candidate.setPassword(passwordEncoder.encode(candidate.getPassword()));
+		
 		candidateRepository.save(candidate);
 	}
 
@@ -78,5 +84,16 @@ public class CandidateService {
 		Candidate candidate = getCandidateById(candidateId);
 		return candidate.getFavoriteJobs();
 	}
+
+	public Candidate updateCandidate(long id,UpdatedCandidate updatedCandidate) {
+		Candidate candidateInDB = getCandidateById(id);
+		candidateInDB.setEmail(updatedCandidate.getEmail());
+		candidateInDB.setName(updatedCandidate.getName());
+		candidateInDB.setLastName(updatedCandidate.getLastName());
+		
+		return candidateRepository.save(candidateInDB);
+	}
+	
+
 
 }

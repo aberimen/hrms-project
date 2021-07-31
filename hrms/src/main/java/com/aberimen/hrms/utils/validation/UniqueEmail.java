@@ -9,8 +9,8 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-@Constraint(validatedBy = { UniqueEmailValidator.class })
+@Target({ ElementType.FIELD, ElementType.TYPE })
+@Constraint(validatedBy = { UniqueEmailValidator.class, UniqueUpdatedEmailValidator.class })
 public @interface UniqueEmail {
 
 	String message() default "Girilen email zaten kayıtlı";

@@ -1,5 +1,6 @@
-import { addToFavoriteJobs, getFavoriteJobs, removeFromFavoriteJobs } from "../../api/candidateApi";
+import { addToFavoriteJobs, getFavoriteJobs, removeFromFavoriteJobs, updateCandidate } from "../../api/candidateApi";
 import * as ACTIONS from '../constants/candidateActionTypes';
+import { UPDATE_SUCCESS } from "../constants/UserActionTypes";
 
 
 export const getFavoriteJobsSuccess = (favoriteJobs) => {
@@ -23,8 +24,12 @@ export const removeFromFavoriteSuccess = (job) => {
     };
 };
 
-
-
+export const updateCandidateSuccess = (candidate) => {
+    return {
+        type: UPDATE_SUCCESS,
+        payload: candidate
+    };
+};
 
 //handlers
 
