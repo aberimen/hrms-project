@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Input from '../components/Input';
-import { useHistory } from 'react-router-dom';
 import { registerEmployer } from '../api/employerApi';
-import { registerCandidate } from '../api/candidateApi';
+import { registerCandidate } from '../api/authApi';
+import ValidationErrorsMessage from '../components/ValidationErrorsMessage';
 
 const SignupPage = (props) => {
 
-    const {history} = props;
+    const [validationErrors, setValidationErrors] = useState({});
+    const { history } = props;
     const isPageForEmployers = history.location.pathname === '/employer';
 
     const employerRegisterFormInitialValues = {
@@ -73,7 +74,9 @@ const SignupPage = (props) => {
     const saveCandidate = async (candidate) => {
         try {
             await registerCandidate(candidate);
-        } catch (error) { }
+        } catch (error) {
+                setValidationErrors(error.response.data.validationErrors);
+            }
     };
 
 
@@ -185,7 +188,7 @@ const SignupPage = (props) => {
 
                     {!isPageForEmployers && <Input
                         label="Doğum Yılı *"
-                        type="date"
+                        maxlength="4"
                         name="yearOfBirth"
                         value={values.yearOfBirth}
                         onBlur={handleBlur}
@@ -195,6 +198,8 @@ const SignupPage = (props) => {
 
                     <button className="btn btn-primary btn-apply" type="submit" name="submit" disabled={false} > Kayıt Ol </button>
                 </form>
+
+                <ValidationErrorsMessage errors={validationErrors && ["girdiğiniz bilgileri kontrol ediniz"]} />
             </div >
         </div >
     );
