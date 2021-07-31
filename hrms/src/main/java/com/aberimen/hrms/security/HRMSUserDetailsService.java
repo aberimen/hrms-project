@@ -17,8 +17,8 @@ public class HRMSUserDetailsService implements UserDetailsService{
 	
 	
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User userInDB = userService.findByUsername(username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		User userInDB = userService.findByEmail(email);
 		if(userInDB == null) {
 			throw new UsernameNotFoundException("User not found");
 		}

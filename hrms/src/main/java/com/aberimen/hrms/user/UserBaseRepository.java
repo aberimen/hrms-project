@@ -10,6 +10,4 @@ public interface UserBaseRepository<T extends User> extends JpaRepository<T, Lon
 
 	Optional<T> findByEmail(String email);	
 	
-	Optional<T> findByUsername(String username);	
-
 }

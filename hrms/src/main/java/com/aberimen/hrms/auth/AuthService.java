@@ -30,7 +30,7 @@ public class AuthService {
 
 		try {
 			Authentication authenticate = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+					new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
 			HRMSUserDetails userDetails = (HRMSUserDetails) authenticate.getPrincipal();
 			user = userDetails.getUser();
 
@@ -38,7 +38,7 @@ public class AuthService {
 			throw new UnauthorizedException("Kullanıcı adı veya şifre yanlış " + e);
 		}
 
-		String token = jwtUtil.generateToken(user.getUsername());
+		String token = jwtUtil.generateToken(user.getEmail());
 		Role userRole = user.getRole();
 
 		switch (userRole) {

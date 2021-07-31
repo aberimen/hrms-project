@@ -41,8 +41,8 @@ public class UserService {
 		return "email doğrulanamadı";
 	}
 
-	public User findByUsername(String username) {
-		Optional<User> inDB = userRepository.findByUsername(username);
+	public User findByEmail(String email) {
+		Optional<User> inDB = userRepository.findByEmail(email);
 
 		if (inDB.isPresent()) {
 			return inDB.get();
