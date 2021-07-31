@@ -10,6 +10,7 @@ import org.springframework.boot.web.error.ErrorAttributeOptions.Include;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
@@ -30,23 +31,27 @@ public class ErrorHandler implements ErrorController {
 		int status = (int) errorAttributes.get("status");
 		String message = (String) errorAttributes.get("message");
 		String path = (String) errorAttributes.get("path");
-		
-		
+
 		ApiErrorResponse errorResponse = new ApiErrorResponse(status, message, path);
-		
-		if(errorAttributes.containsKey("errors")) { // validasyon hatalarını içeriyorsa
-			
-			List<FieldError> errors = (List<FieldError>) errorAttributes.get("errors");
+
+		if (errorAttributes.containsKey("errors")) { // validasyon hatalarını içeriyorsa
+
+			List<ObjectError> errors = (List<ObjectError>) errorAttributes.get("errors");
 			Map<String, String> validationErrors = new HashMap<>();
-			
-			for (FieldError fieldError : errors) {
-				validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+
+			for (ObjectError error : errors) {
+				if (error instanceof FieldError) {
+					FieldError fieldError = (FieldError) error;
+					validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+
+				}
+				validationErrors.put(error.getObjectName(), error.getDefaultMessage());
+				error.getDefaultMessage();
 			}
-			
+
 			errorResponse.setValidationErrors(validationErrors);
 		}
-		
-		
+
 		return errorResponse;
 	}
 
