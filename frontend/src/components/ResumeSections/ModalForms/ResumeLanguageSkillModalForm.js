@@ -5,10 +5,13 @@ import Modal from '../../Modal';
 import Select from '../../Select';
 import { getLanguages } from '../../../api/commonApi';
 import { addLanguageSkill } from '../../../api/resumeApi';
+import { useSelector } from 'react-redux';
 
-const ResumeLanguageSkillModalForm = ({ modalVisible, onModalClickCancel }) => {
+const ResumeLanguageSkillModalForm = ({ modalVisible, setModalVisible }) => {
 
     const [languages, setLanguages] = useState([]);
+
+    const { id: resumeId } = useSelector(store => store.resume);
 
     const formik = useFormik({
         initialValues: {
@@ -24,7 +27,8 @@ const ResumeLanguageSkillModalForm = ({ modalVisible, onModalClickCancel }) => {
 
         onSubmit: (values, { resetForm, setSubmitting }) => {
             saveLanguageSkill(values);
-            // resetForm();
+            setModalVisible(false);
+            resetForm();
         }
     });
 
@@ -43,7 +47,6 @@ const ResumeLanguageSkillModalForm = ({ modalVisible, onModalClickCancel }) => {
 
 
     const saveLanguageSkill = async (languageSkill) => {
-        const resumeId = 1; //test
         try {
             await addLanguageSkill(languageSkill, resumeId);
         } catch (error) { }
@@ -53,7 +56,7 @@ const ResumeLanguageSkillModalForm = ({ modalVisible, onModalClickCancel }) => {
         <form onSubmit={handleSubmit}>
             <Modal
                 visible={modalVisible}
-                onClickCancel={onModalClickCancel}
+                onClickCancel={() => { setModalVisible(false) }}
                 // saveButtonDisabled={isSubmitting}
                 title="Yabancı Dil Bilgisi Ekle"
             >

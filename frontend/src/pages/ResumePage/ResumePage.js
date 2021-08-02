@@ -30,7 +30,6 @@ const ResumePage = () => {
 
 
     const resume = useSelector(state => state.resume);
-    console.log(resume);
 
 
     return (
@@ -53,11 +52,11 @@ const ResumePage = () => {
 
                  <ResumeEducationDetailsSection resume={resume} />
 
-               {/* <ResumeExperiencesSection resume={resume} />
+               {/* <ResumeExperiencesSection resume={resume} /> */}
 
                 <ResumeLanguageSkillsSection resume={resume} />
 
-                <ResumeTechnicalSkillsSection resume={resume} />
+                {/* <ResumeTechnicalSkillsSection resume={resume} />
 
                 <ResumeSocialAccountsSection resume={resume} /> */}
 
