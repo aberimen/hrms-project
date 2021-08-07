@@ -10,10 +10,16 @@ export const loginSuccess = (user) => {
 
 export const loginHandler = credentials => {
     return async dispatch => {
-        const result = await login(credentials);
-        await dispatch(loginSuccess(result.data));
-        setAuthorizationToken(result.data.token);
-        return result;
+        try {
+            const result = await login(credentials);
+            await dispatch(loginSuccess(result.data));
+            localStorage.setItem('user', JSON.stringify({
+                ...result.data,
+                isLoggedIn: true
+            }));
+            setAuthorizationToken(result.data.token);
+            return result;
+        } catch (err) { }
     }
 };
 

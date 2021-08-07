@@ -1,6 +1,13 @@
+import { setAuthorizationToken } from "../../api/authApi";
 import { LOGIN_SUCCESS, UPDATE_SUCCESS } from "../constants/UserActionTypes";
 
-const defaultState = {
+const user = JSON.parse(localStorage.getItem('user'));
+
+if(user){
+    console.log(user);
+    setAuthorizationToken(user.token);
+}
+const defaultState = user || {
     isLoggedIn: false,
     user: {},
 };
