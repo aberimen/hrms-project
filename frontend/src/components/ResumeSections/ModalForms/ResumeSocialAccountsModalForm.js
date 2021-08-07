@@ -3,13 +3,14 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Modal from '../../Modal';
 import Input from '../../Input';
-import { addSocialAccounts } from '../../../api/resumeApi';
-import { useSelector } from 'react-redux';
+import { addSocialAccounts, updateSocialAccounts } from '../../../api/resumeApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateResumeSuccess } from '../../../redux/actions/resumeActions';
 
-const ResumeSocialAccountsModalForm = ({githubAccount, linkedinAccount, resume, isUpdateMode, modalVisible, setModalVisible }) => {
+const ResumeSocialAccountsModalForm = ({ githubAccount, linkedinAccount, isUpdateMode, modalVisible, setModalVisible }) => {
 
-    console.log(githubAccount);
     const { id: resumeId } = useSelector(store => store.resume);
+    const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
@@ -25,19 +26,22 @@ const ResumeSocialAccountsModalForm = ({githubAccount, linkedinAccount, resume, 
 
         onSubmit: (values, { resetForm, setSubmitting }) => {
             saveSocialAccount(values);
-            // resetForm();
+            setModalVisible(false);
+            resetForm();
         }
     });
 
     const { handleSubmit, handleChange, handleBlur, values, touched, errors, isSubmitting, setTouched } = formik;
 
-    useEffect(() => {
-    }, []);
-
-
     const saveSocialAccount = async (socialAccounts) => {
         try {
-            await addSocialAccounts(socialAccounts, resumeId);
+            let result;
+            if (!isUpdateMode) {
+                result = await addSocialAccounts(socialAccounts, resumeId);
+            } else {
+                result = await updateSocialAccounts(socialAccounts, resumeId);
+            }
+            dispatch(updateResumeSuccess(result.data));
         } catch (error) { }
     };
 

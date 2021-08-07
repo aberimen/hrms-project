@@ -82,10 +82,9 @@ public class ResumeController {
 	}
 
 	@PostMapping("/resumes/social-accounts")
-	public GenericResponse createSocialAccounts(@RequestBody SocialAccountsDTO socialAccountsDTO,
+	public Resume createSocialAccounts(@RequestBody SocialAccountsDTO socialAccountsDTO,
 			@RequestParam long resumeId) {
-		resumeService.saveSocialAccounts(socialAccountsDTO, resumeId);
-		return new GenericResponse("Sosyal medya bilgileri eklendi.");
+		return resumeService.saveSocialAccounts(socialAccountsDTO, resumeId);
 	}
 
 	// TODO update delete methods
@@ -98,6 +97,12 @@ public class ResumeController {
 	public Resume updateEducation(@RequestBody EducationDTO educationDTO, @RequestParam long resumeId) {
 		Education education = Mapper.getInstance().map(educationDTO, Education.class);
 		return resumeService.saveEducation(education, resumeId);
+	}
+	
+	@PutMapping("/resumes/social-accounts")
+	public Resume updateSocialAccounts(@RequestBody SocialAccountsDTO socialAccountsDTO,
+			@RequestParam long resumeId) {
+		return resumeService.saveSocialAccounts(socialAccountsDTO, resumeId);
 	}
 
 	
