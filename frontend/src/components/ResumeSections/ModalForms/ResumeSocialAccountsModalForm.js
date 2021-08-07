@@ -4,15 +4,20 @@ import * as Yup from 'yup';
 import Modal from '../../Modal';
 import Input from '../../Input';
 import { addSocialAccounts } from '../../../api/resumeApi';
+import { useSelector } from 'react-redux';
 
-const ResumeSocialAccountsModalForm = ({ modalVisible, onModalClickCancel }) => {
+const ResumeSocialAccountsModalForm = ({githubAccount, linkedinAccount, resume, isUpdateMode, modalVisible, setModalVisible }) => {
+
+    console.log(githubAccount);
+    const { id: resumeId } = useSelector(store => store.resume);
 
     const formik = useFormik({
         initialValues: {
-            githubAccount: '',
-            linkedinAccount: '',
+            githubAccount: githubAccount || '',
+            linkedinAccount: linkedinAccount || '',
         },
 
+        enableReinitialize: true,
         validationSchema:
             Yup.object({
 
@@ -31,7 +36,6 @@ const ResumeSocialAccountsModalForm = ({ modalVisible, onModalClickCancel }) => 
 
 
     const saveSocialAccount = async (socialAccounts) => {
-        const resumeId = 1; //test
         try {
             await addSocialAccounts(socialAccounts, resumeId);
         } catch (error) { }
@@ -41,7 +45,7 @@ const ResumeSocialAccountsModalForm = ({ modalVisible, onModalClickCancel }) => 
         <form onSubmit={handleSubmit}>
             <Modal
                 visible={modalVisible}
-                onClickCancel={onModalClickCancel}
+                onClickCancel={() => { setModalVisible(false) }}
                 // saveButtonDisabled={isSubmitting}
                 title="Sosyal Hesaplar Bilgisi Ekle"
             >

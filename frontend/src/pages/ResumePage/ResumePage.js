@@ -56,9 +56,9 @@ const ResumePage = () => {
 
                 <ResumeLanguageSkillsSection resume={resume} />
 
-                {/* <ResumeTechnicalSkillsSection resume={resume} />
+                {/* <ResumeTechnicalSkillsSection resume={resume} />*/}
 
-                <ResumeSocialAccountsSection resume={resume} /> */}
+                <ResumeSocialAccountsSection resume={resume} /> 
 
             </div>
         </div >
