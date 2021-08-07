@@ -108,12 +108,12 @@ public class ResumeService {
 	   return inDB.getSummary();
 	}
 
-	public void saveSocialAccounts(SocialAccountsDTO socialAccountsDTO, long resumeId) {
+	public Resume saveSocialAccounts(SocialAccountsDTO socialAccountsDTO, long resumeId) {
 		Resume inDB = getResumeById(resumeId);
 		inDB.setGithubAccount(socialAccountsDTO.getGithubAccount());
 		inDB.setLinkedinAccount(socialAccountsDTO.getLinkedinAccount());
 
-		resumeRepository.save(inDB);
+		return resumeRepository.save(inDB);
 	}
 	
 
