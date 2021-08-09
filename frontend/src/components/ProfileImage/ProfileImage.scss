@@ -1,0 +1,26 @@
+.avatar {
+  display: flex;
+
+  .edit-img {
+    align-self: center;
+    opacity: 0;
+  }
+
+  &:hover .edit-img {
+    opacity: 1;
+  }
+  .image {
+    display: inline-block;
+    width: 160px;
+    height: 160px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    overflow: hidden;
+    vertical-align: middle;
+
+    img {
+      width: 100%;
+      border-style: none;
+    }
+  }
+}

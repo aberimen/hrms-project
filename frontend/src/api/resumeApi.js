@@ -51,6 +51,10 @@ export const getEducationTypes = () => {
     ];
 };
 
+export const saveImage = (resumeId, file) => {
+    return axios.post(`/api/1.0/resumes/profile-image?resumeId=${resumeId}`, file);
+}
+
 
 //update APIs
 
@@ -81,5 +85,7 @@ export const updateProfileImage = (file, resumeId) => {
 export const updateSocialAccounts = (socialAccounts, resumeId) => {
     return axios.put(`/api/1.0/resumes/social-accounts?resumeId=${resumeId}`, socialAccounts);
 };
+
+
 
 

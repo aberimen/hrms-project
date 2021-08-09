@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import './ResumePage.scss';
-import defaultProfileImage from '../../assets/user-avatar.png';
 import ResumeSummarySection from '../../components/ResumeSections/ResumeSummarySection';
 import ResumeEducationDetailsSection from '../../components/ResumeSections/ResumeEducationDetailsSection';
 import ResumeTechnicalSkillsSection from '../../components/ResumeSections/ResumeTechnicalSkillsSection'
@@ -9,13 +8,14 @@ import ResumeSocialAccountsSection from '../../components/ResumeSections/ResumeS
 import ResumeLanguageSkillsSection from '../../components/ResumeSections/ResumeLanguageSkillsSection';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleGetResume } from '../../redux/actions/resumeActions';
+import ProfileImage from '../../components/ProfileImage/ProfileImage';
 
 
 const ResumePage = () => {
 
     const dispatch = useDispatch();
 
-    const {user} = useSelector(state => state.auth);
+    const { user } = useSelector(state => state.auth);
 
 
     useEffect(() => {
@@ -38,27 +38,26 @@ const ResumePage = () => {
 
             </div>
             <div className="container">
+
                 <section className="profile-abstract">
-                    <div className="avatar">
-                        <img src={defaultProfileImage} />
-                    </div>
+                    <ProfileImage resume={resume} />
 
                     <div className="name">
-                        <h3>Abdurrahman Berimen</h3>
+                        <h3>{user.name} {user.lastName}</h3>
                     </div>
                 </section>
 
                 <ResumeSummarySection resume={resume} />
 
-                 <ResumeEducationDetailsSection resume={resume} />
+                <ResumeEducationDetailsSection resume={resume} />
 
-               {/* <ResumeExperiencesSection resume={resume} /> */}
+                {/* <ResumeExperiencesSection resume={resume} /> */}
 
                 <ResumeLanguageSkillsSection resume={resume} />
 
                 {/* <ResumeTechnicalSkillsSection resume={resume} />*/}
 
-                <ResumeSocialAccountsSection resume={resume} /> 
+                <ResumeSocialAccountsSection resume={resume} />
 
             </div>
         </div >
