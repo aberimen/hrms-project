@@ -1,18 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.scss';
 import NavLink from './NavLink';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutHandler } from '../../redux/actions/authActions';
+import { getCandidateResume } from '../../api/resumeApi';
 
 const Navbar = () => {
 
     const [activePath, setActivePath] = useState();
-
+    const [drowpdownVisible, setDropdownVisible] = useState(false);
     const { pathname } = useLocation();
+    const dropdown = useRef();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setActivePath(pathname);
     }, [pathname]);
+
+    useEffect(() => {
+        document.addEventListener('click', trackDropdown);
+
+        return () => {
+            document.removeEventListener('click', trackDropdown);
+        }
+    }, []);
+
+    const trackDropdown = (e) => {
+        if (!dropdown.current || !dropdown.current.contains(e.target)) {
+            setDropdownVisible(false);
+        }
+    }
 
     const handleClickLink = (e) => {
         e.preventDefault();
@@ -21,6 +39,9 @@ const Navbar = () => {
 
     const { isLoggedIn, user } = useSelector(state => state.auth);
 
+    const onClickLogout = () => {
+        dispatch(logoutHandler());
+    };
 
     return (
         <div className="navbar-area">
@@ -37,7 +58,16 @@ const Navbar = () => {
                         <NavLink name="İş İlanları" active={activePath} onClick={handleClickLink} to="/jobs" />
                         {user.role === 'CANDIDATE' && <NavLink name="CV" active={activePath} onClick={handleClickLink} to="/resume" />}
                         {user.role === 'EMPLOYER' && < NavLink name="İlan Ver" active={activePath} onClick={handleClickLink} to="/post-job" />}
-                        {isLoggedIn && <NavLink name="Hesabım" active={activePath} onClick={handleClickLink} to="/account" />}
+
+                        {isLoggedIn && <li class="nav-item dropdown" ref={dropdown}>
+                            <div className={`nav-link dropdown-toggle ${drowpdownVisible && 'show'}`} role="button" onClick={() => setDropdownVisible(!drowpdownVisible)}>
+                                <img className="rounded-circle" src={user.} width="28" height="28" />
+                            </div>
+                            <ul class={`dropdown-menu ${drowpdownVisible && 'show'}`} aria-labelledby="navbarDropdown">
+                                <li><Link className="dropdown-item" to="/account">Hesabım</Link></li>
+                                <li><Link className="dropdown-item" onClick={onClickLogout}>Çıkış Yap</Link></li>
+                            </ul>
+                        </li>}
                     </ul>
 
                     {!isLoggedIn &&
@@ -46,6 +76,7 @@ const Navbar = () => {
                             <Link className="btn btn-primary my-2 my-sm-0 ms-2" to="/login" >Giriş Yap</Link>
                         </div>
                     }
+
                 </div>
             </nav>
 

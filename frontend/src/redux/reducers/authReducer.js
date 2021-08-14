@@ -1,9 +1,9 @@
 import { setAuthorizationToken } from "../../api/authApi";
-import { LOGIN_SUCCESS, UPDATE_SUCCESS } from "../constants/UserActionTypes";
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS, UPDATE_SUCCESS } from "../constants/UserActionTypes";
 
 const user = JSON.parse(localStorage.getItem('user'));
 
-if(user){
+if (user) {
     console.log(user);
     setAuthorizationToken(user.token);
 }
@@ -19,6 +19,8 @@ const authReducer = (state = defaultState, action) => {
                 isLoggedIn: true,
                 ...action.payload
             };
+        case LOGOUT_SUCCESS:
+            return {...defaultState};
         case UPDATE_SUCCESS:
             return {
                 ...state,
