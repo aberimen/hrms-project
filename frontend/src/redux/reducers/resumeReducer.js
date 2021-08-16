@@ -1,9 +1,11 @@
 import * as ACTIONS from "../constants/resumeActionTypes";
+import defaultProfileImage from '../../assets/user-avatar.png';
 
 const initialState = {
     summary: '',
     educationDetails: [],
-    languageSkills: []
+    languageSkills: [],
+    profileImage: defaultProfileImage
 
 }
 
