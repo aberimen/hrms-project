@@ -1,6 +1,7 @@
 package com.aberimen.hrms.jobposting;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.criteria.Join;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.aberimen.hrms.candidate.Candidate;
 import com.aberimen.hrms.common.location.Location;
 import com.aberimen.hrms.error.GenericNotFoundException;
 import com.aberimen.hrms.jobposition.JobPosition;
@@ -70,6 +72,11 @@ public class JobPostingService {
 
 			return jobOptional.get();
 	}
+	
+	public List<Candidate> getAppliedCandidates(long jobId) {
+		return jobPostingRepository.findAppliedCandidates(jobId);
+		
+	}
 
 
 	public Specification<JobPosting> isActive(Boolean isActive) {
@@ -119,6 +126,8 @@ public class JobPostingService {
 			return cb.equal(join.get("city"), city);
 		};
 	}
+
+	
 
 	
 }

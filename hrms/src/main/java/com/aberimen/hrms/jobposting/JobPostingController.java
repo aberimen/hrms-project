@@ -1,5 +1,7 @@
 package com.aberimen.hrms.jobposting;
 
+import java.util.stream.Stream;
+
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aberimen.hrms.candidate.dto.CandidateDTO;
 import com.aberimen.hrms.jobposting.dto.JobPostingDTO;
 import com.aberimen.hrms.jobposting.dto.JobPostingResponseDTO;
 import com.aberimen.hrms.utils.GenericResponse;
@@ -45,6 +48,12 @@ public class JobPostingController {
 				.getActiveJobPostings(isRemote, min, max, employmentType, location, positionName, pageable)
 				.map(JobPostingResponseDTO::new);
 	}
+	
+	@GetMapping("/applied-candidates/{jobId}")
+	public Stream<CandidateDTO> getAppliedCandidates(@PathVariable long jobId) {
+		return jobPostingService.getAppliedCandidates(jobId).stream().map(CandidateDTO::new);
+	}
+	
 
 	@PostMapping("/job-postings/status/{id}")
 	public GenericResponse changeStatus(@PathVariable long id) {
