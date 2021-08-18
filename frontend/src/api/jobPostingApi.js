@@ -13,3 +13,11 @@ export const changeJobPostingStatus = id => {
     return axios.post(`/api/1.0/job-postings/status/${id}`);
 
 };
+
+export const getEmployerJobs = employerId => {
+    return axios.get(`/api/1.0/employers/${employerId}/job-postings`);
+};
+
+export const getAppliedCandidates = jobId => {
+    return axios.get(`/api/1.0/applied-candidates/${jobId}`);
+};
