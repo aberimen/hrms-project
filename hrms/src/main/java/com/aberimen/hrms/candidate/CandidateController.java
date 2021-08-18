@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aberimen.hrms.candidate.dto.CandidateDTO;
 import com.aberimen.hrms.candidate.dto.UpdatedCandidate;
+import com.aberimen.hrms.jobposting.dto.JobPostingResponseDTO;
 import com.aberimen.hrms.resume.Resume;
 import com.aberimen.hrms.utils.GenericResponse;
 
@@ -71,6 +73,19 @@ public class CandidateController {
 			@Valid @RequestBody UpdatedCandidate updatedCandidate) {
 		Candidate candidate = candidateService.updateCandidate(candidateId, updatedCandidate);
 		return new CandidateDTO(candidate);
+	}
+	
+	@PostMapping("/candidates/{candidateId}/applied-jobs")
+	public GenericResponse applyJob(@PathVariable long candidateId, @PathParam(value = "jobId") long jobId) {
+		candidateService.applyJob(candidateId, jobId);
+		return new GenericResponse("applied success");
+	}
+	
+	@GetMapping("/candidates/{candidateId}/applied-jobs")
+	public List<JobPostingResponseDTO> getAppliedJobs(@PathVariable long candidateId) {
+		return candidateService.getAppliedJobs(candidateId)
+				.stream()
+				.map(JobPostingResponseDTO::new).collect(Collectors.toList());
 	}
 
 }

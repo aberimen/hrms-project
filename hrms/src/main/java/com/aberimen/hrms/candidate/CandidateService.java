@@ -93,6 +93,19 @@ public class CandidateService {
 		
 		return candidateRepository.save(candidateInDB);
 	}
+
+	public void applyJob(long candidateId, long jobId) {
+		Candidate candidate = getCandidateById(candidateId);
+		JobPosting job = jobPostingService.findById(jobId);
+		candidate.getAppliedJobs().add(job);
+		candidateRepository.save(candidate);
+		
+	}
+
+	public List<JobPosting> getAppliedJobs(long candidateId) {
+		Candidate candidate = getCandidateById(candidateId);
+		return candidate.getAppliedJobs();
+	}
 	
 
 
