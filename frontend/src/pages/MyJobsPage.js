@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getAppliedCandidates, getEmployerJobs } from '../api/jobPostingApi';
 
 const MyJobsPage = () => {
@@ -15,12 +16,7 @@ const MyJobsPage = () => {
         } catch (err) { }
     }, []);
 
-    const onClickGetCandidates = async (jobId) => {
-        try {
-            const result = await getAppliedCandidates(jobId);
-            alert(JSON.stringify(result.data))
-        } catch (err) { }
-    };
+
 
     return (
         <div className="my-jobs bg-light" style={{ minHeight: '100vh' }}>
@@ -48,7 +44,7 @@ const MyJobsPage = () => {
                                 <td>{job.jobPosition.positionName}</td>
                                 <td>{new Date(job.createdAt).toLocaleString('tr-TR')}</td>
                                 <td>
-                                    <button className="btn btn-primary" onClick={() => onClickGetCandidates(job.id)}>Başvuruları Gör</button>
+                                    <Link className="btn btn-primary" to={`my-jobs/${job.id}`}>Başvuruları Gör</Link>
                                 </td>
                             </tr>
                         )}
