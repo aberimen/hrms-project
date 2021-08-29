@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAppliedCandidates, getEmployerJobs } from '../api/jobPostingApi';
+import { getEmployerJobs } from '../api/jobPostingApi';
 
 const MyJobsPage = () => {
 

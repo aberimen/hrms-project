@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.aberimen.hrms.candidate.dto.CandidateRegisterRequest;
 import com.aberimen.hrms.candidate.dto.UpdatedCandidate;
+import com.aberimen.hrms.error.BadRequestException;
 import com.aberimen.hrms.error.GenericNotFoundException;
 import com.aberimen.hrms.jobposting.JobPosting;
 import com.aberimen.hrms.jobposting.JobPostingService;
@@ -24,17 +25,17 @@ public class CandidateService {
 
 	private CandidateRepository candidateRepository;
 	private JobPostingService jobPostingService;
-	private PasswordEncoder passwordEncoder; // SecurityConfig sınıfında BCrypt için bean tanımlamıştık 
+	private PasswordEncoder passwordEncoder; // SecurityConfig sınıfında BCrypt için bean tanımlamıştık
 
 	public void save(CandidateRegisterRequest candidateReq) {
 		Candidate candidate = Mapper.getInstance().map(candidateReq, Candidate.class);
-		
+
 		Resume emptyResume = new Resume();
 		candidate.setEmailVerified(false); // email doğrulaması ile hesabını açtırması gerek
 		candidate.setRole(Role.CANDIDATE);
 		candidate.setResume(emptyResume);
 		candidate.setPassword(passwordEncoder.encode(candidate.getPassword()));
-		
+
 		candidateRepository.save(candidate);
 	}
 
@@ -67,16 +68,16 @@ public class CandidateService {
 		JobPosting job = jobPostingService.findById(jobId);
 		candidate.getFavoriteJobs().add(job);
 		candidateRepository.save(candidate);
-		
+
 		return job.getId();
 	}
-	
+
 	public long deleteFavoriteJob(long candidateId, long jobId) {
 		Candidate candidate = getCandidateById(candidateId);
 		JobPosting job = jobPostingService.findById(jobId);
 		candidate.getFavoriteJobs().remove(job);
 		candidateRepository.save(candidate);
-		
+
 		return job.getId();
 	}
 
@@ -85,28 +86,30 @@ public class CandidateService {
 		return candidate.getFavoriteJobs();
 	}
 
-	public Candidate updateCandidate(long id,UpdatedCandidate updatedCandidate) {
+	public Candidate updateCandidate(long id, UpdatedCandidate updatedCandidate) {
 		Candidate candidateInDB = getCandidateById(id);
 		candidateInDB.setEmail(updatedCandidate.getEmail());
 		candidateInDB.setName(updatedCandidate.getName());
 		candidateInDB.setLastName(updatedCandidate.getLastName());
-		
+
 		return candidateRepository.save(candidateInDB);
 	}
 
 	public void applyJob(long candidateId, long jobId) {
 		Candidate candidate = getCandidateById(candidateId);
 		JobPosting job = jobPostingService.findById(jobId);
-		candidate.getAppliedJobs().add(job);
-		candidateRepository.save(candidate);
-		
+		if (!candidate.getAppliedJobs().contains(job)) {
+			candidate.getAppliedJobs().add(job);
+			candidateRepository.save(candidate);
+		} else {
+			throw new BadRequestException("already applied");
+		}
+
 	}
 
 	public List<JobPosting> getAppliedJobs(long candidateId) {
 		Candidate candidate = getCandidateById(candidateId);
 		return candidate.getAppliedJobs();
 	}
-	
-
 
 }
