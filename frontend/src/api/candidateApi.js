@@ -20,6 +20,10 @@ export const removeFromFavoriteJobs = (candidateId, jobId) => {
     return axios.delete(`/api/1.0/candidates/favorite-jobs/${candidateId}/${jobId}`);
 };
 
-export const updateCandidate = (candidateId, updatedCandidate)=> {
-    return axios.put(`/api/1.0/candidates/${candidateId}`,updatedCandidate);
+export const updateCandidate = (candidateId, updatedCandidate) => {
+    return axios.put(`/api/1.0/candidates/${candidateId}`, updatedCandidate);
 };
+
+export const applyJob = (candidateId, jobId) => {
+    return axios.post(`/api/1.0/candidates/${candidateId}/applied-jobs?jobId=${jobId}`)
+}

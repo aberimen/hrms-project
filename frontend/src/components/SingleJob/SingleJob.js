@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { handleAddToFavoriteJobs, handleRemoveFromFavoriteJobs } from '../../redux/actions/candidateActions';
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { FaCity } from 'react-icons/fa';
+import { applyJob } from '../../api/candidateApi';
 
 
 const SingleJob = ({ title, description, tags = [], jobId, location }) => {
@@ -24,6 +25,13 @@ const SingleJob = ({ title, description, tags = [], jobId, location }) => {
             await dispatch(handleRemoveFromFavoriteJobs(user.id, jobId));
         }
     };
+
+    const onClickApplyJob = async () => {
+        try {
+            if (user.role === 'CANDIDATE')
+                await applyJob(user.id, jobId);
+        } catch (err) { }
+    }
 
     return (
         <div className="single-job">
@@ -69,7 +77,7 @@ const SingleJob = ({ title, description, tags = [], jobId, location }) => {
             </div>
 
             <div className="card-submit">
-                <button className="btn btn-primary">Başvur</button>
+                <button className="btn btn-primary" onClick={onClickApplyJob}>Başvur</button>
             </div>
         </div>
     );
