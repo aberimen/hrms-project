@@ -2,14 +2,15 @@ import React, { useRef, useState } from 'react';
 import './ProfileImage.scss';
 import defaultProfileImage from '../../assets/user-avatar.png';
 import EditButton from '../EditButton';
-import { saveImage } from '../../api/resumeApi';
+import { handleUpdateProfileImage } from '../../redux/actions/resumeActions';
+import { useDispatch } from 'react-redux';
 
 const ProfileImage = ({ resume }) => {
 
     const [newImage, setNewImage] = useState();
     const fileInput = useRef();
+    const dispatch = useDispatch();
 
-    console.log(resume);
     const onClickBtn = () => {
         fileInput.current.click();
     };
@@ -29,12 +30,9 @@ const ProfileImage = ({ resume }) => {
     };
 
     const uploadFile = async (file) => {
-        try {
-            const multipartFile = new FormData();
-            multipartFile.append('file', file);
-            await saveImage(resume.id, multipartFile);
-        } catch (err) {
-        }
+        const multipartFile = new FormData();
+        multipartFile.append('file', file);
+        await dispatch(handleUpdateProfileImage(resume.id, multipartFile));
     };
 
     return (

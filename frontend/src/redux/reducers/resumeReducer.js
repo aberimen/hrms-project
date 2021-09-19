@@ -21,6 +21,11 @@ const resumeReducer = (state = initialState, action) => {
                 ...state,
                 ...action.payload
             };
+        case ACTIONS.UPDATE_PROFILE_IMAGE_SUCCESS:
+            return {
+                ...state,
+                profileImage: action.payload
+            };
         default:
             return {
                 ...state
