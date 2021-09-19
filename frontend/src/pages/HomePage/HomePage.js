@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import onlineResume from '../../assets/undraw_online_resume.svg';
 import './HomePage.scss';
 import { FaBriefcase, FaRegAddressCard, FaUserCheck } from 'react-icons/fa';
 import SingleJob from '../../components/SingleJob/SingleJob';
+import { getAllJobPostings } from '../../api/jobPostingApi';
 
 const HomePage = () => {
 
+    const [lastJobs, setLastJobs] = useState([]);
+
+    useEffect(async () => {
+        try {
+            const result = await getAllJobPostings({ size: 4 });
+            if (result.data)
+                setLastJobs(result.data.content);
+        } catch (err) { 
+        }
+    }, [])
     return (
         <>
             <section className="mt-5">
@@ -66,18 +77,24 @@ const HomePage = () => {
                         </div>
                     </div>
                     <div className="row contents">
-                        <div className="col-lg-4 col-md-6">
-                            <SingleJob title="Java Developer" />
-                        </div>
-                        <div className="col-lg-4 col-md-6">
-                            <SingleJob title="Front End Developer" />
-                        </div>
-                        <div className="col-lg-4 col-md-6">
-                            <SingleJob title="Front End Developer" />
-                        </div>
+                        {lastJobs.map(job =>
+                            <div className="col-lg-3 col-md-6" key={job.id}>
+                                <SingleJob
+                                    title={job.jobPosition.positionName}
+                                    description={job.jobDescription}
+                                    company={job.employer.company}
+                                    workRemotely={job.workRemotely}
+                                    tags={[
+                                        job.employmentType,
+                                        (job.workRemotely ? 'Remote' : 'İş Yerinde')
+                                    ]}
+                                    jobId={job.id}
+                                    location={job.location}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
-
             </section>
 
 
