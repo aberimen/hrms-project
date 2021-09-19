@@ -7,6 +7,8 @@ import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,8 +44,7 @@ public class JobPostingController {
 
 	@GetMapping("/job-postings")
 	public Page<JobPostingResponseDTO> getJobPostings(Boolean isRemote, Integer min, Integer max,
-			EmploymentType employmentType, String location, String positionName, Pageable pageable) {
-
+			EmploymentType employmentType, String location, String positionName, @PageableDefault(sort = "id",direction = Direction.DESC)  Pageable pageable) {
 		return jobPostingService
 				.getActiveJobPostings(isRemote, min, max, employmentType, location, positionName, pageable)
 				.map(JobPostingResponseDTO::new);
