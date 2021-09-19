@@ -1,4 +1,5 @@
-import { addToFavoriteJobs, getFavoriteJobs, removeFromFavoriteJobs, updateCandidate } from "../../api/candidateApi";
+import { addToFavoriteJobs, getFavoriteJobs, removeFromFavoriteJobs } from "../../api/candidateApi";
+import { errorToast, successToast } from "../../components/utils/notification";
 import * as ACTIONS from '../constants/candidateActionTypes';
 import { UPDATE_SUCCESS } from "../constants/UserActionTypes";
 
@@ -47,8 +48,10 @@ export const handleAddToFavoriteJobs = (candidateId, jobId) => {
         try {
             const result = await addToFavoriteJobs(candidateId, jobId);
             dispatch(addToFavoriteJobsSuccess(result.data));
-
-        } catch (err) { }
+            successToast("İş ilanı favorilerine eklendi!");
+        } catch (err) {
+            errorToast("Bir hata oluştu");
+        }
     }
 };
 
