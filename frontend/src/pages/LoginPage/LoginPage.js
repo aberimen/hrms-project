@@ -38,6 +38,7 @@ const LoginPage = (props) => {
 			push('/');
 
 		} catch (err) {
+			if(err.response)
 			setApiError(err.response.data.message);
 		}
 	};

@@ -8,6 +8,7 @@ import { getAllJobPositions } from '../api/jobPositionApi';
 import { createJobPosting } from '../api/jobPostingApi';
 import TextArea from '../components/TextArea';
 import { useSelector } from 'react-redux';
+import { successToast } from '../components/utils/notification';
 const PostJobPage = () => {
 
     const [locations, setLocations] = useState([]);
@@ -38,6 +39,7 @@ const PostJobPage = () => {
 
         onSubmit: (values, { resetForm, setSubmitting }) => {
             postJob(values);
+            resetForm();
         }
 
     });
@@ -73,6 +75,7 @@ const PostJobPage = () => {
                 ...jobPosting,
                 employerId
             });
+            successToast("İş İlanı Eklendi")
         } catch (error) { }
     }
 
@@ -82,7 +85,7 @@ const PostJobPage = () => {
             <div className="container bg-white border-radius p-5">
 
                 <form onSubmit={handleSubmit}>
-                    <h3>İş İlanı Ver</h3>
+                    <h3 className="mb-4 fw-bold">İş İlanı Ver</h3>
 
                     <Select
                         label="İş Pozisyonu *"
@@ -142,7 +145,7 @@ const PostJobPage = () => {
                         placeholder="iş tanımı giriniz" />
 
                     <label className="form-label">Maaş Skalası</label>
-                    <div className="d-flex" style={{ marginBlock: "-1.5rem" }}>
+                    <div className="d-flex" >
                         <Input
                             type="number"
                             name="minSalary"
@@ -183,7 +186,7 @@ const PostJobPage = () => {
                         error={touched.deadline && errors.deadline}
                         id="deadline" />
 
-                    <button className="btn btn-primary btn-apply" type="submit" name="submit"  > Gönder </button>
+                    <button className="btn btn-primary btn-apply mt-3" type="submit" name="submit"  > Gönder </button>
                 </form>
             </div >
         </div>

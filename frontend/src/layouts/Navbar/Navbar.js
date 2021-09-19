@@ -5,6 +5,7 @@ import NavLink from './NavLink';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutHandler } from '../../redux/actions/authActions';
 import { handleGetResume } from '../../redux/actions/resumeActions';
+import defaultProfileImage from '../../assets/user-avatar.png';
 
 const Navbar = () => {
 
@@ -71,7 +72,7 @@ const Navbar = () => {
                             <li class="nav-item ms-5" ref={dropdown}>
                                 <div className={`dropdown-toggle  ${drowpdownVisible && 'show'}`} role="button" onClick={() => setDropdownVisible(!drowpdownVisible)}>
                                     {user.role === 'CANDIDATE' ?
-                                        <img className="rounded-circle nav-avatar" src={profileImage} />
+                                        <img className="rounded-circle nav-avatar" src={profileImage || defaultProfileImage} />
                                         :
                                         user.company
                                     }
