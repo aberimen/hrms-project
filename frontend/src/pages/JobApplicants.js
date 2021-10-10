@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getAppliedCandidates } from '../api/jobPostingApi';
 
 const JobApplicants = () => {
@@ -25,9 +25,10 @@ const JobApplicants = () => {
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Adı</th>
+                            <th scope="col">Soyadı</th>
+                            <th scope="col">Email</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +38,7 @@ const JobApplicants = () => {
                                 <th scope="row">{c.name}</th>
                                 <td>{c.lastName}</td>
                                 <td>{c.email}</td>
+                                <td><Link className="btn btn-primary" to={`/resume-preview/${c.resumeId}`}>CV Gör</Link></td>
                             </tr>
 
                         )}

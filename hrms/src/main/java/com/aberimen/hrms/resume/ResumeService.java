@@ -2,6 +2,7 @@ package com.aberimen.hrms.resume;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -39,12 +40,12 @@ public class ResumeService {
 		return resumeRepository.save(inDB);
 	}
 
-	public void saveExperience(Experience experience, long resumeId) {
+	public List<Experience> saveExperience(Experience experience, long resumeId) {
 		Resume inDB = getResumeById(resumeId);
 		experience.setResume(inDB);
 		inDB.getExperiences().add(experience);
-
 		resumeRepository.save(inDB);
+		return inDB.getExperiences();
 	}
 
 	public void saveLanguageSkill(LanguageSkill languageSkill, long resumeId) {

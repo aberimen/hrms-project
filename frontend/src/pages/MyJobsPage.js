@@ -9,11 +9,14 @@ const MyJobsPage = () => {
 
     const { user } = useSelector(state => state.auth);
 
-    useEffect(async () => {
-        try {
-            const result = await getEmployerJobs(user.id);
-            setJobs(result.data.content);
-        } catch (err) { }
+    useEffect(() => {
+        async function loadJobs() {
+            try {
+                const result = await getEmployerJobs(user.id);
+                setJobs(result.data.content);
+            } catch (err) { }
+        }
+        loadJobs();
     }, []);
 
 

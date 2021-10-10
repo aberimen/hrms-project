@@ -28,7 +28,6 @@ const LanguageSkill = ({ name, level }) => {
         loadStars();
     }, [])
 
-    console.log(stars);
 
     return (
         <div className="container p-2">

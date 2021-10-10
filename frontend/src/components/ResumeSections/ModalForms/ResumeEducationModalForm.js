@@ -43,7 +43,7 @@ const ResumeEducationModalForm = ({ modalVisible, setModalVisible, previousValue
         onSubmit: (values, { resetForm, setSubmitting }) => {
             saveEducationDetails(values);
             resetForm();
-            setModalVisible();
+            setModalVisible(false);
         }
     });
 
