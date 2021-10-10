@@ -28,6 +28,9 @@ import com.aberimen.hrms.technicalskill.TechnicalSkillRequestDTO;
 import com.aberimen.hrms.utils.GenericResponse;
 import com.aberimen.hrms.utils.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/1.0")
 public class ResumeController {
@@ -48,11 +51,10 @@ public class ResumeController {
 	}
 
 	@PostMapping("/resumes/experiences")
-	public GenericResponse createExperience(@RequestBody @Valid ExperienceRequestDTO experienceRequestDTO,
-			@RequestParam long resumeId) {
+	public Map<String, List<Experience>> createExperience(@RequestBody @Valid ExperienceRequestDTO experienceRequestDTO,
+														  @RequestParam long resumeId) {
 		Experience experience = Mapper.getInstance().map(experienceRequestDTO, Experience.class);
-		resumeService.saveExperience(experience, resumeId);
-		return new GenericResponse("Deneyim bilgisi eklendi.");
+		return Map.of("experiences", resumeService.saveExperience(experience, resumeId));
 	}
 
 	@PostMapping("/resumes/language-skills")
