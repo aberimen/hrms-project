@@ -1,0 +1,17 @@
+.image {
+  width: 160px;
+  height: 160px;
+}
+
+.profile-abstract {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .image {
+    transform: translateY(-20%);
+  }
+}
+

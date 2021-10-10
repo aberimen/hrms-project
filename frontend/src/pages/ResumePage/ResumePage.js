@@ -47,17 +47,17 @@ const ResumePage = () => {
                     </div>
                 </section>
 
-                <ResumeSummarySection resume={resume} />
+                <ResumeSummarySection resume={resume} previewMod={false} />
 
-                <ResumeEducationDetailsSection resume={resume} />
+                <ResumeEducationDetailsSection resume={resume} previewMod={false} />
 
-                {/* <ResumeExperiencesSection resume={resume} /> */}
+                <ResumeExperiencesSection resume={resume} />
 
-                <ResumeLanguageSkillsSection resume={resume} />
+                <ResumeLanguageSkillsSection resume={resume} previewMod={false} />
 
                 {/* <ResumeTechnicalSkillsSection resume={resume} />*/}
 
-                <ResumeSocialAccountsSection resume={resume} />
+                <ResumeSocialAccountsSection resume={resume} previewMod={false} />
 
             </div>
         </div >

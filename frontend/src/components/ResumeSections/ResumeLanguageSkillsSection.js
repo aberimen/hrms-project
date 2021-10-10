@@ -3,7 +3,7 @@ import LanguageSkill from '../LanguageSkill';
 import ResumeSection from '../ResumeSection/ResumeSection';
 import ResumeLanguageSkillModalForm from './ModalForms/ResumeLanguageSkillModalForm';
 
-const ResumeLanguageSkillsSection = ({resume = {}}) => {
+const ResumeLanguageSkillsSection = ({ resume = {}, previewMod }) => {
 
     const [isUpdateMode, setIsUpdateMode] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
@@ -15,21 +15,21 @@ const ResumeLanguageSkillsSection = ({resume = {}}) => {
 
     return (
         <ResumeSection className="language-skills-section" title="Yabancı Dil" >
-        {resume.languageSkills.map(l =>
-            <LanguageSkill key = {l.id} name={l.language.languageName} level = {l.languageLevel} />
-        )}
+            {resume.languageSkills.map(l =>
+                <LanguageSkill key={l.id} name={l.language.languageName} level={l.languageLevel} />
+            )}
 
-        <ResumeSection.Footer onClickAdd={handleClickAdd} />
+            {!previewMod && <ResumeSection.Footer onClickAdd={handleClickAdd} />}
 
 
-        {/* modal  form */}
+            {/* modal  form */}
 
-        <ResumeLanguageSkillModalForm
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-        />
+            <ResumeLanguageSkillModalForm
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+            />
 
-    </ResumeSection>
+        </ResumeSection>
     );
 };
 

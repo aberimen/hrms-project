@@ -4,7 +4,7 @@ import EditButton from '../EditButton';
 import ResumeSection from '../ResumeSection/ResumeSection';
 import ResumeSocialAccountsModalForm from './ModalForms/ResumeSocialAccountsModalForm';
 
-const ResumeSocialAccountsSection = ({ resume }) => {
+const ResumeSocialAccountsSection = ({ resume, previewMod }) => {
 
     const [isUpdateMode, setIsUpdateMode] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
@@ -36,9 +36,11 @@ const ResumeSocialAccountsSection = ({ resume }) => {
                             </div>
                         </div>
 
-                        <div className="ms-auto pe-2">
-                            <EditButton onClick={handleClickEdit} />
-                        </div>
+                        {!previewMod &&
+                            <div className="ms-auto pe-2">
+                                <EditButton onClick={handleClickEdit} />
+                            </div>
+                        }
                     </div>
                 }
 

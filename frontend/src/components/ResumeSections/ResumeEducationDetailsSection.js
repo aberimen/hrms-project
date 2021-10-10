@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import EditButton from '../EditButton';
 import EducationCard from '../EducationCard/EducationCard';
 import ResumeSection from '../ResumeSection/ResumeSection';
 import ResumeEducationModalForm from './ModalForms/ResumeEducationModalForm';
 
 
-const ResumeEducationDetailsSection = ({ resume }) => {
+const ResumeEducationDetailsSection = ({ resume, previewMod }) => {
 
-    const [isUpdateMode, setIsUpdateMode] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
     const handleClickAdd = () => {
-        setIsUpdateMode(false);
         setModalVisible(true);
     };
 
@@ -20,13 +17,14 @@ const ResumeEducationDetailsSection = ({ resume }) => {
             {resume.educationDetails.map(education =>
                 <EducationCard
                     education={education}
+                    previewMod={previewMod}
                 />
             )}
 
-            <ResumeSection.Footer onClickAdd={handleClickAdd} />
+            {!previewMod && <ResumeSection.Footer onClickAdd={handleClickAdd} />}
 
 
-            {/* modal  form */}
+            {/* modal form for create new*/}
 
             <ResumeEducationModalForm
                 modalVisible={modalVisible}

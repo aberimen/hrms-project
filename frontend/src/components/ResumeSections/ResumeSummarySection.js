@@ -3,7 +3,7 @@ import EditButton from '../EditButton';
 import ResumeSummaryFormModal from './ModalForms/ResumeSummaryModalForm';
 import ResumeSection from '../ResumeSection/ResumeSection';
 
-const ResumeSummarySection = ({ resume }) => {
+const ResumeSummarySection = ({ resume, previewMod }) => {
     const [updateMode, setUpdateMode] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -26,7 +26,7 @@ const ResumeSummarySection = ({ resume }) => {
                         <div>{resume.summary}</div>
                     </div>
                     <div className="align-items-start col-2 d-flex justify-content-end pe-2">
-                        <EditButton onClick={handleClickEdit} />
+                        {!previewMod && <EditButton onClick={handleClickEdit} />}
                     </div>
                 </div>}
 

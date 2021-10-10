@@ -3,7 +3,7 @@ import EditButton from '../EditButton';
 import ResumeEducationModalForm from '../ResumeSections/ModalForms/ResumeEducationModalForm';
 import './educationCard.scss';
 
-const EducationCard = ({ education }) => {
+const EducationCard = ({ education, previewMod }) => {
 
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -11,12 +11,12 @@ const EducationCard = ({ education }) => {
         setModalVisible(true);
     };
 
-    const {id, university, educationLevel, schoolName, educationType, stillStudying, startDate, graduationDate, educationLanguage, department } = education;
+    const { id, university, educationLevel, schoolName, educationType, stillStudying, startDate, graduationDate, educationLanguage, department } = education;
 
     return (
         <div className="education">
             <div className="edit-button">
-                <EditButton onClick={handleClickEdit} />
+                {!previewMod && <EditButton onClick={handleClickEdit} />}
 
             </div>
             <div className="row">
