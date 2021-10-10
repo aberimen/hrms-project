@@ -12,6 +12,7 @@ import AccountSettingsPage from "./pages/AccountSettingsPage/AccountSettingsPage
 import { useSelector } from "react-redux";
 import MyJobsPage from "./pages/MyJobsPage";
 import JobApplicants from "./pages/JobApplicants";
+import ResumePreviewPage from "./pages/ResumePreviewPage";
 
 function App() {
   const { isLoggedIn } = useSelector(state => state.auth);
@@ -30,6 +31,7 @@ function App() {
           <Route path="/employer" component={SignupPage} />
           <Route path="/account" component={AccountSettingsPage} />
           <Route path="/jobs" component={JobsPage} />
+          <Route path="/resume-preview/:resumeId" component={ResumePreviewPage} />
           <Route exact path="/my-jobs" component={MyJobsPage} />
           <Route path="/my-jobs/:jobId" component={JobApplicants} />
 
