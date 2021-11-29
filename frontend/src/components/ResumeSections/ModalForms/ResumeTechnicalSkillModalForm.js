@@ -5,10 +5,13 @@ import Modal from '../../Modal';
 import { addTechnicalSkill } from '../../../api/resumeApi';
 import { getTechStacks } from '../../../api/commonApi';
 import Select from '../../Select';
+import { useSelector } from 'react-redux';
 
-const ResumeTechnicalSkillModalForm = ({ modalVisible, onModalClickCancel }) => {
+const ResumeTechnicalSkillModalForm = ({ modalVisible, setModalVisible }) => {
 
     const [techStacks, setTechStacks] = useState([]);
+
+    const resume = useSelector(state => state.resume);
 
     const formik = useFormik({
         initialValues: {
@@ -40,7 +43,8 @@ const ResumeTechnicalSkillModalForm = ({ modalVisible, onModalClickCancel }) => 
     };
 
     const saveTechnicalSkill = async (technicalSkill) => {
-        const resumeId = 1; //test
+        const { id: resumeId } = resume;
+
         try {
             await addTechnicalSkill(technicalSkill, resumeId);
         } catch (error) { }
@@ -50,7 +54,7 @@ const ResumeTechnicalSkillModalForm = ({ modalVisible, onModalClickCancel }) => 
         <form onSubmit={handleSubmit}>
             <Modal
                 visible={modalVisible}
-                onClickCancel={onModalClickCancel}
+                onClickCancel={() => setModalVisible(false)}
                 // saveButtonDisabled={isSubmitting}
                 title="Teknik Bilgi Ekle"
             >
