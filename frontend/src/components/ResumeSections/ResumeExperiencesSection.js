@@ -6,7 +6,6 @@ import ResumeExperienceModalForm from './ModalForms/ResumeExperienceModalForm';
 
 const ResumeExperiencesSection = ({ resume, previewMod }) => {
 
-    console.log(resume);
     const [modalVisible, setModalVisible] = useState(false);
 
     const handleClickAdd = () => {

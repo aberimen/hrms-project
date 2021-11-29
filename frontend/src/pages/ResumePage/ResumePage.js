@@ -55,7 +55,7 @@ const ResumePage = () => {
 
                 <ResumeLanguageSkillsSection resume={resume} previewMod={false} />
 
-                {/* <ResumeTechnicalSkillsSection resume={resume} />*/}
+                <ResumeTechnicalSkillsSection resume={resume} />
 
                 <ResumeSocialAccountsSection resume={resume} previewMod={false} />
 
