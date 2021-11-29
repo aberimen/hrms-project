@@ -6,18 +6,24 @@ import Input from '../../Input';
 import Select from '../../Select';
 import { getAllJobPositions } from '../../../api/jobPositionApi';
 import { addExperience } from '../../../api/resumeApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateResumeSuccess } from '../../../redux/actions/resumeActions';
 
-const ResumeExperienceModalForm = ({ modalVisible, setModalVisible, previousValues, isUpdateMode, resume, setResume }) => {
+const ResumeExperienceModalForm = ({ modalVisible, setModalVisible, previousValues, isUpdateMode }) => {
     const [jobPositions, setJobPositions] = useState([]);
+    const resume = useSelector(state => state.resume);
 
+    const dispatch = useDispatch();
     const formik = useFormik({
-        initialValues: {
+        initialValues: isUpdateMode ? previousValues : {
             companyName: '',
             endDate: '',
             jobPositionId: '',
             startDate: '',
             stillWorking: false,
         },
+
+        enableReinitialize: true,
 
         validationSchema:
             Yup.object({
@@ -28,7 +34,8 @@ const ResumeExperienceModalForm = ({ modalVisible, setModalVisible, previousValu
 
         onSubmit: (values, { resetForm, setSubmitting }) => {
             saveExperience(values);
-            // resetForm();
+            resetForm();
+            setModalVisible(false);
         }
     });
 
@@ -49,9 +56,12 @@ const ResumeExperienceModalForm = ({ modalVisible, setModalVisible, previousValu
     };
 
     const saveExperience = async (experience) => {
-        const resumeId = 1; //test
+        const { id: resumeId } = resume;
+
         try {
-            await addExperience(experience, resumeId);
+            const result = await addExperience(experience, resumeId);
+            dispatch(updateResumeSuccess(result.data));
+
         } catch (error) { }
     };
 
@@ -60,7 +70,7 @@ const ResumeExperienceModalForm = ({ modalVisible, setModalVisible, previousValu
             <Modal
                 name="summary"
                 visible={modalVisible}
-                onClickCancel={onModalClickCancel}
+                onClickCancel={() => setModalVisible(false)}
                 // saveButtonDisabled={isSubmitting}
                 title="Yeni Deneyim Ekle"
             >
@@ -107,8 +117,8 @@ const ResumeExperienceModalForm = ({ modalVisible, setModalVisible, previousValu
                             <Input
                                 type="date"
                                 label="Bitiş Tarihi"
-                                name="graduationDate"
-                                value={values.graduationDate}
+                                name="endDate"
+                                value={values.endDate}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                             />
@@ -119,6 +129,7 @@ const ResumeExperienceModalForm = ({ modalVisible, setModalVisible, previousValu
                                 type="checkbox"
                                 label="Devam Ediyor"
                                 name="stillWorking"
+                                defaultChecked = {values.stillWorking}
                                 error={touched.stillWorking && errors.stillWorking}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
