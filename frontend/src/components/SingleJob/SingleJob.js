@@ -7,6 +7,7 @@ import { handleAddToFavoriteJobs, handleRemoveFromFavoriteJobs } from '../../red
 import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { FaCity } from 'react-icons/fa';
 import { applyJob } from '../../api/candidateApi';
+import { errorToast, successToast } from '../utils/notification';
 
 
 const SingleJob = ({ title, description, tags = [], jobId, location }) => {
@@ -28,9 +29,15 @@ const SingleJob = ({ title, description, tags = [], jobId, location }) => {
 
     const onClickApplyJob = async () => {
         try {
-            if (user.role === 'CANDIDATE')
+            if (user.role === 'CANDIDATE') {
                 await applyJob(user.id, jobId);
-        } catch (err) { }
+                successToast("Başvurunuz alındı");
+            } else {
+                errorToast("Başvuru sırasında bir hata oluştu");
+            }
+        } catch (err) {
+            errorToast("Başvuru sırasında bir hata oluştu");
+        }
     }
 
     return (

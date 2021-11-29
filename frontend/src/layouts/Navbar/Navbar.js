@@ -66,7 +66,8 @@ const Navbar = () => {
                         <NavLink name="Ana Sayfa" active={activePath} onClick={handleClickLink} to="/" />
                         <NavLink name="İş İlanları" active={activePath} onClick={handleClickLink} to="/jobs" />
                         {user.role === 'CANDIDATE' && <NavLink name="CV" active={activePath} onClick={handleClickLink} to="/resume" />}
-                        {user.role === 'EMPLOYER' && < NavLink name="İlan Ver" active={activePath} onClick={handleClickLink} to="/post-job" />}
+                        {user.role === 'EMPLOYER' && <NavLink name="İlan Ver" active={activePath} onClick={handleClickLink} to="/post-job" />}
+                        {user.role === 'EMPLOYER' && <NavLink name="İlanlarım" active={activePath} onClick={handleClickLink} to="/my-jobs" />}
 
                         {isLoggedIn &&
                             <li class="nav-item ms-5" ref={dropdown}>
